@@ -21,12 +21,3 @@ void OpticalObject::setX(double x){
 void OpticalObject::setY(double y){
     this->y = y;
 }
-
-ostream& OpticalObject::toString(ostream& os)const{
-    os << "x = " << x <<"\ny = "<< y<<"\n";
-    return os; 
-}
-
-ostream& operator<<(ostream& os, const OpticalObject& OO){
-    return OO.toString(os);
-}

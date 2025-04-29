@@ -5,13 +5,13 @@ class OpticalObject{
 
     private:
         double x, y;
-    public:
+
+    protected:
         OpticalObject(double, double);
+        
+    public:
         double getX();
         double getY();
         void setX(double);
         void setY(double);
-        ostream& toString(ostream&)const;
 };
-
-ostream& operator<<(ostream&, const OpticalObject&);
