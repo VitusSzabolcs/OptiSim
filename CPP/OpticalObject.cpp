@@ -1,4 +1,4 @@
-#include "OpticatObject.h"
+#include "OpticalObject.h"
 using namespace std;
 
 OpticalObject::OpticalObject(double x, double y){
@@ -22,7 +22,11 @@ void OpticalObject::setY(double y){
     this->y = y;
 }
 
-ostream& operator<<(ostream& os, const OpticalObject& OO){
-    os << "x = " << OO.x <<"\ny = "<< OO.y<<"\n";
+ostream& OpticalObject::toString(ostream& os)const{
+    os << "x = " << x <<"\ny = "<< y<<"\n";
     return os; 
+}
+
+ostream& operator<<(ostream& os, const OpticalObject& OO){
+    return OO.toString(os);
 }
