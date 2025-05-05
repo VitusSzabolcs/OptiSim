@@ -1,3 +1,6 @@
+#ifndef OPTICALOBJECT_H
+#define OPTICALOBJECT_H
+
 #include <iostream>
 using namespace std;
 
@@ -15,3 +18,5 @@ class OpticalObject{
         void setX(double);
         void setY(double);
 };
+
+#endif

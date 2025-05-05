@@ -1,3 +1,6 @@
+#ifndef THICKLENS_H
+#define THICKLENS_H
+
 #include "Lens.h"
 
 class ThickLens: public Lens{
@@ -19,3 +22,5 @@ class ThickLens: public Lens{
         double getD();
         void setD(double);
 };
+
+#endif
