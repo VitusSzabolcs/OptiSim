@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\OptiSim.dir/objects.a
+C:\MinGW\bin\ar.exe qc CMakeFiles\OptiSim.dir/objects.a @CMakeFiles\OptiSim.dir\objects1.rsp
+C:\MinGW\bin\c++.exe -Wl,--whole-archive CMakeFiles\OptiSim.dir/objects.a -Wl,--no-whole-archive -o OptiSim.exe -Wl,--out-implib,libOptiSim.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\OptiSim.dir\linkLibs.rsp

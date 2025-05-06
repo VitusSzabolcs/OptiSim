@@ -1,0 +1,3 @@
+C:/Users/Vitus Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/build/CMakeFiles/OptiSim.dir
+C:/Users/Vitus Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/build/CMakeFiles/edit_cache.dir
+C:/Users/Vitus Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/build/CMakeFiles/rebuild_cache.dir
