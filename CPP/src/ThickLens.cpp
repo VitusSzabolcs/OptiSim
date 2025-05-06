@@ -47,3 +47,8 @@ void ThickLens::setR_Right(double r_right){
     this->r_right = r_right;
     this->setF(computeF(n, d, r_right, r_left));
 }
+
+Image ThickLens::Calculate(ImagingSubject){
+    // TODO writing this method
+    return Image(0, 0, 0);
+}
