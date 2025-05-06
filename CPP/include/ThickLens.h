@@ -21,6 +21,7 @@ class ThickLens: public Lens{
         void setR_Right(double);
         double getD();
         void setD(double);
+        Image Calculate(ImagingSubject) override;
 };
 
 #endif

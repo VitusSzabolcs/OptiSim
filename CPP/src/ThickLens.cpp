@@ -18,6 +18,7 @@ double ThickLens::getN(){
 
 void ThickLens::setN(double n){
     this->n = n;
+    this->setF(computeF(n, d, r_right, r_left));
 }
 
 double ThickLens::getD(){
@@ -26,6 +27,7 @@ double ThickLens::getD(){
 
 void ThickLens::setD(double d){
     this->d = d;
+    this->setF(computeF(n, d, r_right, r_left));
 }
 
 double ThickLens::getR_Left(){
@@ -34,6 +36,7 @@ double ThickLens::getR_Left(){
 
 void ThickLens::setR_Left(double r_left){
     this->r_left = r_left;
+    this->setF(computeF(n, d, r_right, r_left));
 }
 
 double ThickLens::getR_Right(){
@@ -42,4 +45,5 @@ double ThickLens::getR_Right(){
 
 void ThickLens::setR_Right(double r_right){
     this->r_right = r_right;
+    this->setF(computeF(n, d, r_right, r_left));
 }

@@ -1,8 +1,9 @@
 #ifndef OPTICALOBJECT_H
 #define OPTICALOBJECT_H
 
-#include <iostream>
-using namespace std;
+#include "Image.h"
+#include "ImagingSubject.h"
+#include "LightSource.h"
 
 class OpticalObject{
 
@@ -17,6 +18,7 @@ class OpticalObject{
         double getY();
         void setX(double);
         void setY(double);
+        virtual Image Calculate(ImagingSubject) = 0;
 };
 
 #endif
