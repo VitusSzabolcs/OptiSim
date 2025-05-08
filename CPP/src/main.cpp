@@ -8,17 +8,11 @@ using namespace std;
 
 int main(){
     
-    ThinLens lens1(10, 5, 10);
-    ThickLens lens2(1, 2, 3, 4, 5, 6);
+    ThinLens lens(15, 10, 10);
+    LightSource ls(0, 2);
+    Image im = lens.Calculate(ls);
 
-    cout<<lens1.getX()<<" "<<lens1.getY()<<" "<<lens1.getF()<<endl;
-    cout<<lens2.getX()<<" "<<lens2.getY()<<" "<<lens2.getF() << " " << lens2.getN()<<endl;
-
-    Image image(11, 12, true);
-    LightSource lightSource(13, 14);
-
-    cout<<image.getX()<<" "<<image.getY()<<" "<<image.getReal()<<endl;
-    cout<<lightSource.getX()<<" "<<lightSource.getY()<<endl;
+    cout<<im.getX()<<" "<<im.getY()<<" "<<im.getReal();
 
     return 0;
 }

@@ -3,11 +3,11 @@
 
 ThinLens::ThinLens(double x, double y, double f):Lens(x, y, f){}
 Image ThinLens::Calculate(ImagingSubject is){
-    double x_is = is.getX();
+    double d_is = getX() - is.getX();
     double y_is = is.getY();
 
-    double x_im = pow(1/getF() - 1/x_is, -1);
-    double y_im = -x_im/x_is*y_is;
+    double d_im = pow(1/getF() - 1/d_is, -1);
+    double y_im = -d_im/d_is*y_is;
 
-    return Image(x_im, y_im, x_im > 0);
+    return Image(getX() + d_im, y_im, d_im > 0);
 }

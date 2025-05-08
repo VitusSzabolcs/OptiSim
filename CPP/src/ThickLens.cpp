@@ -5,11 +5,21 @@ double ThickLens::computeF(double n, double d, double r_left, double r_right){
     return 1/finv;
 }
 
+double ThickLens::computeHLeft(){
+    return (n - 1) * d / n * r_left/(r_right + r_left);
+}
+
+double ThickLens::computeHRight(){
+    return (n - 1) * d / n * r_right/(r_right + r_left);
+}
+
 ThickLens::ThickLens(double x, double y, double n, double d, double r_left, double r_right):Lens(x, y, computeF(n, d, r_left, r_right)){
     this->n = n;
     this->d = d;
     this->r_left = r_left;
     this->r_right = r_right;
+    this->H_left = computeHLeft();
+    this->H_right = computeHRight();
 }
 
 double ThickLens::getN(){
@@ -17,8 +27,12 @@ double ThickLens::getN(){
 }
 
 void ThickLens::setN(double n){
-    this->n = n;
-    this->setF(computeF(n, d, r_right, r_left));
+    if(this->n != n){
+        this->n = n;
+        this->setF(computeF(n, d, r_right, r_left));
+        this->H_left = computeHLeft();
+        this->H_right = computeHRight();
+    }
 }
 
 double ThickLens::getD(){
@@ -26,8 +40,12 @@ double ThickLens::getD(){
 }
 
 void ThickLens::setD(double d){
-    this->d = d;
-    this->setF(computeF(n, d, r_right, r_left));
+    if(this->d != d){
+        this->d = d;
+        this->setF(computeF(n, d, r_right, r_left));
+        this->H_left = computeHLeft();
+        this->H_right = computeHRight();
+    }
 }
 
 double ThickLens::getR_Left(){
@@ -35,8 +53,12 @@ double ThickLens::getR_Left(){
 }
 
 void ThickLens::setR_Left(double r_left){
-    this->r_left = r_left;
-    this->setF(computeF(n, d, r_right, r_left));
+    if(this->r_left != r_left){
+        this->r_left = r_left;
+        this->setF(computeF(n, d, r_right, r_left));
+        this->H_left = computeHLeft();
+        this->H_right = computeHRight();
+    }
 }
 
 double ThickLens::getR_Right(){
@@ -44,8 +66,12 @@ double ThickLens::getR_Right(){
 }
 
 void ThickLens::setR_Right(double r_right){
-    this->r_right = r_right;
-    this->setF(computeF(n, d, r_right, r_left));
+    if(this->r_right != r_right){
+        this->r_right = r_right;
+        this->setF(computeF(n, d, r_right, r_left));
+        this->H_left = computeHLeft();
+        this->H_right = computeHRight();
+    }
 }
 
 Image ThickLens::Calculate(ImagingSubject){

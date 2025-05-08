@@ -9,7 +9,10 @@ class ThickLens: public Lens{
         double r_left;
         double r_right;
         double d;
+        double H_left, H_right;
         double computeF(double, double, double, double);
+        double computeHLeft();
+        double computeHRight();
     
     public:
         ThickLens(double, double, double, double, double, double);

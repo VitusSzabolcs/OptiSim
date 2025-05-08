@@ -39,7 +39,19 @@ CMakeFiles/OptiSim.dir/src/ThinLens.cpp.obj: C:/Users/Vitus\ Szabolcs/Desktop/Me
   C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/Lens.h \
   C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/LightSource.h \
   C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/OpticalObject.h \
-  C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/ThinLens.h
+  C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/ThinLens.h \
+  c:/mingw/include/_mingw.h \
+  c:/mingw/include/math.h \
+  c:/mingw/include/msvcrtver.h \
+  c:/mingw/include/sdkddkver.h \
+  c:/mingw/include/w32api.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cmath \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/math.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h
 
 CMakeFiles/OptiSim.dir/src/main.cpp.obj: C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/src/main.cpp \
   C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/Image.h \
@@ -167,6 +179,8 @@ c:/mingw/include/wctype.h:
 
 c:/mingw/include/errno.h:
 
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h:
+
 C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/Image.h:
 
 C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/ImagingSubject.h:
@@ -201,21 +215,23 @@ C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/src/OpticalObje
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h:
 
+c:/mingw/include/direct.h:
+
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/exception:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h:
 
-c:/mingw/include/direct.h:
-
 C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/src/ThickLens.cpp:
-
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc:
 
 C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/ThickLens.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h:
+
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h:
+
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/math.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc:
 
@@ -229,33 +245,35 @@ c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h:
 
 C:/Users/Vitus\ Szabolcs/Desktop/Mesteri/2_felev/OOP/GeomSim/CPP/include/ThinLens.h:
 
-c:/mingw/include/ctype.h:
-
 c:/mingw/include/locale.h:
 
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc:
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h:
+
+c:/mingw/include/math.h:
 
 c:/mingw/include/msvcrtver.h:
 
-c:/mingw/include/wchar.h:
-
-c:/mingw/include/process.h:
-
 c:/mingw/include/sdkddkver.h:
+
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cmath:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/system_error:
 
 c:/mingw/include/stdint.h:
 
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h:
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h:
+
+c:/mingw/include/ctype.h:
+
+c:/mingw/include/wchar.h:
+
+c:/mingw/include/process.h:
 
 c:/mingw/include/stdio.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h:
 
 c:/mingw/include/stdlib.h:
-
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h:
 
 c:/mingw/include/sys/stat.h:
 
@@ -291,11 +309,19 @@ c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h:
 
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h:
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h:
+
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h:
 
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc:
+
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h:
+
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h:
+
+c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h:
 
@@ -349,8 +375,6 @@ c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h:
 
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h:
-
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/initializer_list:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/iosfwd:
@@ -361,19 +385,13 @@ c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/istream:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h:
 
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h:
-
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h:
-
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h:
-
-c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h:
 
 c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/new:
 
