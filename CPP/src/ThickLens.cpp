@@ -7,7 +7,7 @@ double ThickLens::computeF(double n, double d, double r_left, double r_right){
 }
 
 double ThickLens::computeHLeft(){
-    return - getF() * (n - 1) * d / r_right / n + getX();
+    return - getF() * (n - 1) * d / r_right / n + getX() - d/2;
 }
 
 double ThickLens::computeHRight(){
