@@ -1,18 +1,30 @@
 #include "OpticalSystem.h"
 
-OpticalSystem::OpticalSystem(){
-}
+OpticalSystem::OpticalSystem() = default;
 
-void OpticalSystem::add(OpticalObject OO_object, string OO_name){
+void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
+	name_lens_map[OO_name] = &OO_object;
+	int size = order.size();
 
-	name_lens_mag[OO_name] = &OO_object;
-	if (order.size()==0) order[0] = OO_name;
-	else { 
-		for(int i=0; i<order.size(); i++){
-			if (name_lens_mag[order[i]].getX() > OO_object.getX()){
-				order.insert(order.begin() + i, OO_name);
-				break;
-			}
+	if (size == 0){
+		order.push_back(OO_name);
+		return;
+	}
+	
+	int index = size;
+	
+	for(int i=0; i<size; i++){
+		if (name_lens_map[order[i]]->getX() > OO_object.getX()){
+			index = i;
+			break;
 		}
 	}
+
+	order.insert(order.begin() + index, OO_name);
+
+}
+
+OpticalSystem::~OpticalSystem(){
+	delete LS;
+	delete IMG;
 }
