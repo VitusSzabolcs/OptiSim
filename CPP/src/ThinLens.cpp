@@ -11,3 +11,7 @@ Image ThinLens::Calculate(ImagingSubject is){
 
     return Image(getX() + d_im, y_im, d_im > 0);
 }
+
+void ThinLens::setF(double f){
+    this->f = f;
+}

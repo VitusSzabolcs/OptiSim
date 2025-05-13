@@ -4,13 +4,11 @@
 #include "OpticalObject.h"
 
 class Lens: public OpticalObject{
-    private:
-        double f;
     protected:
         Lens(double, double, double);
+        double f;
     public:
         double getF();
-        void setF(double);
 };
 
 #endif

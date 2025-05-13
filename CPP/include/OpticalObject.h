@@ -7,17 +7,13 @@
 
 class OpticalObject{
 
-    private:
-        double x, y;
-
     protected:
         OpticalObject(double, double);
+        double x;
         
     public:
         double getX();
-        double getY();
         void setX(double);
-        void setY(double);
         virtual Image Calculate(ImagingSubject) = 0;
 };
 

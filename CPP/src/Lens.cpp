@@ -7,7 +7,3 @@ Lens::Lens(double x, double y, double f):OpticalObject(x, y){
 double Lens::getF(){
     return f;
 }
-
-void Lens::setF(double f){
-    this->f = f;
-}

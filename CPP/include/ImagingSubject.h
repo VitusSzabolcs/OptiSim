@@ -2,11 +2,10 @@
 #define IMAGINGSUBJECT_H
 
 class ImagingSubject{
-    private:
-        double x;
-        double y;
     protected:
         ImagingSubject(double, double);
+        double x;
+        double y;
     public:
         double getX();
         void setX(double);
