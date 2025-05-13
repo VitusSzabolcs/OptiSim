@@ -1,13 +1,10 @@
 #include <iostream>
-#include "ThinLens.h"
-#include "ThickLens.h"
-#include "Image.h"
-#include "LightSource.h"
+#include "OpticalSystem.h"
+
 
 using namespace std;
 
 int main(){
-    
     ThinLens lens(15, 10, 10);
     LightSource ls(0, 2);
     Image im = lens.Calculate(ls);
@@ -19,6 +16,9 @@ int main(){
     Image Im = Lens.Calculate(Ls);
 
     cout<<Im.getX()<<" "<<Im.getY()<<" "<<Im.getReal() << endl;
+
+    OpticalSystem my_system;
+    my_system.add(lens,"L1");
 
     return 0;
 }
