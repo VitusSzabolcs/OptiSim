@@ -8,7 +8,7 @@
 class OpticalObject{
 
     protected:
-        OpticalObject(double, double);
+        OpticalObject(double);
         double x;
         
     public:

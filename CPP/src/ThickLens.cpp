@@ -14,7 +14,7 @@ double ThickLens::computeHRight(){
     return - getF() * (n - 1) * d / r_left / n + x + d/2;
 }
 
-ThickLens::ThickLens(double x, double y, double n, double d, double r_left, double r_right):Lens(x, y, computeF(n, d, r_left, r_right)){
+ThickLens::ThickLens(double x, double n, double d, double r_left, double r_right):Lens(x, computeF(n, d, r_left, r_right)){
     this->n = n;
     this->d = d;
     this->r_left = r_left;

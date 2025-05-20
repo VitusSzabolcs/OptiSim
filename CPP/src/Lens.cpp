@@ -1,6 +1,6 @@
 #include "Lens.h"
 
-Lens::Lens(double x, double y, double f):OpticalObject(x, y){
+Lens::Lens(double x, double f):OpticalObject(x){
     this->f = f;
 }
 

@@ -15,17 +15,18 @@ using namespace std;
 class OpticalSystem{ 
     private:
         LightSource *LS;
-        Image *IMG;
+        vector<Image> imageSequence;
     	map<string, OpticalObject*> name_lens_map;
     	vector<string> order;
     public:
 		OpticalSystem();
     	OpticalSystem(string);
     	void add(OpticalObject&, string);
-    	//void add(LightSource);
+    	void add(LightSource);
     	void modifyLightSource(double, double);
     	void modifyOpticalObject(string, string, double);
     	void save(string);
+		vector<Image> getImageSequence();
     	Image Calculate();
 		~OpticalSystem();
 };

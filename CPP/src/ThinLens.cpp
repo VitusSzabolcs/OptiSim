@@ -1,7 +1,7 @@
 #include "ThinLens.h"
 #include <math.h>
 
-ThinLens::ThinLens(double x, double y, double f):Lens(x, y, f){}
+ThinLens::ThinLens(double x, double f):Lens(x, f){}
 Image ThinLens::Calculate(ImagingSubject is){
     double d_is = getX() - is.getX();
     double y_is = is.getY();

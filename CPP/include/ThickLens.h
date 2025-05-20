@@ -14,7 +14,7 @@ class ThickLens: public Lens{
         double computeHRight();
     
     public:
-        ThickLens(double, double, double, double, double, double);
+        ThickLens(double, double, double, double, double);
         double getN();
         void setN(double);
         double getR_Left();

@@ -1,7 +1,7 @@
 #include "OpticalObject.h"
 using namespace std;
 
-OpticalObject::OpticalObject(double x, double y){
+OpticalObject::OpticalObject(double x){
     this->x = x;
 }
 

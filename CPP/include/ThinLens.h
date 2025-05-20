@@ -5,7 +5,7 @@
 
 class ThinLens: public Lens{
     public:
-        ThinLens(double, double, double);
+        ThinLens(double, double);
         Image Calculate(ImagingSubject) override;
         void setF(double);
 };

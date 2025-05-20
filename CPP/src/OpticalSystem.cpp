@@ -1,6 +1,8 @@
 #include "OpticalSystem.h"
 
-OpticalSystem::OpticalSystem() = default;
+OpticalSystem::OpticalSystem(){
+	LS = nullptr;
+};
 
 void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	name_lens_map[OO_name] = &OO_object;
@@ -24,7 +26,25 @@ void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 
 }
 
+void OpticalSystem::add(LightSource ls){
+	LS = &ls;
+}
+
 OpticalSystem::~OpticalSystem(){
 	delete LS;
-	delete IMG;
+}
+
+vector<Image> OpticalSystem::getImageSequence(){
+	return imageSequence;
+}
+
+Image OpticalSystem::Calculate(){
+	imageSequence.clear();
+	Image img = name_lens_map[order[0]]->Calculate(*LS);
+	imageSequence.push_back(img);
+	for(int i = 1; i < order.size(); i++){
+		img = name_lens_map[order[i]]->Calculate(img);
+		imageSequence.push_back(img);
+	}
+	return img;
 }

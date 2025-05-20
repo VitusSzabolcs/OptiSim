@@ -5,7 +5,7 @@
 
 class Lens: public OpticalObject{
     protected:
-        Lens(double, double, double);
+        Lens(double, double);
         double f;
     public:
         double getF();

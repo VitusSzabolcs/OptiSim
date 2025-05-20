@@ -1,26 +1,30 @@
 #include <iostream>
 #include "OpticalSystem.h"
+#include <vector>
 
 
 using namespace std;
 
 int main(){
-    ThinLens lens(15, 10, 10), lens2(20, 10, 10), lens3(17, 10, 10);
-    LightSource ls(0, 2);
-    Image im = lens.Calculate(ls);
-
-    cout<<im.getX()<<" "<<im.getY()<<" "<<im.getReal() << endl;
-
-    ThickLens Lens(30 + 0.5, 10, 1.5, 1, 20, -40);
-    LightSource Ls(0, 2);
-    Image Im = Lens.Calculate(Ls);
-
-    cout<<Im.getX()<<" "<<Im.getY()<<" "<<Im.getReal() << endl;
+    ThinLens lens1(60, 30);
+    ThinLens lens2(90, 30);
+    LightSource ls(0, 8);
 
     OpticalSystem my_system;
-    my_system.add(lens, "L1");
+    my_system.add(lens1, "L1");
     my_system.add(lens2, "L2");
-    my_system.add(lens3, "L3");
 
+    my_system.add(ls);
+
+    Image img = my_system.Calculate();
+
+    vector<Image> imageSequence = my_system.getImageSequence();
+
+    vector<Image>::iterator it;
+    for(it = imageSequence.begin(); it < imageSequence.end(); it++){
+        cout<<(*it).getX()<<" "<<(*it).getY()<<" "<<(*it).getReal() << endl;
+    }
+
+    cout<<img.getX()<<" "<<img.getY()<<" "<<img.getReal();
     return 0;
 }
