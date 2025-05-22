@@ -1,0 +1,21 @@
+{
+  "object": {
+    "position": 0.0,
+    "size": 1.5
+  },
+  "lenses": [
+    { 
+      "name": "Lense1",
+      "type": "thin",
+      "position": 10.0,
+      "focal_length": 5.0
+    },
+    {
+      "name": "Lense3",
+      "type": "thin",
+      "position": 25.0,
+      "focal_length": -10.0
+    }
+  ]
+}
+
