@@ -23,7 +23,7 @@ class OpticalSystem{
     	OpticalSystem(string);
     	void add(OpticalObject&, string);
     	void add(LightSource);
-    	void modifyLightSource(double, double);
+    	void modifyLightSource(string, double);
     	void modifyOpticalObject(string, string, double);
     	void save(string);
 		vector<Image> getImageSequence();

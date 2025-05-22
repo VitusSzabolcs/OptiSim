@@ -1,5 +1,8 @@
 #include "ThickLens.h"
 #include <math.h>
+#include <string>
+
+using namespace std;
 
 double ThickLens::computeF(double n, double d, double r_left, double r_right){
     double finv = (n-1) * (1/r_left - 1/r_right + (n-1)*d/(n*r_left*r_right));
@@ -15,6 +18,8 @@ double ThickLens::computeHRight(){
 }
 
 ThickLens::ThickLens(double x, double n, double d, double r_left, double r_right):Lens(x, computeF(n, d, r_left, r_right)){
+    if(n <= 0) throw string("The refractive index most be a positive number.");
+    if(d <= 0) throw string("The thickness of the lens must be a positive number.");
     this->n = n;
     this->d = d;
     this->r_left = r_left;

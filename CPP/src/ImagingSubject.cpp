@@ -6,11 +6,11 @@ ImagingSubject::ImagingSubject(double x, double y){
 }
 
 double ImagingSubject::getX(){
-    return x;
+    return this->x;
 }
 
 double ImagingSubject::getY(){
-    return y;
+    return this->y;
 }
 
 void ImagingSubject::setX(double x){
