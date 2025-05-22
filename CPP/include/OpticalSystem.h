@@ -17,8 +17,6 @@ class OpticalSystem{
         vector<Image> imageSequence;
     	map<string, OpticalObject*> name_lens_map;
     	vector<string> order;
-        vector<ThinLens> thin_lenses;
-        vector<ThickLens> thick_lenses;
     public:
 		OpticalSystem();
     	OpticalSystem(string);
