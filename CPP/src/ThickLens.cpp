@@ -18,7 +18,7 @@ double ThickLens::computeHRight(){
 }
 
 ThickLens::ThickLens(double x, double n, double d, double r_left, double r_right):Lens(x, computeF(n, d, r_left, r_right)){
-    if(n <= 0) throw string("The refractive index most be a positive number.");
+    if(n <= 0) throw string("The refractive index must be a positive number.");
     if(d <= 0) throw string("The thickness of the lens must be a positive number.");
     this->n = n;
     this->d = d;

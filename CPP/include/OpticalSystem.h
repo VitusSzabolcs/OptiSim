@@ -18,18 +18,21 @@ class OpticalSystem{
     	map<string, OpticalObject*> name_lens_map;
     	vector<string> order;
     public:
+        // constructors
 		OpticalSystem();
     	OpticalSystem(string);
-
+        // adding methods
     	void add(OpticalObject&, string);
     	void add(LightSource);
+        // modifying methods
     	void modifyLightSource(string, double);
     	void modifyOpticalObject(string, string, double);
+        // other methods
         void toString();
-
     	void save(string);
 		vector<Image> getImageSequence();
     	Image Calculate();
+        // destructor
 		~OpticalSystem();
 };
 
