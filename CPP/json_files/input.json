@@ -1,0 +1,48 @@
+{
+  "object": {
+    "position": 0.0,
+    "size": 1.5
+  },
+  "lenses": [
+    { 
+      "name": "Lense1",
+      "type": "thin",
+      "position": 10.0,
+      "focal_length": 5.0
+    },
+    {
+      "name": "Lense2",
+      "type": "thick",
+      "position": 60.0,
+      "radius_left": 12.0,
+      "radius_right": -21.0,
+      "refractive_index": 1.52,
+      "thickness": 3.5
+    },
+    {
+      "name": "Lense3",
+      "type": "thin",
+      "position": 25.0,
+      "focal_length": -10.0
+    },
+    {
+      "name": "Lense4",
+      "type": "thick",
+      "position": 40.0,
+      "radius_left": 15.0,
+      "radius_right": -20.0,
+      "refractive_index": 1.52,
+      "thickness": 4.0
+    },
+    {
+      "name": "Lense5",
+      "type": "thick",
+      "position": 65.0,
+      "radius_left": 17.0,
+      "radius_right": -20.0,
+      "refractive_index": 1.72,
+      "thickness": 4.5
+    }
+  ]
+}
+
