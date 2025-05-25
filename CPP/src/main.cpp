@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OpticalSystem.h"
 #include <vector>
+#include <limits>
 
 
 using namespace std;
@@ -8,9 +9,10 @@ using namespace std;
 int main(){
     try{
         // instantiate lenses and light source
-        ThinLens lens1(60, 30);
-        ThickLens lens2(90, 1.6, 5, 30, -30);
-        LightSource ls(0, 8);
+        ThinLens lens1(0, 10);
+        ThickLens lens2(20, 1.5, 2.0, 15.0, -15.0);
+
+        LightSource ls(-10, 2);
 
         // instantiate an optical system and add components ot it
         OpticalSystem my_system;
@@ -18,8 +20,6 @@ int main(){
         my_system.add(lens2, "L2");
 
         my_system.add(ls);
-
-        my_system.modifyOpticalObject("L2", "d", 6);
 
         // print the sistem into the console
         my_system.toString();
@@ -34,6 +34,8 @@ int main(){
             cout<<(*it).getX()<<" "<<(*it).getY()<<" "<<(*it).getReal() << endl;
         }
 
+
+        //double infinity = std::numeric_limits<double>::infinity();
 
         // instantiate an Optical System object using a .json file
         // OpticalSystem my_second_system("../json_files/input.json");
