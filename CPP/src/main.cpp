@@ -9,17 +9,17 @@ int main(){
     try{
         // instantiate lenses and light source
         ThinLens lens1(60, 30);
-        ThinLens lens2(90, 30);
+        ThickLens lens2(90, 1.6, 5, 30, -30);
         LightSource ls(0, 8);
 
         // instantiate an optical system and add components ot it
         OpticalSystem my_system;
         my_system.add(lens1, "L1");
         my_system.add(lens2, "L2");
-        lens1 = ThinLens(1, 2);
-        my_system.add(lens1, "L3");
 
         my_system.add(ls);
+
+        my_system.modifyOpticalObject("L2", "d", 6);
 
         // print the sistem into the console
         my_system.toString();
@@ -36,11 +36,11 @@ int main(){
 
 
         // instantiate an Optical System object using a .json file
-        OpticalSystem my_second_system("../json_files/input.json");
+        // OpticalSystem my_second_system("../json_files/input.json");
         
         // calculate the system's imaging and print the system into the console
-        Image final_image = my_second_system.Calculate();
-        my_second_system.toString();
+        // Image final_image = my_second_system.Calculate();
+        // my_second_system.toString();
 
         // modify the system than save it into a new json file
         //my_second_system.add(lens2, "new");
@@ -54,8 +54,8 @@ int main(){
         //}
 
         // instantiate an Optical System object using the recently created json file, than print it
-        OpticalSystem my_third_system("../json_files/save_after_modification.json");
-        my_third_system.toString();
+        // OpticalSystem my_third_system("../json_files/save_after_modification.json");
+        // my_third_system.toString();
 
         // try to instantiate an Optical System object using a wrong json file
         // OpticalSystem my_fourth_system("../json_files/fake.json");

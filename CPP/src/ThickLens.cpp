@@ -1,6 +1,7 @@
 #include "ThickLens.h"
 #include <math.h>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -31,9 +32,10 @@ double ThickLens::getN(){
 }
 
 void ThickLens::setN(double n){
+    if(n <= 0) throw string("The refractive index must be a positive number.");
     if(this->n != n){
         this->n = n;
-        this->f = computeF(n, d, r_right, r_left);
+        this->f = computeF(n, d, r_left, r_right);
     }
 }
 
@@ -42,9 +44,10 @@ double ThickLens::getD(){
 }
 
 void ThickLens::setD(double d){
+    
     if(this->d != d){
         this->d = d;
-        this->f = computeF(n, d, r_right, r_left);
+        this->f = computeF(n, d, r_left, r_right);
     }
 }
 
@@ -55,7 +58,7 @@ double ThickLens::getR_Left(){
 void ThickLens::setR_Left(double r_left){
     if(this->r_left != r_left){
         this->r_left = r_left;
-        this->f = computeF(n, d, r_right, r_left);
+        this->f = computeF(n, d, r_left, r_right);
     }
 }
 
@@ -66,7 +69,7 @@ double ThickLens::getR_Right(){
 void ThickLens::setR_Right(double r_right){
     if(this->r_right != r_right){
         this->r_right = r_right;
-        this->f = computeF(n, d, r_right, r_left);
+        this->f = computeF(n, d, r_left, r_right);
     }
 }
 

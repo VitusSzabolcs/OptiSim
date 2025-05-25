@@ -24,6 +24,8 @@ class OpticalSystem{
         // adding methods
     	void add(OpticalObject&, string);
     	void add(LightSource);
+		// removing method
+		void remove(string);
         // modifying methods
     	void modifyLightSource(string, double);
     	void modifyOpticalObject(string, string, double);

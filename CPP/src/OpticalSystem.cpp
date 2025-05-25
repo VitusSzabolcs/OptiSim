@@ -86,7 +86,6 @@ void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	}
 
 	order.insert(order.begin() + index, OO_name);
-
 }
 
 void OpticalSystem::add(LightSource ls){
@@ -217,7 +216,41 @@ OpticalSystem::~OpticalSystem(){
 	delete LS;
 }
 
-void OpticalSystem::modifyOpticalObject(string name, string param, double val){
+void OpticalSystem::remove(string name){
 	if(name_lens_map.find(name) == name_lens_map.end()) throw string("Invalid key.");
-	
+	for(int i = 0; i < order.size(); i++){
+		if(order[i] == name) {
+			order.erase(order.begin() + i);
+			break;
+		}
+	}
+	delete name_lens_map[name];
+	name_lens_map.erase(name);
+}
+
+void OpticalSystem::modifyOpticalObject(string name, string param, double val){
+	if(name_lens_map.find(name) == name_lens_map.end()) throw string("Invalid key: " + name);
+	ThinLens* ptr_thin = dynamic_cast<ThinLens*>(name_lens_map[name]);
+	ThickLens* ptr_thick = dynamic_cast<ThickLens*>(name_lens_map[name]);
+	if (ptr_thin) {
+		if(param == "f") ptr_thin->setF(val);
+		else if(param == "x"){
+			ThinLens l(val, ptr_thin->getF());
+			remove(name);
+			add(l, name);
+		}
+		else throw string("Invalid parameter: " + param);
+	}
+	else if (ptr_thick) {
+		if(param == "n") ptr_thick->setN(val);
+		else if(param == "r1") ptr_thick->setR_Left(val);
+		else if(param == "r2") ptr_thick->setR_Right(val);
+		else if(param == "d") ptr_thick->setD(val);
+		else if(param == "x"){
+			ThickLens L(val, ptr_thick->getN(), ptr_thick->getD(), ptr_thick->getR_Left(), ptr_thick->getR_Right());
+			remove(name);
+			add(L, name);
+		}
+		else throw string("Invalid parameter: " + param);
+	}
 }
