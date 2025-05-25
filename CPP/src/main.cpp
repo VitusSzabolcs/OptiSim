@@ -14,6 +14,8 @@ int main(){
         OpticalSystem my_system;
         my_system.add(lens1, "L1");
         my_system.add(lens2, "L2");
+        lens1 = ThinLens(1, 2);
+        my_system.add(lens1, "L3");
 
         my_system.add(ls);
 
@@ -24,8 +26,13 @@ int main(){
         for(it = imageSequence.begin(); it < imageSequence.end(); it++){
             cout<<(*it).getX()<<" "<<(*it).getY()<<" "<<(*it).getReal() << endl;
         }
+        int x = 1;
+        if(typeid(lens1).name() == "ThinLens") cout << "megy";
+
     }catch(const string& error){
         cout<<error<<endl;
     }
+
+    
     return 0;
 }

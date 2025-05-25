@@ -8,7 +8,7 @@ OpticalSystem::OpticalSystem(){
 };
 
 void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
-	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw string("The name is taken, please chose another.");
+	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw string("The key is taken, please chose another.");
 	name_lens_map[OO_name] = &OO_object;
 	int size = order.size();
 
@@ -60,4 +60,9 @@ void OpticalSystem::modifyLightSource(string param, double val){
 	if(param == "x") LS->setX(val);
 	else if(param == "y") LS->setY(val);
 	else throw string("Invalid parameter.");
+}
+
+void OpticalSystem::modifyOpticalObject(string name, string param, double val){
+	if(name_lens_map.find(name) == name_lens_map.end()) throw string("Invalid key.");
+	
 }
