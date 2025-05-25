@@ -56,8 +56,6 @@ OpticalSystem::OpticalSystem(string file_name){
 // Adding methods -------------------------------------------------------------
 void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw string("The key is taken, please chose another.");
-	name_lens_map[OO_name] = &OO_object;
-	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw string("The name is taken, please chose another.");
 	ThinLens* ptr_thin = dynamic_cast<ThinLens*>(&OO_object);
 	ThickLens* ptr_thick = dynamic_cast<ThickLens*>(&OO_object);
 
@@ -71,7 +69,6 @@ void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	    									   ptr_thick->getR_Left(),
 	    									   ptr_thick->getR_Right());
 	}
-	//name_lens_map[OO_name] = &OO_object;
 	int size = order.size();
 
 	if (size == 0){

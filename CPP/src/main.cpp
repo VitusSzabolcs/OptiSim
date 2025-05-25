@@ -33,8 +33,6 @@ int main(){
         for(it = myimageSequence.begin(); it < myimageSequence.end(); it++){
             cout<<(*it).getX()<<" "<<(*it).getY()<<" "<<(*it).getReal() << endl;
         }
-        int x = 1;
-        if(typeid(lens1).name() == "ThinLens") cout << "megy";
 
 
         // instantiate an Optical System object using a .json file
@@ -60,7 +58,7 @@ int main(){
         my_third_system.toString();
 
         // try to instantiate an Optical System object using a wrong json file
-        //OpticalSystem my_fourth_system("../json_files/fake.json");
+        // OpticalSystem my_fourth_system("../json_files/fake.json");
     }catch(const string& error){
         cout<<error<<endl;
     }
