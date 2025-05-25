@@ -1,3 +1,0 @@
-/home/tomi/Desktop/Egyetem/OOP/GeomSim/CPP/build/CMakeFiles/OptiSim.dir
-/home/tomi/Desktop/Egyetem/OOP/GeomSim/CPP/build/CMakeFiles/edit_cache.dir
-/home/tomi/Desktop/Egyetem/OOP/GeomSim/CPP/build/CMakeFiles/rebuild_cache.dir
