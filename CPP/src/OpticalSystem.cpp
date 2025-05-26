@@ -128,38 +128,39 @@ Image OpticalSystem::Calculate(){
 	return img;
 }
 	
-void OpticalSystem::toString(){
+void OpticalSystem::toString(ostream& os){
 
-	cout << "\n-------------------------------------------------------------------------------\n";
-	cout << "#    SYSTEM SUMMARY";
-	cout << "\n-------------------------------------------------------------------------------\n";
+	os << "\n-------------------------------------------------------------------------------\n";
+	os << "#    SYSTEM SUMMARY";
+	os << "\n-------------------------------------------------------------------------------\n";
 	if(LS != nullptr){
-		cout << "Object Position: " << LS->getX() << ", Size: " << LS->getY() << "\n";
+		os << "Object Position: " << LS->getX() << ", Size: " << LS->getY() << "\n";
 
 	}
 	for (int i=0; i< order.size(); i++){
 		ThinLens* ptr_thin = dynamic_cast<ThinLens*>(name_lens_map[order[i]]);
 		ThickLens* ptr_thick = dynamic_cast<ThickLens*>(name_lens_map[order[i]]);
 		if (ptr_thin){
-			cout << "\nThin Lens: " << order[i]
+			os << "\nThin Lens: " << order[i]
 				 <<",  Position: " << ptr_thin->getX()
 		         << ", Focal Length: " << ptr_thin->getF() << "\n";
 		}
 		if (ptr_thick){
-			cout << "\nThick Lens: " << order[i]
+			os << "\nThick Lens: " << order[i]
 				 << ", Position: " << ptr_thick->getX()
 	             << ", n: " << ptr_thick->getN()
 	             << ", Thickness: " << ptr_thick->getD() 
 	        	 << ", Radius_left: " << ptr_thick->getR_Left()
-	        	 << ", Radius_right: " << ptr_thick->getR_Right()<< "\n";
+	        	 << ", Radius_right: " << ptr_thick->getR_Right()
+				 << ", Focal Length: " << ptr_thick->getF() << "\n";
 		}
 	}
 	if (imageSequence.size() != 0){
-		cout << "\n\e[1mImage Position: " << imageSequence.back().getX()
+		os << "\nImage Position: " << imageSequence.back().getX()
 		<< ", Size: " << imageSequence.back().getY()
-		<< ", Is real: " << imageSequence.back().getReal() << "\e[0m";
+		<< ", Is real: " << imageSequence.back().getReal();
 	}
-	cout << "\n-------------------------------------------------------------------------------\n";
+	os << "\n-------------------------------------------------------------------------------\n";
 }
 
 void OpticalSystem::save(string file_name) {

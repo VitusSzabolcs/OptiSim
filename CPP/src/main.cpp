@@ -2,6 +2,7 @@
 #include "OptiSim.h"
 #include <vector>
 #include <limits>
+#include <fstream>
 
 
 using namespace std;
@@ -21,9 +22,6 @@ int main(){
 
         my_system.add(ls);
 
-        // print the sistem into the console
-        my_system.toString();
-
         // calculate the system's imaging and save the intermediate and final images as vectors
         Image img = my_system.Calculate();
         vector<Image> myimageSequence = my_system.getImageSequence();
@@ -35,6 +33,12 @@ int main(){
         }
 
         cout<<getOptiSimVersionString()<<endl;
+
+        // print the sistem into the console
+        ofstream f;
+        f.open("output.txt");
+        my_system.toString(f);
+        f.close();
 
         //double infinity = std::numeric_limits<double>::infinity();
 

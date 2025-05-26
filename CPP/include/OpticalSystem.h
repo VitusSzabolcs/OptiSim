@@ -8,6 +8,8 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -30,7 +32,7 @@ class OpticalSystem{
     	void modifyLightSource(string, double);
     	void modifyOpticalObject(string, string, double);
         // other methods
-        void toString();
+        void toString(ostream& os = cout);
     	void save(string);
 		vector<Image> getImageSequence();
     	Image Calculate();
