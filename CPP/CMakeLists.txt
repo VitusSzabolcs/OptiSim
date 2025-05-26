@@ -21,4 +21,5 @@ add_executable(OptiSim
 	src/ThickLens.cpp
 	src/ThinLens.cpp
 	src/OpticalSystem.cpp
+	src/OptiSimVersion.cpp
 )

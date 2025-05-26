@@ -1,5 +1,5 @@
 #include <iostream>
-#include "OpticalSystem.h"
+#include "OptiSim.h"
 #include <vector>
 #include <limits>
 
@@ -34,6 +34,7 @@ int main(){
             cout<<(*it).getX()<<" "<<(*it).getY()<<" "<<(*it).getReal() << endl;
         }
 
+        cout<<getOptiSimVersionString()<<endl;
 
         //double infinity = std::numeric_limits<double>::infinity();
 
