@@ -1,0 +1,15 @@
+#ifndef OPTISIMVERSION_H
+#define OPTISIMVERSION_H
+
+#define OPTISIM_VERSION_MAJOR "1"
+#define OPTISIM_VERSION_MINOR "0"
+#define OPTISIM_VERSION_PATCH "0"
+
+#define OPTISIM_VERSION_STRING \
+    OPTISIM_VERSION_MAJOR "." \
+    OPTISIM_VERSION_MINOR "." \
+    OPTISIM_VERSION_PATCH
+
+const char* getOptiSimVersionString();
+
+#endif
