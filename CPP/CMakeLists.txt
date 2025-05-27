@@ -28,7 +28,8 @@ target_compile_options(OptiSimLib PRIVATE -fPIC)
 target_include_directories(OptiSimLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(OptiSim
-    src/main.cpp
+    #src/main.cpp
+    src/OptiSim.cpp
     ${COMMON_CPP_SOURCES}
 )
 

@@ -5,13 +5,13 @@
   },
   "lenses": [
     { 
-      "name": "Lense1",
+      "name": "Lens_1",
       "type": "thin",
       "position": 10.0,
       "focal_length": 5.0
     },
     {
-      "name": "Lense3",
+      "name": "Lens_3",
       "type": "thin",
       "position": 25.0,
       "focal_length": -10.0

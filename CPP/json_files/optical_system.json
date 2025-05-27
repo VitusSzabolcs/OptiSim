@@ -5,16 +5,19 @@
   },
   "lenses": [
     {
+      "name": "Lens_1",
       "type": "thin",
       "position": 10.0,
       "focal_length": 5.0
     },
     {
+      "name": "Lens_2",
       "type": "thin",
       "position": 25.0,
       "focal_length": -10.0
     },
     {
+      "name": "Lens_3",
       "type": "thick",
       "position": 40.0,
       "radius1": 15.0,
