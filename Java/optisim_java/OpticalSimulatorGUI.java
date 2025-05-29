@@ -18,6 +18,9 @@ public class OpticalSimulatorGUI extends JFrame {
         OpS.add_thick_lens("Lens2", 10, 10, 10, 10, 10);
         OpS.modify_light_source("x", 10);
         OpS.modify_optical_object("Lens1", "x", 10);
+        OpS.calculate();
+        //OpS.initialize("/home/vszabolcs/OOP/GeomSim/Python/json_files/input.json");
+        //OpS.save("system.json");
 
         // Left panel with controls and list
         elementListPanel = new ElementListPanel(this, OpS);

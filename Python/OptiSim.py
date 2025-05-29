@@ -10,6 +10,9 @@ class OpticalSystem(object):
         ls = op.LightSource(0, 8)
         self.system.add(ls)
 
+    def initialize(self, filename):
+        self.self = op.OpticalSystem(str(filename))
+
     def add_thin_lens(self, name, x, f):
         lens = op.ThinLens(x, f)
         self.system.add(lens, str(name))
@@ -23,6 +26,12 @@ class OpticalSystem(object):
 
     def modify_light_source(self, param, val):
         self.system.modifyLightSource(str(param), val)
+
+    def calculate(self):
+        self.system.Calculate()
+
+    def save(self, filename):
+        self.system.save(str(filename))
 
 
 jpype.startJVM(classpath = ['../Java/optisim_java.jar'])
