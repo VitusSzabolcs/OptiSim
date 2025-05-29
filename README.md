@@ -10,3 +10,7 @@ cmake .. -G "MinGW Makefiles"
 
 cmake --build .
 
+in java folder:
+
+    javac ./optisim_java/*.java
+    jar cf optisim_java.jar ./optisim_java/*.class
