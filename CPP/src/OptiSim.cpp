@@ -1,7 +1,7 @@
 #include <iostream>
-#include "OpticalSystem.h"
 #include <vector>
 #include <iomanip>
+#include "OptiSim.h"
 
 using namespace std;
 
@@ -37,6 +37,10 @@ void help(){
     cout << setw(18) << "-p"
          << setw(22) << "--print"
          << "Print the parameters of the optical system to the console." << endl;
+
+    cout << setw(18) << "-v"
+         << setw(22) << "--version"
+         << "Print version info." << endl;
 }
 
 struct command_path {
@@ -78,6 +82,9 @@ int main(int argc, char* argv[]){
             if (string(argv[i]) == "-h" || string(argv[i]) == "--help"){
                 help();
                 if (argc == 2) should_I_calc = false;
+            } else if (string(argv[i]) == "-v" || string(argv[i]) == "--version"){
+                const char* version_string = getOptiSimVersionString();
+                cout << version_string << endl;
             } else if (string(argv[i]) == "-p" || string(argv[i]) == "--print"){
                 should_I_print = true;
             } else if (string(argv[i]) == "-il" || string(argv[i]) == "--imagelist"){
