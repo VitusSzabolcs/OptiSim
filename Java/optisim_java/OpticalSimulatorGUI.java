@@ -14,7 +14,10 @@ public class OpticalSimulatorGUI extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        OpS.initialize();
+        OpS.add_thin_lens("Lens1", 10, 10);
+        OpS.add_thick_lens("Lens2", 10, 10, 10, 10, 10);
+        OpS.modify_light_source("x", 10);
+        OpS.modify_optical_object("Lens1", "x", 10);
 
         // Left panel with controls and list
         elementListPanel = new ElementListPanel(this, OpS);
