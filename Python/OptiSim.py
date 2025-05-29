@@ -5,11 +5,11 @@ from jpype import JProxy
 import optisim as op
 
 class OpticalSystem(object):
+    system = op.OpticalSystem()
     def initialize(self):
-        system = op.OpticalSystem()
         ls = op.LightSource(0, 8)
-        system.add(ls)
-        system.toString()    
+        self.system.add(ls)
+        self.system.toString()
         
 
 jpype.startJVM(classpath = ['../Java/optisim_java.jar'])
@@ -20,6 +20,6 @@ OpS = OpticalSystem()
 
 proxy = JProxy(optisim_java.OpticalSystem, inst = OpS)
 
-optisim_java.OptiSim(proxy)
+optisim_java.OpticalSimulatorGUI(proxy)
 
 jpype.shutdownJVM()

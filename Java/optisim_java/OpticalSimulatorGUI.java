@@ -1,0 +1,32 @@
+package optisim_java;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class OpticalSimulatorGUI extends JFrame {
+    private ElementListPanel elementListPanel;
+    private DrawingPanel drawingPanel;
+
+    public OpticalSimulatorGUI(OpticalSystem OpS) {
+        setTitle("Optical Simulator");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1000, 600);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        OpS.initialize();
+
+        // Left panel with controls and list
+        elementListPanel = new ElementListPanel(this, OpS);
+        drawingPanel = new DrawingPanel(OpS);
+
+        add(elementListPanel, BorderLayout.WEST);
+        add(drawingPanel, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    public DrawingPanel getDrawingPanel() {
+        return drawingPanel;
+    }
+}
