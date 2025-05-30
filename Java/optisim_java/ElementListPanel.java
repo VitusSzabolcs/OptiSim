@@ -72,10 +72,74 @@ public class ElementListPanel extends JPanel {
     }
 
     private void showAddDialog() {
-        String name = JOptionPane.showInputDialog(this, "Enter element name:");
-        if (name != null && !name.trim().isEmpty()) {
-            elementListModel.addElement(name);
-        }
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Add Optical Element", true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(300, 450);
+        dialog.setLocationRelativeTo(this);
+
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+
+        String[] options = {"Thin Lens", "Thick Lens"};
+        JComboBox<String> typeCombo = new JComboBox<>(options);
+        formPanel.add(new JLabel("Type:"));
+        formPanel.add(typeCombo);
+
+        JTextField nameField = new JTextField();
+        formPanel.add(new JLabel("Name:"));
+        formPanel.add(nameField);
+
+        JTextField positionField = new JTextField();
+        JTextField focalLengthField = new JTextField();
+        JTextField refractiveIndexField = new JTextField();
+        JTextField leftRadiusField = new JTextField();
+        JTextField rightRadiusField = new JTextField();
+        JTextField thicknessField = new JTextField();
+
+        JPanel dynamicFieldsPanel = new JPanel();
+        dynamicFieldsPanel.setLayout(new BoxLayout(dynamicFieldsPanel, BoxLayout.Y_AXIS));
+
+        Runnable updateFields = () -> {
+            dynamicFieldsPanel.removeAll();
+            dynamicFieldsPanel.add(new JLabel("Position:"));
+            dynamicFieldsPanel.add(positionField);
+            if (typeCombo.getSelectedItem().equals("Thin Lens")) {
+                dynamicFieldsPanel.add(new JLabel("Focal Length:"));
+                dynamicFieldsPanel.add(focalLengthField);
+            } else {
+                dynamicFieldsPanel.add(new JLabel("Refractive Index:"));
+                dynamicFieldsPanel.add(refractiveIndexField);
+                dynamicFieldsPanel.add(new JLabel("Left Radius:"));
+                dynamicFieldsPanel.add(leftRadiusField);
+                dynamicFieldsPanel.add(new JLabel("Right Radius:"));
+                dynamicFieldsPanel.add(rightRadiusField);
+                dynamicFieldsPanel.add(new JLabel("Thickness:"));
+                dynamicFieldsPanel.add(thicknessField);
+            }
+            dynamicFieldsPanel.revalidate();
+            dynamicFieldsPanel.repaint();
+        };
+
+        typeCombo.addActionListener(e -> updateFields.run());
+        updateFields.run();
+
+        formPanel.add(dynamicFieldsPanel);
+
+        JButton addButton = new JButton("Add");
+        addButton.addActionListener(e -> {
+            String type = (String) typeCombo.getSelectedItem();
+            String name = nameField.getText();
+            String position = positionField.getText();
+            if (!name.trim().isEmpty()) {
+                String entry = name + " (" + type + ", pos: " + position + ")";
+                elementListModel.addElement(entry);
+            }
+            dialog.dispose();
+        });
+
+        dialog.add(formPanel, BorderLayout.CENTER);
+        dialog.add(addButton, BorderLayout.SOUTH);
+        dialog.setVisible(true);
     }
 
     private void showModifyDialog(String element, int index) {
