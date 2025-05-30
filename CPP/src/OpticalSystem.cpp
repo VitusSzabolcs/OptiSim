@@ -3,6 +3,7 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <typeinfo>
+#include <cmath>
 
 
 using namespace std;
@@ -18,13 +19,13 @@ OpticalSystem::OpticalSystem(string file_name){
 	// Read datafrom .json file
     ifstream file(file_name);
     
-    if (!file.is_open()) throw string("Failed to open file: "+file_name);
+    if (!file.is_open()) throw runtime_error("ERROR: \t Failed to open file: "+file_name);
 
     json data;
     try {
         file >> data;
     } catch (json::parse_error& e) {
-        cerr << "JSON parse error: " << e.what() << '\n';
+		throw runtime_error("ERROR: \tJSON parse error: " + string(e.what()));
     }
 
     // Extract information
@@ -55,7 +56,7 @@ OpticalSystem::OpticalSystem(string file_name){
 
 // Adding methods -------------------------------------------------------------
 void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
-	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw string("The key is taken, please chose another.");
+	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw runtime_error("ERROR: \tThe key is taken, please chose another.");
 	ThinLens* ptr_thin = dynamic_cast<ThinLens*>(&OO_object);
 	ThickLens* ptr_thick = dynamic_cast<ThickLens*>(&OO_object);
 
@@ -69,6 +70,7 @@ void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	    									   ptr_thick->getR_Left(),
 	    									   ptr_thick->getR_Right());
 	}
+
 	int size = order.size();
 
 	if (size == 0){
@@ -85,6 +87,23 @@ void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 		}
 	}
 
+	if(index > 0){
+		if(abs(name_lens_map[order[index-1]]->getX() - OO_object.getX()) < 0.001){
+			delete name_lens_map[OO_name];
+			name_lens_map.erase(OO_name);
+			throw runtime_error("ERROR: \tLenses are too close together. The minimum distance must be atleast 0.001 mm");
+		}
+			
+	}
+	if (index < order.size()) {
+		if (abs(name_lens_map[order[index]]->getX() - OO_object.getX()) < 0.001){
+			delete name_lens_map[OO_name];
+			name_lens_map.erase(OO_name);
+			throw runtime_error("ERROR: \tLenses are too close together. The minimum distance must be atleast 0.001 mm");
+		}
+			
+	}
+
 	order.insert(order.begin() + index, OO_name);
 }
 
@@ -96,10 +115,10 @@ void OpticalSystem::add(LightSource ls){
 
 // Modifying methods ----------------------------------------------------------
 void OpticalSystem::modifyLightSource(string param, double val){
-	if(LS == nullptr) throw string("You have to add a lightSource to the system before you can modify it");
+	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a lightSource to the system before you can modify it");
 	if(param == "x") LS->setX(val);
 	else if(param == "y") LS->setY(val);
-	else throw string("Invalid parameter.");
+	else throw runtime_error("ERROR: \tInvalid parameter: " + param);
 }
 
 
@@ -110,8 +129,8 @@ vector<Image> OpticalSystem::getImageSequence(){
 }
 
 Image OpticalSystem::Calculate(){
-	if(LS == nullptr) throw string("You have to add a lightSource to the system before calling the Calculate() method.");
-	if(order.size() == 0) throw string("You have to add OpticalObjects to the system first before calling the Calculate() method.");
+	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a lightSource to the system before calling the Calculate() method.");
+	if(order.size() == 0) throw runtime_error("ERROR: \tYou have to add OpticalObjects to the system first before calling the Calculate() method.");
 	
 	imageSequence.clear();
 	
@@ -164,7 +183,7 @@ void OpticalSystem::toString(ostream& os){
 }
 
 void OpticalSystem::save(string file_name) {
-    if (LS == nullptr) throw string("Cannot save system: no light source present.");
+    if (LS == nullptr) throw runtime_error("ERROR: \tCannot save system: no light source present.");
 
     json data;
 
@@ -202,7 +221,7 @@ void OpticalSystem::save(string file_name) {
 
     // Write to file
     ofstream file(file_name);
-    if (!file.is_open()) throw string("Failed to open file for writing: " + file_name);
+    if (!file.is_open()) throw runtime_error("ERROR: \tFailed to open file for writing: " + file_name);
     file << std::setw(2) << data << std::endl;  // Pretty-print with indentation
     file.close();
 }
@@ -218,7 +237,7 @@ OpticalSystem::~OpticalSystem(){
 }
 
 void OpticalSystem::remove(string name){
-	if(name_lens_map.find(name) == name_lens_map.end()) throw string("Invalid key.");
+	if(name_lens_map.find(name) == name_lens_map.end()) throw runtime_error("ERROR: \tInvalid key: " + name);
 	for(int i = 0; i < order.size(); i++){
 		if(order[i] == name) {
 			order.erase(order.begin() + i);
@@ -230,7 +249,7 @@ void OpticalSystem::remove(string name){
 }
 
 void OpticalSystem::modifyOpticalObject(string name, string param, double val){
-	if(name_lens_map.find(name) == name_lens_map.end()) throw string("Invalid key: " + name);
+	if(name_lens_map.find(name) == name_lens_map.end()) throw runtime_error("ERROR: \tInvalid key: " + name);
 	ThinLens* ptr_thin = dynamic_cast<ThinLens*>(name_lens_map[name]);
 	ThickLens* ptr_thick = dynamic_cast<ThickLens*>(name_lens_map[name]);
 	if (ptr_thin) {
@@ -240,7 +259,7 @@ void OpticalSystem::modifyOpticalObject(string name, string param, double val){
 			remove(name);
 			add(l, name);
 		}
-		else throw string("Invalid parameter: " + param);
+		else throw runtime_error("ERROR: \tInvalid parameter: " + param);
 	}
 	else if (ptr_thick) {
 		if(param == "n") ptr_thick->setN(val);
@@ -252,6 +271,6 @@ void OpticalSystem::modifyOpticalObject(string name, string param, double val){
 			remove(name);
 			add(L, name);
 		}
-		else throw string("Invalid parameter: " + param);
+		else throw runtime_error("ERROR: \tInvalid parameter: " + param);
 	}
 }

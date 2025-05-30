@@ -1,6 +1,7 @@
 #include "ThinLens.h"
 #include <cmath>
 #include <limits>
+#include <iostream>
 
 using namespace std;
 
@@ -40,5 +41,6 @@ Image ThinLens::Calculate(ImagingSubject is){
 }
 
 void ThinLens::setF(double f){
+    if (f == 0) throw runtime_error("ERROR: \tFocal length cannot be zero.");
     this->f = f;
 }
