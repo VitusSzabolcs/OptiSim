@@ -115,7 +115,7 @@ void OpticalSystem::add(LightSource ls){
 
 // Modifying methods ----------------------------------------------------------
 void OpticalSystem::modifyLightSource(string param, double val){
-	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a lightSource to the system before you can modify it");
+	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a Light Source to the system before you can modify it");
 	if(param == "x") LS->setX(val);
 	else if(param == "y") LS->setY(val);
 	else throw runtime_error("ERROR: \tInvalid parameter: " + param);
@@ -129,16 +129,25 @@ vector<Image> OpticalSystem::getImageSequence(){
 }
 
 Image OpticalSystem::Calculate(){
-	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a lightSource to the system before calling the Calculate() method.");
-	if(order.size() == 0) throw runtime_error("ERROR: \tYou have to add OpticalObjects to the system first before calling the Calculate() method.");
+	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a Light Source to the system before calling the Calculate() method.");
+	if(order.size() == 0) throw runtime_error("ERROR: \tYou have to add Optical Objects to the system first before calling the Calculate() method.");
 	
 	imageSequence.clear();
-	
-	Image img = name_lens_map[order[0]]->Calculate(*LS);
+
+	int start = 0;
+	while (start < order.size()) {
+		if (LS->getX() > name_lens_map[order[start]]->getX())
+        	start++;
+    	else
+        	break;
+	}
+
+	if(start == order.size()) throw runtime_error("ERROR: \t The Light Source is behind all the Optical Objects, nothing to calculate.");
+	Image img = name_lens_map[order[start]]->Calculate(*LS);
 	
 	imageSequence.push_back(img);
 	
-	for(int i = 1; i < order.size(); i++){
+	for(int i = start+1; i < order.size(); i++){
 		
 		img = name_lens_map[order[i]]->Calculate(img);
 		
