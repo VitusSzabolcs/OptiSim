@@ -13,12 +13,19 @@
 
 using namespace std;
 
+struct ray {
+    vector<double> x;
+    vector<double> y;
+};
+
 class OpticalSystem{ 
     private:
         LightSource *LS;
         vector<Image> imageSequence;
     	map<string, OpticalObject*> name_lens_map;
     	vector<string> order;
+        map<string, ray> ray_coord;
+        void NextRayCoords(OpticalObject*, Image, string);
     public:
         // constructors
 		OpticalSystem();
@@ -36,6 +43,7 @@ class OpticalSystem{
     	void save(string);
 		vector<Image> getImageSequence();
     	Image Calculate();
+        map<string, ray> getRays();
         // destructor
 		~OpticalSystem();
 };

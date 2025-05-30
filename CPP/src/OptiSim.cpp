@@ -38,6 +38,10 @@ void help(){
          << setw(22) << "--print"
          << "Print the parameters of the optical system to the console." << endl;
 
+    cout << setw(18) << "-r"
+         << setw(22) << "--rays"
+         << "Expands the output with the ray coordinates." << endl;
+
     cout << setw(18) << "-v"
          << setw(22) << "--version"
          << "Print version info." << endl;
@@ -68,6 +72,7 @@ int main(int argc, char* argv[]){
         bool should_I_print = false;
         bool should_I_calc = true;
         bool should_I_print_il = false;
+        bool should_I_print_rays = false;
     	if (argc < 2) {
     		throw runtime_error("\033[1mDescription\033[0m: By default, this tool reads an "
                         "optical system from a file called \"input.json\" and "
@@ -82,17 +87,25 @@ int main(int argc, char* argv[]){
             if (string(argv[i]) == "-h" || string(argv[i]) == "--help"){
                 help();
                 if (argc == 2) should_I_calc = false;
+
             } else if (string(argv[i]) == "-v" || string(argv[i]) == "--version"){
                 const char* version_string = getOptiSimVersionString();
                 cout << version_string << endl;
                 if (argc == 2) should_I_calc = false;
+
             } else if (string(argv[i]) == "-p" || string(argv[i]) == "--print"){
                 should_I_print = true;
+
+            } else if (string(argv[i]) == "-r" || string(argv[i]) == "--rays"){
+                should_I_print_rays = true;
+
             } else if (string(argv[i]) == "-il" || string(argv[i]) == "--imagelist"){
                 should_I_print_il = true;
+
             } else if (splitted.command == "-i" || splitted.command == "--input"){
                 if (splitted.file == "") throw runtime_error("Check help for correct usage:  OptiSim --help");
                 input_file = splitted.file;
+
             } else if (splitted.command == "-o" || splitted.command == "--output"){
                 if (splitted.file == "") throw runtime_error("Check help for correct usage:  OptiSim --help");
                 output_file = splitted.file;
@@ -116,6 +129,8 @@ int main(int argc, char* argv[]){
             if (should_I_print_il) {
                 vector<Image> imageSequence = my_system.getImageSequence();
                 vector<Image>::iterator it;
+                outputFile << "#\tImages"
+                << "\n-------------------------------------------------------------------------------\n";
                 outputFile << left
                            << setw(15) << "X coordinate"
                            << setw(15) << "Y coordinate"
@@ -128,6 +143,29 @@ int main(int argc, char* argv[]){
                                << setw(10) << setprecision(1) << (*it).getReal()
                                << "\n";
                 }
+                outputFile << "\n-------------------------------------------------------------------------------\n";
+            }
+            if (should_I_print_rays){
+                map<string, ray> rays = my_system.getRays();
+                outputFile << "#\tRays"
+                << "\n-------------------------------------------------------------------------------\n";
+                outputFile << right
+                           << setw(16) << "Ray 1"
+                           << setw(30) << "Ray 2"<< "\n\n";
+                outputFile << left
+                           << setw(15) << "X coordinate"
+                           << setw(15) << "Y coordinate"
+                           << setw(15) << "X coordinate"
+                           << setw(15) << "Y coordinate"<< "\n\n";
+                for (int i =0; i<rays["ray_1"].x.size(); i++){
+                    outputFile << right << fixed << setprecision(6)
+                               << setw(12) << rays["ray_1"].x[i]
+                               << setw(15) << rays["ray_1"].y[i]
+                               << setw(15) << rays["ray_2"].x[i]
+                               << setw(15) << rays["ray_2"].y[i]
+                               << "\n";
+                }
+                outputFile << "\n-------------------------------------------------------------------------------\n";
             }
         }
     	

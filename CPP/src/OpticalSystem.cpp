@@ -132,6 +132,19 @@ Image OpticalSystem::Calculate(){
 	if(LS == nullptr) throw runtime_error("ERROR: \tYou have to add a Light Source to the system before calling the Calculate() method.");
 	if(order.size() == 0) throw runtime_error("ERROR: \tYou have to add Optical Objects to the system first before calling the Calculate() method.");
 	
+	// initial coordinates
+	ray_coord["ray_1"].x.push_back(LS->getX());
+	ray_coord["ray_1"].y.push_back(LS->getY());
+	ray_coord["ray_2"].x.push_back(LS->getX());
+	ray_coord["ray_2"].y.push_back(LS->getY());
+
+	// first lens
+	ray_coord["ray_1"].x.push_back(name_lens_map[order[0]]->getX());
+	ray_coord["ray_1"].y.push_back(LS->getY());
+	ray_coord["ray_2"].x.push_back(name_lens_map[order[0]]->getX());
+	ray_coord["ray_2"].y.push_back(0);
+
+	// calculate first image
 	imageSequence.clear();
 
 	int start = 0;
@@ -148,11 +161,19 @@ Image OpticalSystem::Calculate(){
 	imageSequence.push_back(img);
 	
 	for(int i = start+1; i < order.size(); i++){
+		NextRayCoords(name_lens_map[order[i]], img, "ray_1");
+		NextRayCoords(name_lens_map[order[i]], img, "ray_2");
 		
 		img = name_lens_map[order[i]]->Calculate(img);
 		
 		imageSequence.push_back(img);
 	}
+	// rays intersect at final image
+	ray_coord["ray_1"].x.push_back(img.getX());
+	ray_coord["ray_1"].y.push_back(img.getY());
+	ray_coord["ray_2"].x.push_back(img.getX());
+	ray_coord["ray_2"].y.push_back(img.getY());
+	
 	return img;
 }
 	
@@ -282,4 +303,25 @@ void OpticalSystem::modifyOpticalObject(string name, string param, double val){
 		}
 		else throw runtime_error("ERROR: \tInvalid parameter: " + param);
 	}
+}
+
+// Helper method --------------------------------------------------------------
+void OpticalSystem::NextRayCoords(OpticalObject* ActualLens, Image ActualImage, string which){
+	double x_image = ActualImage.getX();
+	double y_image = ActualImage.getY();
+	double x_ray = ray_coord[which].x.back();
+	double y_ray = ray_coord[which].y.back();
+	double x_lens = ActualLens->getX();
+
+	double a = (y_image-y_ray)/(x_image-x_ray);
+	double b = y_ray-a*x_ray;
+	double x_ray_new = x_lens;
+	double y_ray_new = a*x_ray_new+b;
+
+	ray_coord[which].x.push_back(x_ray_new);
+	ray_coord[which].y.push_back(y_ray_new);
+}
+
+map<string, ray> OpticalSystem::getRays(){
+	return ray_coord;
 }
