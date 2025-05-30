@@ -8,7 +8,13 @@ lens2 = op.ThickLens(20, 1.5, 2.0, 15.0, -15.0)
 my_system = op.OpticalSystem()
 
 my_system.add(lens1, "L1")
-my_system.add(lens2, "L2")
+
+try:
+    my_system.add(lens2, "L1")
+except op.OptiSimError as e:
+    print("Caught:", e)
+
+my_system.add(lens2, "L2")    
 
 my_system.add(ls)
 
