@@ -8,8 +8,9 @@ public interface OpticalSystem{
     void add_thick_lens(String name, double x, double n, double d, double r_left, double r_right);
     void modify_optical_object(String name, String param, double val);
     void modify_light_source(String param, double val);
-    void calculate();
+    Map<String, Object> calculate();
     void save(String filename);     
     Map<String, Map<String, Object>> getSystemElements();
     Map<String, Object> getLightSource();
+    Map<String, Map<String, Object>> getRays();
 }

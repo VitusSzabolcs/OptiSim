@@ -28,7 +28,11 @@ class OpticalSystem(object):
         self.system.modifyLightSource(str(param), val)
 
     def calculate(self):
-        self.system.Calculate()
+        img = self.system.Calculate()
+        img_map = HashMap()
+        img_map.put("x", img.getX())
+        img_map.put("y", img.getY())
+        return img_map
 
     def save(self, filename):
         self.system.save(str(filename))
@@ -51,6 +55,7 @@ class OpticalSystem(object):
                 inner_map.put("r_right", oo.getR_right())
             outer_map.put(name, inner_map)
         return outer_map
+
     def getLightSource(self):
         ls = self.system.getLightSource()
         ls_map = HashMap()
@@ -58,9 +63,25 @@ class OpticalSystem(object):
         ls_map.put("y", ls.getY())
         return ls_map
 
+    def getRays(self):
+        rays = self.system.getRays()
+        outer_map = HashMap()
+        for key, ray in rays.items():
+            inner_map = HashMap()
+            x_list = ArrayList()
+            y_list = ArrayList()
+            print(ray.y)
+            for i in range(len(ray.x)):
+                x_list.add(ray.x[i])
+                y_list.add(ray.y[i])
+            inner_map.put("x", x_list)
+            inner_map.put("y", y_list)
+            outer_map.put(key, inner_map)
+        return outer_map
+
 jpype.startJVM(classpath = ['../Java/optisim_java.jar'])
 
-from java.util import HashMap
+from java.util import HashMap, ArrayList
 
 import optisim_java
 

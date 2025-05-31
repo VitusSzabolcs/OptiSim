@@ -25,5 +25,6 @@ img = my_system.Calculate()
 my_system.toString()
 
 my_map = my_system.getRays() 
+print(my_map)
 
 
