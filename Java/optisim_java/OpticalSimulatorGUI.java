@@ -2,6 +2,7 @@ package optisim_java;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 // Main window class for the optical simulator GUI
 public class OpticalSimulatorGUI extends JFrame {
@@ -21,6 +22,18 @@ public class OpticalSimulatorGUI extends JFrame {
         OpS.modify_light_source("x", 10);
         OpS.modify_optical_object("Lens1", "x", 10);
         OpS.calculate();
+        Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
+        for (String key : SystemElements.keySet()) {
+            System.out.println("Element ID: " + key);
+            Map<String, Object> fields = SystemElements.get(key);
+            for (String field : fields.keySet()) {
+                System.out.println("  " + field + ": " + fields.get(field));
+            }
+        }
+        Map<String, Object> LightSource = OpS.getLightSource();
+        System.out.println(LightSource.get("x"));
+        System.out.println(LightSource.get("y"));
+        
         //OpS.initialize("/home/vszabolcs/OOP/GeomSim/Python/json_files/input.json");
         //OpS.save("system.json");
         

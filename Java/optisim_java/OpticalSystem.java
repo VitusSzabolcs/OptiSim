@@ -1,5 +1,7 @@
 package optisim_java;
 
+import java.util.Map;
+
 public interface OpticalSystem{
     void initialize(String filename);
     void add_thin_lens(String name, double x, double f);
@@ -7,5 +9,7 @@ public interface OpticalSystem{
     void modify_optical_object(String name, String param, double val);
     void modify_light_source(String param, double val);
     void calculate();
-    void save(String filename);
+    void save(String filename);     
+    Map<String, Map<String, Object>> getSystemElements();
+    Map<String, Object> getLightSource();
 }

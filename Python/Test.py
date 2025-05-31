@@ -24,5 +24,6 @@ img = my_system.Calculate()
 
 my_system.toString()
 
-print(my_system.getSystemElements()["L2"].getD())
-print(my_system.getRays()["ray_1"].x)
+my_map = my_system.getRays() 
+
+
