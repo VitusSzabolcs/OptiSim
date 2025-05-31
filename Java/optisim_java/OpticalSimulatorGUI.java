@@ -25,6 +25,7 @@ public class OpticalSimulatorGUI extends JFrame {
 
         // System.out.println(Image.get("x"));
         // System.out.println(Image.get("y"));
+        // System.out.println(Image.get("real"));
 
         // Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
         // for (String key : SystemElements.keySet()) {
@@ -37,6 +38,7 @@ public class OpticalSimulatorGUI extends JFrame {
         // Map<String, Object> LightSource = OpS.getLightSource();
         // System.out.println(LightSource.get("x"));
         // System.out.println(LightSource.get("y"));
+
         // Map<String, Map<String, Object>> Rays = OpS.getRays();
         // for (String key : Rays.keySet()) {
         //     System.out.println("Element ID: " + key);

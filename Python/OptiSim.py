@@ -32,6 +32,7 @@ class OpticalSystem(object):
         img_map = HashMap()
         img_map.put("x", img.getX())
         img_map.put("y", img.getY())
+        img_map.put("real", img.getReal())
         return img_map
 
     def save(self, filename):
