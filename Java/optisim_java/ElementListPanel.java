@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.Map;
 
 // This class defines the left panel with control buttons and a list of optical elements
 public class ElementListPanel extends JPanel {
@@ -47,7 +48,7 @@ public class ElementListPanel extends JPanel {
         loadButton.addActionListener(e -> loadFile()); // Load file action
         saveButton.addActionListener(e -> saveFile()); // Save file action
         addButton.addActionListener(e -> showAddDialog(OpS)); // Add new lens
-        calculateButton.addActionListener(e -> mainFrame.getDrawingPanel().repaint()); // Trigger redraw
+        calculateButton.addActionListener(e -> Calculate(OpS)); // Trigger redraw
 
         // Double-clicking a list item opens a dialog to modify its name
         elementList.addMouseListener(new MouseAdapter() {
@@ -63,6 +64,16 @@ public class ElementListPanel extends JPanel {
         });
     }
 
+    private void Calculate(OpticalSystem OpS) {
+        mainFrame.getDrawingPanel().repaint();
+        try{
+            Map<String, Object> Image = OpS.calculate();
+            elementListModel.addElement("Image");
+        }catch(RuntimeException ex){
+            System.out.println(ex.getMessage());
+        }
+
+    }
     // Open a file chooser to simulate loading a configuration file
     private void loadFile() {
         JFileChooser fileChooser = new JFileChooser();
@@ -182,19 +193,28 @@ public class ElementListPanel extends JPanel {
 
             if (type == "Thin Lens") {
                 double focal_length = Double.parseDouble(focalLengthField.getText());
-                OpS.add_thin_lens(name, position, focal_length);
+                try{
+                    OpS.add_thin_lens(name, position, focal_length);
+                }catch(RuntimeException ex){
+                    System.out.println(ex.getMessage());
+                }
             }
             else {
                 double refractive_index = Double.parseDouble(refractiveIndexField.getText());
                 double left_radius = Double.parseDouble(leftRadiusField.getText());
                 double right_radius = Double.parseDouble(rightRadiusField.getText());
                 double thickness = Double.parseDouble(thicknessField.getText());
-                OpS.add_thick_lens(name, position, refractive_index, left_radius, right_radius, thickness);
+                try{
+                    OpS.add_thick_lens(name, position, refractive_index, left_radius, right_radius, thickness);
+                }catch(RuntimeException ex){
+                    System.out.println(ex.getMessage());
+                }
+                
             }
-            
+
             if (!name.trim().isEmpty()) {
                 // Add a summary line to the list (placeholder format)
-                String entry = name + " (" + type + ", pos: " + position + ")";
+                String entry = name + " (" + type + ")";
                 elementListModel.addElement(entry);
             }
 
