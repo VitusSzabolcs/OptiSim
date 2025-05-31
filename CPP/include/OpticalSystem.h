@@ -44,6 +44,8 @@ class OpticalSystem{
 		vector<Image> getImageSequence();
     	Image Calculate();
         map<string, ray> getRays();
+        map<string, OpticalObject*> getSystemElements();
+        LightSource getLightSource();
         // destructor
 		~OpticalSystem();
 };

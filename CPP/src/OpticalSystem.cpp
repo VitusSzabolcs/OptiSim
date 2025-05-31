@@ -325,3 +325,27 @@ void OpticalSystem::NextRayCoords(OpticalObject* ActualLens, Image ActualImage, 
 map<string, ray> OpticalSystem::getRays(){
 	return ray_coord;
 }
+
+map<string, OpticalObject*> OpticalSystem::getSystemElements(){
+    std::map<string, OpticalObject*> copyMap;
+    for (const auto& [key, objPtr] : name_lens_map) {
+		ThinLens* ptr_thin = dynamic_cast<ThinLens*>(objPtr);
+		ThickLens* ptr_thick = dynamic_cast<ThickLens*>(objPtr);
+        if (ptr_thin) {
+            copyMap[key] = new ThinLens(ptr_thin->getX(),ptr_thin->getF());
+        }
+		else if (ptr_thick) {
+	    	copyMap[key] = new ThickLens(ptr_thick->getX(),
+	    								 ptr_thick->getN(),
+	    								 ptr_thick->getD(),
+	    								 ptr_thick->getR_Left(),
+	    								 ptr_thick->getR_Right());
+    	}
+	}
+    return copyMap;
+}
+
+LightSource OpticalSystem::getLightSource(){
+	if (LS == nullptr) throw runtime_error("ERROR: \tNo light source present.");
+	return LightSource(LS->getX(), LS->getY());
+}

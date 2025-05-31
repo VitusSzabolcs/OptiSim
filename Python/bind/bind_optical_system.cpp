@@ -53,5 +53,7 @@ void bind_optical_system(py::module_ &m) {
             ofs.close();
         })
         .def("save", &OpticalSystem::save, py::arg("file_name"))
-        .def("remove", &OpticalSystem::remove, py::arg("name"));
+        .def("remove", &OpticalSystem::remove, py::arg("name"))
+        .def("getSystemElements", &OpticalSystem::getSystemElements)
+        .def("getLightSource", &OpticalSystem::getLightSource);
 }

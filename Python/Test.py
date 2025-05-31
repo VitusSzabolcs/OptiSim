@@ -24,6 +24,5 @@ img = my_system.Calculate()
 
 my_system.toString()
 
-my_second_system = op.OpticalSystem("json_files/input.json")
-my_second_system.Calculate()
-my_second_system.toString()
+dic = my_system.getSystemElements()
+print(dic["L2"].getX())
