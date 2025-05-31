@@ -10,12 +10,14 @@ class OpticalSystem(object):
         try:
             ls = op.LightSource(0, 8)
             self.system.add(ls)
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))
 
     def initialize(self, filename):
         try:
             self.system = op.OpticalSystem(str(filename))
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))
 
@@ -23,6 +25,7 @@ class OpticalSystem(object):
         try:
             lens = op.ThinLens(x, f)
             self.system.add(lens, str(name))
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))
 
@@ -30,18 +33,21 @@ class OpticalSystem(object):
         try:
             lens = op.ThickLens(x, n, d, r_left, r_right)
             self.system.add(lens, str(name))
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))
 
     def modify_optical_object(self, name, param, val):
         try:
             self.system.modifyOpticalObject(str(name), str(param), val)
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))   
 
     def modify_light_source(self, param, val):
         try:
             self.system.modifyLightSource(str(param), val)
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))
 
@@ -52,6 +58,7 @@ class OpticalSystem(object):
             img_map.put("x", img.getX())
             img_map.put("y", img.getY())
             img_map.put("real", img.getReal())
+            self.system.toString()
         except op.OptiSimError as e:
             raise RuntimeException(str(e))
         return img_map
