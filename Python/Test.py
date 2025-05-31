@@ -24,5 +24,5 @@ img = my_system.Calculate()
 
 my_system.toString()
 
-dic = my_system.getSystemElements()
-print(dic["L2"].getX())
+print(my_system.getSystemElements()["L2"].getD())
+print(my_system.getRays()["ray_1"].x)

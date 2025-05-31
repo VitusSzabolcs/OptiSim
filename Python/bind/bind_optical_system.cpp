@@ -16,6 +16,11 @@ namespace py = pybind11;
 
 void bind_optical_system(py::module_ &m) {
 
+    py::class_<ray>(m, "Ray")
+        .def(py::init<>())
+        .def_readwrite("x", &ray::x)
+        .def_readwrite("y", &ray::y);
+
     py::class_<OpticalSystem>(m, "OpticalSystem")
         // Constructors
         .def(py::init<>())
@@ -55,5 +60,6 @@ void bind_optical_system(py::module_ &m) {
         .def("save", &OpticalSystem::save, py::arg("file_name"))
         .def("remove", &OpticalSystem::remove, py::arg("name"))
         .def("getSystemElements", &OpticalSystem::getSystemElements)
-        .def("getLightSource", &OpticalSystem::getLightSource);
+        .def("getLightSource", &OpticalSystem::getLightSource)
+        .def("getRays", &OpticalSystem::getRays);
 }
