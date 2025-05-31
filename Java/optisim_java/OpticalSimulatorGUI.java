@@ -17,11 +17,15 @@ public class OpticalSimulatorGUI extends JFrame {
         setLocationRelativeTo(null); // Center the window on screen
         setLayout(new BorderLayout()); // Use BorderLayout for layout management
         
-        // OpS.add_thin_lens("Lens1", 10, 10);
-        // OpS.add_thick_lens("Lens2", 20, 10, 10, 10, 10);
-        // OpS.modify_light_source("x", 1);
-        // OpS.modify_optical_object("Lens1", "x", 10);
-        // Map<String, Object> Image = OpS.calculate();
+        // try{
+        //     OpS.add_thin_lens("Lens1", 10, 10);
+        //     OpS.add_thick_lens("Lens2", 20, 10, 10, 10, 10);
+        //     OpS.modify_light_source("x", 1);
+        //     OpS.modify_optical_object("Lens1", "x", 10);
+        //     Map<String, Object> Image = OpS.calculate();
+        // }catch(RuntimeException e){
+        //     System.out.println(e.getMessage());
+        // }
 
         // System.out.println(Image.get("x"));
         // System.out.println(Image.get("y"));
