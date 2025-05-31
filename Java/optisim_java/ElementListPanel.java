@@ -32,6 +32,10 @@ public class ElementListPanel extends JPanel {
 
         // Initialize list model and JList for displaying optical elements
         elementListModel = new DefaultListModel<>();
+
+        // Add default light source element
+        elementListModel.addElement("Light Source (pos: 0.0, size: 1.0)");
+
         elementList = new JList<>(elementListModel);
         JScrollPane listScrollPane = new JScrollPane(elementList); // Add scroll bar
 
@@ -193,11 +197,58 @@ public class ElementListPanel extends JPanel {
         dialog.add(addButton, BorderLayout.SOUTH);
         dialog.setVisible(true);
     }
-    // Show a simple input dialog to rename an existing element
+    // Opens a dialog window that allows the user to modify the selected optical element.
+    // The fields shown depend on the type of element (Thin Lens, Thick Lens, Light Source).
+    // On confirmation, updates the element's name in the GUI list if it was changed.
     private void showModifyDialog(String element, int index) {
-        String newName = JOptionPane.showInputDialog(this, "Modify element name:", element);
-        if (newName != null && !newName.trim().isEmpty()) {
-            elementListModel.set(index, newName);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Input field for modifying the name
+        JTextField nameField = new JTextField(element);
+        panel.add(new JLabel("Name:"));
+        panel.add(nameField);
+
+        // Common input field: position of the element
+        JTextField positionField = new JTextField();
+        panel.add(new JLabel("Position:"));
+        panel.add(positionField);
+
+        // Add type-specific fields depending on the element type
+        if (element.contains("Thin Lens")) {
+            JTextField focalLengthField = new JTextField();
+            panel.add(new JLabel("Focal Length:"));
+            panel.add(focalLengthField);
+        } else if (element.contains("Thick Lens")) {
+            JTextField refractiveIndexField = new JTextField();
+            JTextField leftRadiusField = new JTextField();
+            JTextField rightRadiusField = new JTextField();
+            JTextField thicknessField = new JTextField();
+
+            panel.add(new JLabel("Refractive Index:"));
+            panel.add(refractiveIndexField);
+            panel.add(new JLabel("Left Radius:"));
+            panel.add(leftRadiusField);
+            panel.add(new JLabel("Right Radius:"));
+            panel.add(rightRadiusField);
+            panel.add(new JLabel("Thickness:"));
+            panel.add(thicknessField);
+        } else if (element.contains("Light Source")) {
+            JTextField sizeField = new JTextField();
+            panel.add(new JLabel("Size:"));
+            panel.add(sizeField);
+        }
+
+        // Show the dialog and process the result
+        int result = JOptionPane.showConfirmDialog(this, panel, "Modify Element", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            String newName = nameField.getText();
+            if (!newName.trim().isEmpty()) {
+                elementListModel.set(index, newName); // Update the name in the list model
+
+                
+            }
         }
     }
+
 }
