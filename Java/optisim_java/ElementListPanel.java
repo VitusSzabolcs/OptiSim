@@ -46,7 +46,7 @@ public class ElementListPanel extends JPanel {
         // Assign event handlers to buttons using lambda expressions
         loadButton.addActionListener(e -> loadFile()); // Load file action
         saveButton.addActionListener(e -> saveFile()); // Save file action
-        addButton.addActionListener(e -> showAddDialog()); // Add new lens
+        addButton.addActionListener(e -> showAddDialog(OpS)); // Add new lens
         calculateButton.addActionListener(e -> mainFrame.getDrawingPanel().repaint()); // Trigger redraw
 
         // Double-clicking a list item opens a dialog to modify its name
@@ -90,7 +90,7 @@ public class ElementListPanel extends JPanel {
     }
 
     // Dialog for adding a new lens (thin or thick) with configurable parameters
-    private void showAddDialog() {
+    private void showAddDialog(OpticalSystem OpS) {
         JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Add Optical Element", true);
         dialog.setLayout(new BorderLayout());
         dialog.setSize(300, 450);
@@ -178,10 +178,20 @@ public class ElementListPanel extends JPanel {
         addButton.addActionListener(e -> {
             String type = (String) typeCombo.getSelectedItem();
             String name = nameField.getText();
-            String position = positionField.getText();
-            //  .
-            //  .
-            //  .
+            double position = Double.parseDouble(positionField.getText()); // returns double primitive
+
+            if (type == "Thin Lens") {
+                double focal_length = Double.parseDouble(focalLengthField.getText());
+                OpS.add_thin_lens(name, position, focal_length);
+            }
+            else {
+                double refractive_index = Double.parseDouble(refractiveIndexField.getText());
+                double left_radius = Double.parseDouble(leftRadiusField.getText());
+                double right_radius = Double.parseDouble(rightRadiusField.getText());
+                double thickness = Double.parseDouble(thicknessField.getText());
+                OpS.add_thick_lens(name, position, refractive_index, left_radius, right_radius, thickness);
+            }
+            
             if (!name.trim().isEmpty()) {
                 // Add a summary line to the list (placeholder format)
                 String entry = name + " (" + type + ", pos: " + position + ")";
