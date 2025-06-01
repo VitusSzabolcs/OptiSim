@@ -151,17 +151,9 @@ Image OpticalSystem::Calculate(){
 	if(LS == nullptr) throw OptiSimError("ERROR: \tYou have to add a Light Source to the system before calling the Calculate() method.");
 	if(order.size() == 0) throw OptiSimError("ERROR: \tYou have to add Optical Objects to the system first before calling the Calculate() method.");
 	
-	// initial coordinates
-	ray_coord["ray_1"].x.push_back(LS->getX());
-	ray_coord["ray_1"].y.push_back(LS->getY());
-	ray_coord["ray_2"].x.push_back(LS->getX());
-	ray_coord["ray_2"].y.push_back(LS->getY());
+	ray_coord["ray_1"].x = vector<double>();
+	ray_coord["ray_2"].x = vector<double>();
 
-	// first lens
-	ray_coord["ray_1"].x.push_back(name_lens_map[order[0]]->getX());
-	ray_coord["ray_1"].y.push_back(LS->getY());
-	ray_coord["ray_2"].x.push_back(name_lens_map[order[0]]->getX());
-	ray_coord["ray_2"].y.push_back(0);
 
 	// calculate first image
 	imageSequence.clear();
@@ -175,6 +167,19 @@ Image OpticalSystem::Calculate(){
 	}
 
 	if(start == order.size()) throw OptiSimError("ERROR: \t The Light Source is behind all the Optical Objects, nothing to calculate.");
+
+	// initial coordinates
+	ray_coord["ray_1"].x.push_back(LS->getX());
+	ray_coord["ray_1"].y.push_back(LS->getY());
+	ray_coord["ray_2"].x.push_back(LS->getX());
+	ray_coord["ray_2"].y.push_back(LS->getY());
+
+	// first lens
+	ray_coord["ray_1"].x.push_back(name_lens_map[order[start]]->getX());
+	ray_coord["ray_1"].y.push_back(LS->getY());
+	ray_coord["ray_2"].x.push_back(name_lens_map[order[start]]->getX());
+	ray_coord["ray_2"].y.push_back(0);
+
 	Image img = name_lens_map[order[start]]->Calculate(*LS);
 	
 	imageSequence.push_back(img);

@@ -132,6 +132,8 @@ public class DrawingPanel extends JPanel {
                     ray = Rays.get(key);
                     ArrayList list_x = (ArrayList) ray.get("x");
                     ArrayList list_y = (ArrayList) ray.get("y");
+                    System.out.println(list_x);
+                    System.out.println(list_y);
                     for(int i = 1; i < list.size(); i++){
                         double y1 = (double)list_y.get(i-1);
                         double x1 = (double)list_x.get(i-1);
