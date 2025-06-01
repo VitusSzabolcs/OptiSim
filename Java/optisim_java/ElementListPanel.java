@@ -73,7 +73,12 @@ public class ElementListPanel extends JPanel {
             Map<String, Object> Image = OpS.calculate();
             elementListModel.addElement("Image");
         }catch(OptiSimError ex){
-            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(
+            this,                         
+            ex.getMessage(),
+            "Optical Simulator Error",
+            JOptionPane.ERROR_MESSAGE
+            );
         }
 
     }
@@ -103,9 +108,18 @@ public class ElementListPanel extends JPanel {
 
 
             } catch(OptiSimError ex){
-                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(
+                this,                         
+                ex.getMessage(),
+                "Optical Simulator Error",
+                JOptionPane.ERROR_MESSAGE
+                );
             }
-            JOptionPane.showMessageDialog(this, "Loaded: " + selectedFile.getName());
+            JOptionPane.showMessageDialog(
+            this,
+            "Loaded: " + selectedFile.getName(),
+            "Optical Simulator Message", 
+            JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -119,9 +133,18 @@ public class ElementListPanel extends JPanel {
             try {
             OpS.save(path);
             } catch(OptiSimError ex){
-                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(
+                this,                         
+                ex.getMessage(),
+                "Optical Simulator Error",
+                JOptionPane.ERROR_MESSAGE
+                );
             }
-            JOptionPane.showMessageDialog(this, "Saved: " + selectedFile.getName());
+            JOptionPane.showMessageDialog(
+            this,
+            "Saved: " + selectedFile.getName(),
+            "Optical Simulator Message", 
+            JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -228,39 +251,47 @@ public class ElementListPanel extends JPanel {
         // Button to finalize and add the new element to the list
         JButton addButton = new JButton("Add");
         addButton.addActionListener(e -> {
-            String type = (String) typeCombo.getSelectedItem();
-            String name = nameField.getText();
-            double position = Double.parseDouble(positionField.getText()); // returns double primitive
 
-            if (type == "Thin Lens") {
-                double focal_length = Double.parseDouble(focalLengthField.getText());
-                try{
+            try{
+                String type = (String) typeCombo.getSelectedItem();
+                String name = nameField.getText();
+                double position = Double.parseDouble(positionField.getText()); // returns double primitive
+
+                if (type == "Thin Lens") {
+                    double focal_length = Double.parseDouble(focalLengthField.getText());
                     OpS.add_thin_lens(name, position, focal_length);
-                }catch(OptiSimError ex){
-                    System.out.println(ex.getMessage());
                 }
-            }
-            else {
-                double refractive_index = Double.parseDouble(refractiveIndexField.getText());
-                double left_radius = Double.parseDouble(leftRadiusField.getText());
-                double right_radius = Double.parseDouble(rightRadiusField.getText());
-                double thickness = Double.parseDouble(thicknessField.getText());
-                try{
+                else {
+                    double refractive_index = Double.parseDouble(refractiveIndexField.getText());
+                    double left_radius = Double.parseDouble(leftRadiusField.getText());
+                    double right_radius = Double.parseDouble(rightRadiusField.getText());
+                    double thickness = Double.parseDouble(thicknessField.getText());
                     OpS.add_thick_lens(name, position, refractive_index, thickness, left_radius, right_radius);
-                }catch(OptiSimError ex){
-                    System.out.println(ex.getMessage());
                 }
-                
-            }
 
-            if (!name.trim().isEmpty()) {
-                // Add a summary line to the list (placeholder format)
-                String entry = name;
-                elementListModel.addElement(entry + "-" + type);
-            }
+                if (!name.trim().isEmpty()) {
+                    // Add a summary line to the list (placeholder format)
+                    String entry = name;
+                    elementListModel.addElement(entry + "-" + type);
+                }
+                //close and clean up the dialog window
+                dialog.dispose();
 
-            //close and clean up the dialog window
-            dialog.dispose();
+            }catch(OptiSimError ex){
+                JOptionPane.showMessageDialog(
+                    this,                         
+                    ex.getMessage(),
+                    "Optical Simulator Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(
+                    this,                         
+                    ex.getMessage(),
+                    "Optical Simulator Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
         });
 
         // Add form and button to the dialog
@@ -376,42 +407,45 @@ public class ElementListPanel extends JPanel {
         // Modify logic
         modifyButton.addActionListener(e -> {
             double position_m = Double.parseDouble(positionField.getText());
+            try{
             if (element.contains("Light Source")) {
                 double size_m = Double.parseDouble(sizeField.getText());
-                try {
-                    OpS.modify_light_source("x", position_m);
-                    OpS.modify_light_source("y", size_m);
-                } catch(OptiSimError ex){
-                    System.out.println(ex.getMessage());
-                }
+                OpS.modify_light_source("x", position_m);
+                OpS.modify_light_source("y", size_m);
                 
 
             } else if (element.split("-")[1].contains("Thin Lens")) {
                 double focal_length_m = Double.parseDouble(focalLengthField.getText());
-                try {
-                    OpS.modify_optical_object(element.split("-")[0], "x", position_m);
-                    OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
-                } catch(OptiSimError ex){
-                    System.out.println(ex.getMessage());
-                }
+                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
 
             } else if (element.split("-")[1].contains("Thick Lens")) {
                 double refractive_index_m = Double.parseDouble(refractiveIndexField.getText());
                 double left_radius_m = Double.parseDouble(leftRadiusField.getText());
                 double right_radius_m = Double.parseDouble(rightRadiusField.getText());
                 double thickness_m = Double.parseDouble(thicknessField.getText());
-                try {
-                    OpS.modify_optical_object(element.split("-")[0], "x", position_m);
-                    OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
-                    OpS.modify_optical_object(element.split("-")[0], "r_left", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
-                    OpS.modify_optical_object(element.split("-")[0], "r_right", right_radius_m); 
-                    OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
-                } catch(OptiSimError ex){
-                    System.out.println(ex.getMessage());
-                }
+                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
+                OpS.modify_optical_object(element.split("-")[0], "r_left", left_radius_m); 
+                OpS.modify_optical_object(element.split("-")[0], "r_right", right_radius_m); 
+                OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
             }
-            
             dialog.dispose();
+            }catch(OptiSimError ex){
+                JOptionPane.showMessageDialog(
+                    this,                         
+                    ex.getMessage(),
+                    "Optical Simulator Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(
+                    this,                         
+                    ex.getMessage(),
+                    "Optical Simulator Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
         });
 
         buttonPanel.add(deleteButton);
