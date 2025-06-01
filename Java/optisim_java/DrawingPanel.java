@@ -81,8 +81,6 @@ public class DrawingPanel extends JPanel {
             }
 
             if(Double.isInfinite(x_last)){
-                
-
                 y_max = Math.abs((double)LightSource.get("y"));
 
                 for (String key : Rays.keySet()) {
@@ -105,7 +103,7 @@ public class DrawingPanel extends JPanel {
             else if(Double.isFinite(x_last)){
                 if(x_last > x_max) x_max = x_last;
 
-                y_max = (double)LightSource.get("y");
+                y_max = Math.abs((double)LightSource.get("y"));
 
                 for (String key : Rays.keySet()) {
                     ray = Rays.get(key);
@@ -118,7 +116,6 @@ public class DrawingPanel extends JPanel {
                     }
                     
                 }
-
                 y_min = -y_max;
 
                 scale_x = 0.8 * width / (x_max - x_min);
@@ -132,9 +129,7 @@ public class DrawingPanel extends JPanel {
                     ray = Rays.get(key);
                     ArrayList list_x = (ArrayList) ray.get("x");
                     ArrayList list_y = (ArrayList) ray.get("y");
-                    System.out.println(list_x);
-                    System.out.println(list_y);
-                    for(int i = 1; i < list.size(); i++){
+                    for(int i = 1; i < list_x.size(); i++){
                         double y1 = (double)list_y.get(i-1);
                         double x1 = (double)list_x.get(i-1);
                         double y2 = (double)list_y.get(i);
@@ -201,17 +196,17 @@ public class DrawingPanel extends JPanel {
 
         int x_draw = (int)Math.round((x - x_min) * scale_x + getWidth() * 0.1);
 
-        int y_draw1 = 0;
-        int y_draw2 = 0;
+        int y_draw1 = (int)Math.round(getHeight() / 2 - y * scale_y);
+        int y_draw2 = getHeight()/2;
 
-        if(y > 0){
-            y_draw1 = (int)Math.round(getHeight() * 0.2 + (y_max - y) * scale_y);
-            y_draw2 = (int)Math.round(getHeight() * 0.2 + y_max * scale_y);
-        }
-        else if (y <= 0){
-            y_draw1 = (int)Math.round(getHeight() * 0.8 - (y_min - y) * scale_y);
-            y_draw2 = (int)Math.round(getHeight() * 0.8 + y_min * scale_y);
-        }
+        // if(y > 0){
+        //     y_draw1 = (int)Math.round(getHeight() * 0.2 + (y_max - y) * scale_y);
+        //     y_draw2 = (int)Math.round(getHeight() * 0.2 + y_max * scale_y);
+        // }
+        // else if (y <= 0){
+        //     y_draw1 = (int)Math.round(getHeight() * 0.8 - (y_min - y) * scale_y);
+        //     y_draw2 = (int)Math.round(getHeight() * 0.8 + y_min * scale_y);
+        // }
 
         g2.setColor(color);
         g2.setStroke(new BasicStroke(2));

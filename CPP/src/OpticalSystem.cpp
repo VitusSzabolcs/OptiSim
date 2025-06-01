@@ -45,7 +45,7 @@ OpticalSystem::OpticalSystem(string file_name){
             add(thinl, lens["name"]);
 
         } else if (type == "thick") {
-            ThickLens thickl =ThickLens(lens["position"],
+            ThickLens thickl = ThickLens(lens["position"],
 							  lens["refractive_index"],
 							  lens["thickness"],
 							  lens["radius_left"],
@@ -154,7 +154,6 @@ Image OpticalSystem::Calculate(){
 	ray_coord["ray_1"].x = vector<double>();
 	ray_coord["ray_2"].x = vector<double>();
 
-
 	// calculate first image
 	imageSequence.clear();
 
@@ -185,11 +184,11 @@ Image OpticalSystem::Calculate(){
 	imageSequence.push_back(img);
 	
 	for(int i = start+1; i < order.size(); i++){
+
 		NextRayCoords(name_lens_map[order[i]], img, "ray_1");
 		NextRayCoords(name_lens_map[order[i]], img, "ray_2");
-		
+
 		img = name_lens_map[order[i]]->Calculate(img);
-		
 		imageSequence.push_back(img);
 	}
 	// rays intersect at final image
