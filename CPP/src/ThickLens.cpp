@@ -3,13 +3,14 @@
 #include <iostream>
 #include <limits>
 #include <cmath>
+#include <OptiSimError.h>
 
 using namespace std;
 
 
 double ThickLens::computeF(double n, double d, double r_left, double r_right){
     if(r_left == 0.0 || r_right == 0.0) {
-        throw runtime_error("ERROR: \tThe radius of the surface cannot be 0.");
+        throw OptiSimError("ERROR: \tThe radius of the surface cannot be 0.");
     }
 
     double term1 = isinf(r_left) ? 0.0 : 1.0 / r_left;
@@ -37,8 +38,8 @@ double ThickLens::computeHRight(){
 }
 
 ThickLens::ThickLens(double x, double n, double d, double r_left, double r_right):Lens(x, computeF(n, d, r_left, r_right)){
-    if(n <= 0) throw runtime_error("ERROR: \tThe refractive index must be a positive number.");
-    if(d <= 0) throw runtime_error("ERROR: \tThe thickness of the lens must be a positive number.");
+    if(n <= 0) throw OptiSimError("ERROR: \tThe refractive index must be a positive number.");
+    if(d <= 0) throw OptiSimError("ERROR: \tThe thickness of the lens must be a positive number.");
     this->n = n;
     this->d = d;
     this->r_left = r_left;
@@ -50,7 +51,7 @@ double ThickLens::getN(){
 }
 
 void ThickLens::setN(double n){
-    if(n <= 0) throw runtime_error("ERROR: \tThe refractive index must be a positive number.");
+    if(n <= 0) throw OptiSimError("ERROR: \tThe refractive index must be a positive number.");
     if(this->n != n){
         this->n = n;
         this->f = computeF(n, d, r_left, r_right);
@@ -62,7 +63,7 @@ double ThickLens::getD(){
 }
 
 void ThickLens::setD(double d){
-    if(d <= 0) throw runtime_error("ERROR: \tThe thickness of the lens must be a positive number.");
+    if(d <= 0) throw OptiSimError("ERROR: \tThe thickness of the lens must be a positive number.");
     if(this->d != d){
         this->d = d;
         this->f = computeF(n, d, r_left, r_right);

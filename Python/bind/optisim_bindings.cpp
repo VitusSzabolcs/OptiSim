@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <iostream>
+#include "OptiSimError.h"
 
 namespace py = pybind11;
 
@@ -15,5 +16,5 @@ PYBIND11_MODULE(optisim, m) {
     bind_imaging_subjects(m);
     bind_optical_system(m);
 
-    py::register_exception<std::runtime_error>(m, "OptiSimError");
+    py::register_exception<OptiSimError>(m, "OptiSimError");
 }

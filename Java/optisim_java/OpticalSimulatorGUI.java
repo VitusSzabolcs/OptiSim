@@ -2,7 +2,6 @@ package optisim_java;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 
 // Main window class for the optical simulator GUI
 public class OpticalSimulatorGUI extends JFrame {

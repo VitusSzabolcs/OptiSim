@@ -19,6 +19,7 @@ set(COMMON_CPP_SOURCES
     src/ThinLens.cpp
     src/OpticalSystem.cpp
     src/OptiSimVersion.cpp
+    src/OptiSimError.cpp
 )
 
 add_library(OptiSimLib STATIC ${COMMON_CPP_SOURCES})

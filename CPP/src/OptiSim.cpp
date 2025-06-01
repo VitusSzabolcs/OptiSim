@@ -74,7 +74,7 @@ int main(int argc, char* argv[]){
         bool should_I_print_il = false;
         bool should_I_print_rays = false;
     	if (argc < 2) {
-    		throw runtime_error("\033[1mDescription\033[0m: By default, this tool reads an "
+    		throw OptiSimError("\033[1mDescription\033[0m: By default, this tool reads an "
                         "optical system from a file called \"input.json\" and "
                         "writes the calculation results to a file called \"output.txt\".\n"
                         "\033[1mUsage\033[0m: OptiSim [OPTIONS]\n"
@@ -103,11 +103,11 @@ int main(int argc, char* argv[]){
                 should_I_print_il = true;
 
             } else if (splitted.command == "-i" || splitted.command == "--input"){
-                if (splitted.file == "") throw runtime_error("Check help for correct usage:  OptiSim --help");
+                if (splitted.file == "") throw OptiSimError("Check help for correct usage:  OptiSim --help");
                 input_file = splitted.file;
 
             } else if (splitted.command == "-o" || splitted.command == "--output"){
-                if (splitted.file == "") throw runtime_error("Check help for correct usage:  OptiSim --help");
+                if (splitted.file == "") throw OptiSimError("Check help for correct usage:  OptiSim --help");
                 output_file = splitted.file;
             }
 	    }

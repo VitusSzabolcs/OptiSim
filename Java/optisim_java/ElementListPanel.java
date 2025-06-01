@@ -403,8 +403,8 @@ public class ElementListPanel extends JPanel {
                 try {
                     OpS.modify_optical_object(element.split("-")[0], "x", position_m);
                     OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
-                    OpS.modify_optical_object(element.split("-")[0], "r1", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
-                    OpS.modify_optical_object(element.split("-")[0], "r2", right_radius_m); 
+                    OpS.modify_optical_object(element.split("-")[0], "r_left", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
+                    OpS.modify_optical_object(element.split("-")[0], "r_right", right_radius_m); 
                     OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
                 } catch(RuntimeException ex){
                     System.out.println(ex.getMessage());

@@ -9,8 +9,9 @@ public interface OpticalSystem{
     void modify_optical_object(String name, String param, double val);
     void modify_light_source(String param, double val);
     Map<String, Object> calculate();
-    void save(String filename);     
+    void save(String filename);
     Map<String, Map<String, Object>> getSystemElements();
     Map<String, Object> getLightSource();
     Map<String, Map<String, Object>> getRays();
+    void remove(String name);
 }

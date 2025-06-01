@@ -10,5 +10,6 @@
 #include "ThickLens.h"
 #include "ThinLens.h"
 #include "OptiSimVersion.h"
+#include "OptiSimError.h"
 
 #endif

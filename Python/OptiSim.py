@@ -120,6 +120,12 @@ class OpticalSystem(object):
             raise RuntimeException(str(e))
         return outer_map
 
+    def remove(self, name):
+        try:
+            self.system.remove(str(name))
+        except op.OptiSimError as e:
+            raise RuntimeException(str(e))
+
 jpype.startJVM(classpath = ['../Java/optisim_java.jar'])
 
 from java.util import HashMap, ArrayList

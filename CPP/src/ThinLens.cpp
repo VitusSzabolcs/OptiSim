@@ -2,6 +2,7 @@
 #include <cmath>
 #include <limits>
 #include <iostream>
+#include "OptiSimError.h"
 
 using namespace std;
 
@@ -41,6 +42,6 @@ Image ThinLens::Calculate(ImagingSubject is){
 }
 
 void ThinLens::setF(double f){
-    if (f == 0) throw runtime_error("ERROR: \tFocal length cannot be zero.");
+    if (f == 0) throw OptiSimError("ERROR: \tFocal length cannot be zero.");
     this->f = f;
 }
