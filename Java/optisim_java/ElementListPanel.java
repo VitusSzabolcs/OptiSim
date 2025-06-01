@@ -224,7 +224,7 @@ public class ElementListPanel extends JPanel {
                 double right_radius = Double.parseDouble(rightRadiusField.getText());
                 double thickness = Double.parseDouble(thicknessField.getText());
                 try{
-                    OpS.add_thick_lens(name, position, refractive_index, left_radius, right_radius, thickness);
+                    OpS.add_thick_lens(name, position, refractive_index, thickness, left_radius, right_radius);
                 }catch(RuntimeException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -318,6 +318,8 @@ public class ElementListPanel extends JPanel {
             formPanel.add(sizeField);
         } else if (element.contains("Image")) {
             formPanel.add(new JLabel("Size:"));
+            positionField.setEditable(false);
+            sizeField.setEditable(false);
             formPanel.add(sizeField);
         } else if (element.split("-")[1].contains("Thin Lens")) {
             formPanel.add(new JLabel("Focal Length:"));
@@ -338,6 +340,9 @@ public class ElementListPanel extends JPanel {
         JButton deleteButton = new JButton("Delete");
         deleteButton.setForeground(Color.RED);
         JButton modifyButton = new JButton("Modify");
+        if (element.contains("Image")) {
+            modifyButton.setEnabled(false);
+        }
 
         // Delete logic
         deleteButton.addActionListener(e -> {
@@ -348,11 +353,32 @@ public class ElementListPanel extends JPanel {
 
         // Modify logic
         modifyButton.addActionListener(e -> {
-            String pos = positionField.getText();
-            // You can fetch values from the relevant text fields here and apply modifications
-            // For now, just print them or apply logic as needed
-            System.out.println("Modify values:");
-            System.out.println("Position = " + pos);
+            double position_m = Double.parseDouble(positionField.getText());
+            if (element.contains("Light Source")) {
+                double size_m = Double.parseDouble(sizeField.getText());
+
+                OpS.modify_light_source("x", position_m);
+                OpS.modify_light_source("y", size_m);
+
+            } else if (element.split("-")[1].contains("Thin Lens")) {
+                double focal_length_m = Double.parseDouble(focalLengthField.getText());
+
+                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
+
+            } else if (element.split("-")[1].contains("Thick Lens")) {
+                double refractive_index_m = Double.parseDouble(refractiveIndexField.getText());
+                double left_radius_m = Double.parseDouble(leftRadiusField.getText());
+                double right_radius_m = Double.parseDouble(rightRadiusField.getText());
+                double thickness_m = Double.parseDouble(thicknessField.getText());
+
+                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
+                OpS.modify_optical_object(element.split("-")[0], "r1", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
+                OpS.modify_optical_object(element.split("-")[0], "r2", right_radius_m); 
+                OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
+            }
+            
             dialog.dispose();
         });
 
