@@ -94,18 +94,19 @@ public class ElementListPanel extends JPanel {
                 
                 Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
                 for (String key : SystemElements.keySet()) {
-                    System.out.println("Element ID: " + key);
                     Map<String, Object> fields = SystemElements.get(key);
                     String type = (String) fields.get("type");
                     if (type.contains("ThinLens")) {
-                        System.out.println(key+" - thin");
                         elementListModel.addElement(key + "-Thin Lens");
                     } else if (type.contains("ThickLens")){
-                        System.out.println(key+" - thick");
                         elementListModel.addElement(key + "-Thick Lens");
                     }
                 }
-
+                JOptionPane.showMessageDialog(
+                this,
+                "Loaded: " + selectedFile.getName(),
+                "Optical Simulator Message", 
+                JOptionPane.INFORMATION_MESSAGE);
 
             } catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
@@ -115,11 +116,6 @@ public class ElementListPanel extends JPanel {
                 JOptionPane.ERROR_MESSAGE
                 );
             }
-            JOptionPane.showMessageDialog(
-            this,
-            "Loaded: " + selectedFile.getName(),
-            "Optical Simulator Message", 
-            JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -131,7 +127,12 @@ public class ElementListPanel extends JPanel {
             File selectedFile = fileChooser.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
             try {
-            OpS.save(path);
+                OpS.save(path);
+                JOptionPane.showMessageDialog(
+                this,
+                "Saved: " + selectedFile.getName(),
+                "Optical Simulator Message", 
+                JOptionPane.INFORMATION_MESSAGE);
             } catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
                 this,                         
@@ -140,11 +141,6 @@ public class ElementListPanel extends JPanel {
                 JOptionPane.ERROR_MESSAGE
                 );
             }
-            JOptionPane.showMessageDialog(
-            this,
-            "Saved: " + selectedFile.getName(),
-            "Optical Simulator Message", 
-            JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
