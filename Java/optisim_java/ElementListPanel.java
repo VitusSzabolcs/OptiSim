@@ -406,6 +406,10 @@ public class ElementListPanel extends JPanel {
             deleteButton.setEnabled(false);
         }
 
+        if (element.contains("Light Source")) {
+            deleteButton.setEnabled(false);
+        }
+
         // Delete logic
         deleteButton.addActionListener(e -> {
             // We can not delete elements from C++ so at this point this button does nothing

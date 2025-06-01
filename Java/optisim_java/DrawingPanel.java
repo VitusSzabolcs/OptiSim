@@ -3,6 +3,7 @@ package optisim_java;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Map;
 
 // Custom panel where optical elements or rays can be drawn graphically
@@ -36,26 +37,122 @@ public class DrawingPanel extends JPanel {
         int width = getWidth();
         int height = getHeight();
 
+        Map<String, Object> LightSource = OpS.getLightSource();
+        Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
+
+        double x_min = 0;
+        double x_max = 0;
+        double y_max = 0;
+        double y_min = 0;
+
         if(!mode){
-            Map<String, Object> LightSource = OpS.getLightSource();
 
-            double x_min = (double)LightSource.get("x");
-            double x_max = x_min + 1e-3;
-            double y_max = (double)LightSource.get("y");
-            double y_min = -y_max;
+            x_min = (double)LightSource.get("x");
+            x_max = x_min + 1e-3;
+            y_max = Math.abs((double)LightSource.get("y"));
+            y_min = -y_max;
 
-            Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
+            
             for (String key : SystemElements.keySet()) {
-                Map<String, Object> fields = SystemElements.get(key);
-                if((double)fields.get("x") > x_max){
-                    x_max = (double)fields.get("x");
+                Map<String, Object> lens = SystemElements.get(key);
+                if((double)lens.get("x") > x_max){
+                    x_max = (double)lens.get("x");
                 }
             }
 
             scale_x = 0.8 * width / (x_max - x_min); 
             scale_y = 0.6 * height / (y_max - y_min);
+        }
+
+        if(mode){
+            Map<String, Map<String, Object>> Rays = OpS.getRays();
+            Map<String, Object> ray = Rays.get("ray_1");
+            ArrayList list = (ArrayList) ray.get("x");
+            double x_last = (Double) list.get(list.size() - 1);
+
+            x_min = (double)LightSource.get("x");
+            x_max = x_min + 1e-3;
 
             for (String key : SystemElements.keySet()) {
+                Map<String, Object> lens = SystemElements.get(key);
+                if((double)lens.get("x") > x_max){
+                    x_max = (double)lens.get("x");
+                }
+            }
+
+            if(Double.isInfinite(x_last)){
+                
+
+                y_max = Math.abs((double)LightSource.get("y"));
+
+                for (String key : Rays.keySet()) {
+                    ray = Rays.get(key);
+                    list = (ArrayList) ray.get("y");
+                    for(int i = 0; i < list.size()-1; i++){
+                        double y = (double)list.get(i);
+                        if(Math.abs(y) > y_max){
+                            y_max = Math.abs(y);
+                        }
+                    }
+                    
+                }
+
+                y_min = -y_max;
+
+                scale_x = 0.8 * width / (x_max - x_min);
+                scale_y = 0.6 * height / (y_max - y_min);
+            }
+            else if(Double.isFinite(x_last)){
+                if(x_last > x_max) x_max = x_last;
+
+                y_max = (double)LightSource.get("y");
+
+                for (String key : Rays.keySet()) {
+                    ray = Rays.get(key);
+                    list = (ArrayList) ray.get("y");
+                    for(int i = 0; i < list.size(); i++){
+                        double y = (double)list.get(i);
+                        if(Math.abs(y) > y_max){
+                            y_max = Math.abs(y);
+                        }
+                    }
+                    
+                }
+
+                y_min = -y_max;
+
+                scale_x = 0.8 * width / (x_max - x_min);
+                scale_y = 0.6 * height / (y_max - y_min);
+
+                Map<String, Object> img = OpS.calculate();
+        
+                drawImagingSubject(g2, img, x_min, y_min, y_max, Color.ORANGE);
+
+                for (String key : Rays.keySet()) {
+                    ray = Rays.get(key);
+                    ArrayList list_x = (ArrayList) ray.get("x");
+                    ArrayList list_y = (ArrayList) ray.get("y");
+                    for(int i = 1; i < list.size(); i++){
+                        double y1 = (double)list_y.get(i-1);
+                        double x1 = (double)list_x.get(i-1);
+                        double y2 = (double)list_y.get(i);
+                        double x2 = (double)list_x.get(i);
+                    
+                        int x1_draw = (int)Math.round(getWidth() * 0.1 + (x1 - x_min) * scale_x);
+                        int x2_draw = (int)Math.round(getWidth() * 0.1 + (x2 - x_min) * scale_x);
+                        int y1_draw = (int)Math.round(getHeight() / 2 - y1 * scale_y);
+                        int y2_draw = (int)Math.round(getHeight() / 2 - y2 * scale_y);
+                        
+                        g2.setColor(Color.BLUE);
+                        g2.drawLine(x1_draw, y1_draw, x2_draw, y2_draw);
+            
+                    }
+                }
+            }
+
+        }
+
+        for (String key : SystemElements.keySet()) {
                 Map<String, Object> lens = SystemElements.get(key);
                 String type = (String) lens.get("type");
                 if(type.contains("ThinLens")){
@@ -65,46 +162,13 @@ public class DrawingPanel extends JPanel {
                     drawLens(g2, lens, x_min, 6);
                 }
             }
-        }
+            drawImagingSubject(g2, LightSource, x_min, y_min, y_max, Color.RED);
 
-        
-
-        // Example drawing: Title
-        // g2.setColor(Color.BLUE);
-
-        // if(mode) g2.drawString("2D Optical Simulation", 20, 20);
-        // if(!mode) g2.drawString("Masik opcio", 40, 40);
-
-        // // Set thicker stroke for reference lines
-        // g2.setStroke(new BasicStroke(2)); // 2-pixel thick line
-
-        // // Draw horizontal reference line (e.g., optical axis)
-        // g2.setColor(Color.GRAY);
-        // g2.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
-
-        // // Draw vertical reference line
-        // g2.setColor(Color.LIGHT_GRAY);
-        // g2.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
-
-        // // Reset to default stroke for arrows
-        // g2.setStroke(new BasicStroke(1));
-        // g2.setColor(Color.RED);
-
-        // // Arrow pointing right
-        // g2.drawLine(100, getHeight() / 2, 150, getHeight() / 2);
-        // g2.drawLine(150, getHeight() / 2, 145, getHeight() / 2 - 5);
-        // g2.drawLine(150, getHeight() / 2, 145, getHeight() / 2 + 5);
-
-        // // Arrow pointing up
-        // g2.drawLine(getWidth() / 2, 300, getWidth() / 2, 250);
-        // g2.drawLine(getWidth() / 2, 250, getWidth() / 2 - 5, 255);
-        // g2.drawLine(getWidth() / 2, 250, getWidth() / 2 + 5, 255);
     }
 
     private void drawLens(Graphics2D g2, Map<String, Object> Lens, double x_min, int thickness){
         double x = (double) Lens.get("x");
         double f = (double) Lens.get("f");
-
 
         int x_draw = (int)Math.round((x - x_min) * scale_x + getWidth() * 0.1);
         int y_draw1 = (int)Math.round(getHeight() * 0.1);
@@ -126,6 +190,37 @@ public class DrawingPanel extends JPanel {
             g2.drawLine(x_draw, y_draw1, x_draw + (int)Math.round(getWidth())/90, y_draw1 - (int)Math.round(getWidth())/70);
             g2.drawLine(x_draw, y_draw2, x_draw - (int)Math.round(getWidth())/90, y_draw2 + (int)Math.round(getWidth())/70);
             g2.drawLine(x_draw, y_draw2, x_draw + (int)Math.round(getWidth())/90, y_draw2 + (int)Math.round(getWidth())/70);
+        }
+    }
+
+    private void drawImagingSubject(Graphics2D g2, Map<String, Object> LS, double x_min, double y_min, double y_max, Color color){
+        double x = (double) LS.get("x");
+        double y = (double) LS.get("y");
+
+        int x_draw = (int)Math.round((x - x_min) * scale_x + getWidth() * 0.1);
+
+        int y_draw1 = 0;
+        int y_draw2 = 0;
+
+        if(y > 0){
+            y_draw1 = (int)Math.round(getHeight() * 0.2 + (y_max - y) * scale_y);
+            y_draw2 = (int)Math.round(getHeight() * 0.2 + y_max * scale_y);
+        }
+        else if (y <= 0){
+            y_draw1 = (int)Math.round(getHeight() * 0.8 - (y_min - y) * scale_y);
+            y_draw2 = (int)Math.round(getHeight() * 0.8 + y_min * scale_y);
+        }
+
+        g2.setColor(color);
+        g2.setStroke(new BasicStroke(2));
+        g2.drawLine(x_draw, y_draw1, x_draw, y_draw2);
+        if(y > 0){
+            g2.drawLine(x_draw, y_draw1, x_draw - (int)Math.round(Math.abs(y_draw1 - y_draw2)/10), y_draw1 + (int)Math.round(Math.abs(y_draw1 - y_draw2)/8));
+            g2.drawLine(x_draw, y_draw1, x_draw + (int)Math.round(Math.abs(y_draw1 - y_draw2)/10), y_draw1 + (int)Math.round(Math.abs(y_draw1 - y_draw2)/8));
+        }
+        else if(y < 0){
+            g2.drawLine(x_draw, y_draw1, x_draw - (int)Math.round(Math.abs(y_draw1 - y_draw2)/10), y_draw1 - (int)Math.round(Math.abs(y_draw1 - y_draw2)/8));
+            g2.drawLine(x_draw, y_draw1, x_draw + (int)Math.round(Math.abs(y_draw1 - y_draw2)/10), y_draw1 - (int)Math.round(Math.abs(y_draw1 - y_draw2)/8));
         }
     }
 
