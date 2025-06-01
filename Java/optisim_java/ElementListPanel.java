@@ -5,16 +5,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.Map;
+import java.util.ArrayList;
 
 // This class defines the left panel with control buttons and a list of optical elements
 public class ElementListPanel extends JPanel {
     private DefaultListModel<String> elementListModel; // Underlying data model for the list
     private JList<String> elementList;                 // GUI component displaying the optical elements
     private OpticalSimulatorGUI mainFrame;             // Reference to the main application window
+    //private OpticalSystem OpSys;
 
 
     public ElementListPanel(OpticalSimulatorGUI frame, OpticalSystem OpS) {
         this.mainFrame = frame;
+        //this.OpSys = OpS;
         setLayout(new BorderLayout()); // Use BorderLayout for layout management
         setPreferredSize(new Dimension(200, 600)); // Fixed width for the side panel
         
@@ -57,7 +60,7 @@ public class ElementListPanel extends JPanel {
                     int index = elementList.locationToIndex(evt.getPoint());
                     if (index >= 0) {
                         String selectedElement = elementListModel.get(index);
-                        showModifyDialog(selectedElement, index);
+                        showModifyDialog(selectedElement, index, OpS);
                     }
                 }
             }
@@ -105,7 +108,6 @@ public class ElementListPanel extends JPanel {
         JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Add Optical Element", true);
         dialog.setLayout(new BorderLayout());
         dialog.setLocationRelativeTo(this); // Optional: centers relative to parent
-
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
@@ -160,8 +162,8 @@ public class ElementListPanel extends JPanel {
                 dynamicFieldsPanel.add(new JLabel("Focal Length:"));
                 dynamicFieldsPanel.add(focalLengthField);
                 dialog.pack(); // Let Java calculate optimal height
-                Dimension size = dialog.getSize();
-                dialog.setSize(new Dimension(300, size.height)); // Set width manually, keep calculated height
+                Dimension window_size = dialog.getSize();
+                dialog.setSize(new Dimension(300, window_size.height)); // Set width manually, keep calculated height
             } else {
                 // Otherwise, the user selected "Thick Lens"
                 // Show input fields relevant to thick lenses
@@ -183,8 +185,8 @@ public class ElementListPanel extends JPanel {
                 dynamicFieldsPanel.add(thicknessField);
 
                 dialog.pack(); // Let Java calculate optimal height
-                Dimension size = dialog.getSize();
-                dialog.setSize(new Dimension(300, size.height)); // Set width manually, keep calculated height
+                Dimension window_size = dialog.getSize();
+                dialog.setSize(new Dimension(300, window_size.height)); // Set width manually, keep calculated height
             }
             // Refresh the panel to reflect the changes in the UI
             // `revalidate()` tells the layout manager to redo layout calculations
@@ -231,8 +233,8 @@ public class ElementListPanel extends JPanel {
 
             if (!name.trim().isEmpty()) {
                 // Add a summary line to the list (placeholder format)
-                String entry = name + " (" + type + ")";
-                elementListModel.addElement(entry);
+                String entry = name;
+                elementListModel.addElement(entry + "-" + type);
             }
 
             //close and clean up the dialog window
@@ -243,77 +245,126 @@ public class ElementListPanel extends JPanel {
         dialog.add(formPanel, BorderLayout.CENTER);
         dialog.add(addButton, BorderLayout.SOUTH);
         dialog.pack(); // Let Java calculate optimal height
-        Dimension size = dialog.getSize();
-        dialog.setSize(new Dimension(300, size.height)); // Set width manually, keep calculated height
+        Dimension window_size = dialog.getSize();
+        dialog.setSize(new Dimension(300, window_size.height)); // Set width manually, keep calculated height
         dialog.setVisible(true);
     }
+
     // Opens a dialog window that allows the user to modify the selected optical element.
     // The fields shown depend on the type of element (Thin Lens, Thick Lens, Light Source).
     // On confirmation, updates the element's name in the GUI list if it was changed.
-    private void showModifyDialog(String element, int index) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    private void showModifyDialog(String element, int index, OpticalSystem OpS) {
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Modify :" + element, true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setLocationRelativeTo(this); // Center on parent
 
-        // Common input field: position of the element
-        JTextField positionField = new JTextField();
-        panel.add(new JLabel("Position:"));
-        panel.add(positionField);
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+
+        double position = 0;
+        double focal_length = 0;
+        double refractive_index = 0;
+        double left_radius = 0;
+        double right_radius = 0;
+        double thickness = 0;
+        double size = 0;
+
+        // Get element current values to display
+        if (element.contains("Light Source")) {
+            Map<String, Object> LightSource = OpS.getLightSource();
+            position = (Double) LightSource.get("x");
+            size = (Double) LightSource.get("y");
+
+        } else if (element.contains("Image")) {
+            Map<String, Map<String, Object>> Rays = OpS.getRays(); // We use this to get the image position and size
+            Map<String, Object> fields = Rays.get("ray_1");
+            ArrayList list = (ArrayList) fields.get("x");
+            position = (Double) list.get(list.size() - 1);
+            list = (ArrayList) fields.get("y");
+            size = (Double) list.get(list.size() - 1);
+
+        } else if (element.split("-")[1].contains("Thin Lens")) {
+            Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
+            Map<String, Object> fields = SystemElements.get(element.split("-")[0]);
+            position = (Double) fields.get("x");
+            focal_length = (Double) fields.get("f");
+
+        } else if (element.split("-")[1].contains("Thick Lens")) {
+            Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
+            Map<String, Object> fields = SystemElements.get(element.split("-")[0]);
+            position = (Double) fields.get("x");
+            refractive_index = (Double) fields.get("n");
+            left_radius = (Double) fields.get("r_left");
+            right_radius = (Double) fields.get("r_right");
+            thickness = (Double) fields.get("d");
+        }
+        
+
+        // Common field: Position
+        JTextField positionField = new JTextField(Double.toString(position));
+        formPanel.add(new JLabel("Position:"));
+        formPanel.add(positionField);
 
         // Type-specific fields
-        JTextField focalLengthField = new JTextField();
-        JTextField refractiveIndexField = new JTextField();
-        JTextField leftRadiusField = new JTextField();
-        JTextField rightRadiusField = new JTextField();
-        JTextField thicknessField = new JTextField();
-        JTextField sizeField = new JTextField();
+        JTextField focalLengthField = new JTextField(Double.toString(focal_length));
+        JTextField refractiveIndexField = new JTextField(Double.toString(refractive_index));
+        JTextField leftRadiusField = new JTextField(Double.toString(left_radius));
+        JTextField rightRadiusField = new JTextField(Double.toString(right_radius));
+        JTextField thicknessField = new JTextField(Double.toString(thickness));
+        JTextField sizeField = new JTextField(Double.toString(size));
 
-        if (element.contains("Thin Lens")) {
-            panel.add(new JLabel("Focal Length:"));
-            panel.add(focalLengthField);
-        } else if (element.contains("Thick Lens")) {
-            panel.add(new JLabel("Refractive Index:"));
-            panel.add(refractiveIndexField);
-            panel.add(new JLabel("Left Radius:"));
-            panel.add(leftRadiusField);
-            panel.add(new JLabel("Right Radius:"));
-            panel.add(rightRadiusField);
-            panel.add(new JLabel("Thickness:"));
-            panel.add(thicknessField);
-        } else if (element.contains("Light Source")) {
-            panel.add(new JLabel("Size:"));
-            panel.add(sizeField);
+        if (element.contains("Light Source")) {
+            formPanel.add(new JLabel("Size:"));
+            formPanel.add(sizeField);
+        } else if (element.contains("Image")) {
+            formPanel.add(new JLabel("Size:"));
+            formPanel.add(sizeField);
+        } else if (element.split("-")[1].contains("Thin Lens")) {
+            formPanel.add(new JLabel("Focal Length:"));
+            formPanel.add(focalLengthField);
+        } else if (element.split("-")[1].contains("Thick Lens")) {
+            formPanel.add(new JLabel("Refractive Index:"));
+            formPanel.add(refractiveIndexField);
+            formPanel.add(new JLabel("Left Radius:"));
+            formPanel.add(leftRadiusField);
+            formPanel.add(new JLabel("Right Radius:"));
+            formPanel.add(rightRadiusField);
+            formPanel.add(new JLabel("Thickness:"));
+            formPanel.add(thicknessField);
         }
 
-        // Add a delete button at the bottom of the dialog
-        JButton deleteButton = new JButton("Delete Element");
-        deleteButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        // Buttons panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton deleteButton = new JButton("Delete");
         deleteButton.setForeground(Color.RED);
-        //panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(deleteButton);
+        JButton modifyButton = new JButton("Modify");
 
-        // Create the dialog as a JOptionPane inside a JDialog
-        final JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(this), "Modify Element", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.getContentPane().add(panel);
-        dialog.pack();
-        dialog.setLocationRelativeTo(this);
-
-        // Handle the delete button action
+        // Delete logic
         deleteButton.addActionListener(e -> {
-            elementListModel.remove(index);
+            // We can not delete elements from C++ so at this point this button does nothing
+            //elementListModel.remove(index);
+            //dialog.dispose();
+        });
+
+        // Modify logic
+        modifyButton.addActionListener(e -> {
+            String pos = positionField.getText();
+            // You can fetch values from the relevant text fields here and apply modifications
+            // For now, just print them or apply logic as needed
+            System.out.println("Modify values:");
+            System.out.println("Position = " + pos);
             dialog.dispose();
         });
 
-        // Show OK/Cancel options separately
-        int result = JOptionPane.showConfirmDialog(dialog, panel, "Modify: "+element, JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-            // You can later retrieve and store these values if needed
-            String position = positionField.getText();
-            // Similarly: focalLengthField.getText(), etc.
-            // Use them to update the backend if required
-        }
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(modifyButton);
 
-        dialog.dispose();
+        dialog.add(formPanel, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        dialog.pack();
+        Dimension window_size = dialog.getSize();
+        dialog.setSize(new Dimension(300, window_size.height)); // Fixed width
+        dialog.setVisible(true);
     }
-
 }
