@@ -48,8 +48,8 @@ public class ElementListPanel extends JPanel {
         add(listScrollPane, BorderLayout.CENTER);
 
         // Assign event handlers to buttons using lambda expressions
-        loadButton.addActionListener(e -> loadFile()); // Load file action
-        saveButton.addActionListener(e -> saveFile()); // Save file action
+        loadButton.addActionListener(e -> loadFile(OpS)); // Load file action
+        saveButton.addActionListener(e -> saveFile(OpS)); // Save file action
         addButton.addActionListener(e -> showAddDialog(OpS)); // Add new lens
         calculateButton.addActionListener(e -> Calculate(OpS)); // Trigger redraw
 
@@ -78,27 +78,49 @@ public class ElementListPanel extends JPanel {
 
     }
     // Open a file chooser to simulate loading a configuration file
-    private void loadFile() {
+    private void loadFile(OpticalSystem OpS) {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            //  .
-            //  .
-            //  .
+            String path = selectedFile.getAbsolutePath();
+            try {
+                OpS.initialize(path);
+                
+                Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
+                for (String key : SystemElements.keySet()) {
+                    System.out.println("Element ID: " + key);
+                    Map<String, Object> fields = SystemElements.get(key);
+                    String type = (String) fields.get("type");
+                    if (type.contains("ThinLens")) {
+                        System.out.println(key+" - thin");
+                        elementListModel.addElement(key + "-Thin Lens");
+                    } else if (type.contains("ThickLens")){
+                        System.out.println(key+" - thick");
+                        elementListModel.addElement(key + "-Thick Lens");
+                    }
+                }
+
+
+            } catch(RuntimeException ex){
+                System.out.println(ex.getMessage());
+            }
             JOptionPane.showMessageDialog(this, "Loaded: " + selectedFile.getName());
         }
     }
 
     // Open a file chooser to simulate saving current configuration
-    private void saveFile() {
+    private void saveFile(OpticalSystem OpS) {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showSaveDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            //  .
-            //  .
-            //  .
+            String path = selectedFile.getAbsolutePath();
+            try {
+            OpS.save(path);
+            } catch(RuntimeException ex){
+                System.out.println(ex.getMessage());
+            }
             JOptionPane.showMessageDialog(this, "Saved: " + selectedFile.getName());
         }
     }
@@ -356,27 +378,37 @@ public class ElementListPanel extends JPanel {
             double position_m = Double.parseDouble(positionField.getText());
             if (element.contains("Light Source")) {
                 double size_m = Double.parseDouble(sizeField.getText());
-
-                OpS.modify_light_source("x", position_m);
-                OpS.modify_light_source("y", size_m);
+                try {
+                    OpS.modify_light_source("x", position_m);
+                    OpS.modify_light_source("y", size_m);
+                } catch(RuntimeException ex){
+                    System.out.println(ex.getMessage());
+                }
+                
 
             } else if (element.split("-")[1].contains("Thin Lens")) {
                 double focal_length_m = Double.parseDouble(focalLengthField.getText());
-
-                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
-                OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
+                try {
+                    OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                    OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
+                } catch(RuntimeException ex){
+                    System.out.println(ex.getMessage());
+                }
 
             } else if (element.split("-")[1].contains("Thick Lens")) {
                 double refractive_index_m = Double.parseDouble(refractiveIndexField.getText());
                 double left_radius_m = Double.parseDouble(leftRadiusField.getText());
                 double right_radius_m = Double.parseDouble(rightRadiusField.getText());
                 double thickness_m = Double.parseDouble(thicknessField.getText());
-
-                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
-                OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
-                OpS.modify_optical_object(element.split("-")[0], "r1", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
-                OpS.modify_optical_object(element.split("-")[0], "r2", right_radius_m); 
-                OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
+                try {
+                    OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                    OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
+                    OpS.modify_optical_object(element.split("-")[0], "r1", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
+                    OpS.modify_optical_object(element.split("-")[0], "r2", right_radius_m); 
+                    OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
+                } catch(RuntimeException ex){
+                    System.out.println(ex.getMessage());
+                }
             }
             
             dialog.dispose();

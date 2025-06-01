@@ -109,7 +109,7 @@ class OpticalSystem(object):
                 inner_map = HashMap()
                 x_list = ArrayList()
                 y_list = ArrayList()
-                print(ray.y)
+                
                 for i in range(len(ray.x)):
                     x_list.add(ray.x[i])
                     y_list.add(ray.y[i])
