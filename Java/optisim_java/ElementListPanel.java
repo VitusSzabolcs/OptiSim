@@ -68,10 +68,13 @@ public class ElementListPanel extends JPanel {
     }
 
     private void Calculate(OpticalSystem OpS) {
-        mainFrame.getDrawingPanel().repaint();
         try{
-            Map<String, Object> Image = OpS.calculate();
+            if(elementListModel.getElementAt(elementListModel.getSize()-1).contains("Image")){
+                elementListModel.remove(elementListModel.getSize()-1);        
+            }
+            OpS.calculate();
             elementListModel.addElement("Image");
+            mainFrame.getDrawingPanel().repaint();
         }catch(OptiSimError ex){
             JOptionPane.showMessageDialog(
             this,                         
@@ -249,6 +252,9 @@ public class ElementListPanel extends JPanel {
         addButton.addActionListener(e -> {
 
             try{
+                if(elementListModel.getElementAt(elementListModel.getSize()-1).contains("Image")){
+                    elementListModel.remove(elementListModel.getSize()-1);        
+                }
                 String type = (String) typeCombo.getSelectedItem();
                 String name = nameField.getText();
                 double position = Double.parseDouble(positionField.getText()); // returns double primitive
@@ -391,42 +397,60 @@ public class ElementListPanel extends JPanel {
         JButton modifyButton = new JButton("Modify");
         if (element.contains("Image")) {
             modifyButton.setEnabled(false);
+            deleteButton.setEnabled(false);
         }
 
         // Delete logic
         deleteButton.addActionListener(e -> {
             // We can not delete elements from C++ so at this point this button does nothing
-            //elementListModel.remove(index);
-            //dialog.dispose();
+            try{
+                if(elementListModel.getElementAt(elementListModel.getSize()-1).contains("Image")){
+                    elementListModel.remove(elementListModel.getSize()-1);        
+                }
+                OpS.remove(element.split("-")[0]);
+                elementListModel.remove(index);
+                dialog.dispose();
+            }catch(OptiSimError ex){
+                JOptionPane.showMessageDialog(
+                    this,                         
+                    ex.getMessage(),
+                    "Optical Simulator Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
         });
 
         // Modify logic
         modifyButton.addActionListener(e -> {
-            double position_m = Double.parseDouble(positionField.getText());
+            
             try{
-            if (element.contains("Light Source")) {
-                double size_m = Double.parseDouble(sizeField.getText());
-                OpS.modify_light_source("x", position_m);
-                OpS.modify_light_source("y", size_m);
-                
+                if(elementListModel.getElementAt(elementListModel.getSize()-1).contains("Image")){
+                    elementListModel.remove(elementListModel.getSize()-1);        
+                }
+                double position_m = Double.parseDouble(positionField.getText());
+                if (element.contains("Light Source")) {
+                    double size_m = Double.parseDouble(sizeField.getText());
+                    OpS.modify_light_source("x", position_m);
+                    OpS.modify_light_source("y", size_m);
+                    
 
-            } else if (element.split("-")[1].contains("Thin Lens")) {
-                double focal_length_m = Double.parseDouble(focalLengthField.getText());
-                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
-                OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
+                } else if (element.split("-")[1].contains("Thin Lens")) {
+                    double focal_length_m = Double.parseDouble(focalLengthField.getText());
+                    OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                    OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
 
-            } else if (element.split("-")[1].contains("Thick Lens")) {
-                double refractive_index_m = Double.parseDouble(refractiveIndexField.getText());
-                double left_radius_m = Double.parseDouble(leftRadiusField.getText());
-                double right_radius_m = Double.parseDouble(rightRadiusField.getText());
-                double thickness_m = Double.parseDouble(thicknessField.getText());
-                OpS.modify_optical_object(element.split("-")[0], "x", position_m);
-                OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
-                OpS.modify_optical_object(element.split("-")[0], "r_left", left_radius_m); 
-                OpS.modify_optical_object(element.split("-")[0], "r_right", right_radius_m); 
-                OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
-            }
-            dialog.dispose();
+                } else if (element.split("-")[1].contains("Thick Lens")) {
+                    double refractive_index_m = Double.parseDouble(refractiveIndexField.getText());
+                    double left_radius_m = Double.parseDouble(leftRadiusField.getText());
+                    double right_radius_m = Double.parseDouble(rightRadiusField.getText());
+                    double thickness_m = Double.parseDouble(thicknessField.getText());
+                    OpS.modify_optical_object(element.split("-")[0], "x", position_m);
+                    OpS.modify_optical_object(element.split("-")[0], "n", refractive_index_m);
+                    OpS.modify_optical_object(element.split("-")[0], "r_left", left_radius_m); 
+                    OpS.modify_optical_object(element.split("-")[0], "r_right", right_radius_m); 
+                    OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
+                }
+                dialog.dispose();
             }catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
                     this,                         

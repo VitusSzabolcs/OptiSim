@@ -123,6 +123,7 @@ class OpticalSystem(object):
     def remove(self, name):
         try:
             self.system.remove(str(name))
+            self.system.toString()
         except op.OptiSimError as e:
             raise optisim_java.OptiSimError(str(e))
 
