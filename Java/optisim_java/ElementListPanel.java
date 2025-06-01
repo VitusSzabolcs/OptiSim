@@ -72,7 +72,7 @@ public class ElementListPanel extends JPanel {
         try{
             Map<String, Object> Image = OpS.calculate();
             elementListModel.addElement("Image");
-        }catch(RuntimeException ex){
+        }catch(OptiSimError ex){
             System.out.println(ex.getMessage());
         }
 
@@ -102,7 +102,7 @@ public class ElementListPanel extends JPanel {
                 }
 
 
-            } catch(RuntimeException ex){
+            } catch(OptiSimError ex){
                 System.out.println(ex.getMessage());
             }
             JOptionPane.showMessageDialog(this, "Loaded: " + selectedFile.getName());
@@ -118,7 +118,7 @@ public class ElementListPanel extends JPanel {
             String path = selectedFile.getAbsolutePath();
             try {
             OpS.save(path);
-            } catch(RuntimeException ex){
+            } catch(OptiSimError ex){
                 System.out.println(ex.getMessage());
             }
             JOptionPane.showMessageDialog(this, "Saved: " + selectedFile.getName());
@@ -236,7 +236,7 @@ public class ElementListPanel extends JPanel {
                 double focal_length = Double.parseDouble(focalLengthField.getText());
                 try{
                     OpS.add_thin_lens(name, position, focal_length);
-                }catch(RuntimeException ex){
+                }catch(OptiSimError ex){
                     System.out.println(ex.getMessage());
                 }
             }
@@ -247,7 +247,7 @@ public class ElementListPanel extends JPanel {
                 double thickness = Double.parseDouble(thicknessField.getText());
                 try{
                     OpS.add_thick_lens(name, position, refractive_index, thickness, left_radius, right_radius);
-                }catch(RuntimeException ex){
+                }catch(OptiSimError ex){
                     System.out.println(ex.getMessage());
                 }
                 
@@ -381,7 +381,7 @@ public class ElementListPanel extends JPanel {
                 try {
                     OpS.modify_light_source("x", position_m);
                     OpS.modify_light_source("y", size_m);
-                } catch(RuntimeException ex){
+                } catch(OptiSimError ex){
                     System.out.println(ex.getMessage());
                 }
                 
@@ -391,7 +391,7 @@ public class ElementListPanel extends JPanel {
                 try {
                     OpS.modify_optical_object(element.split("-")[0], "x", position_m);
                     OpS.modify_optical_object(element.split("-")[0], "f", focal_length_m);
-                } catch(RuntimeException ex){
+                } catch(OptiSimError ex){
                     System.out.println(ex.getMessage());
                 }
 
@@ -406,7 +406,7 @@ public class ElementListPanel extends JPanel {
                     OpS.modify_optical_object(element.split("-")[0], "r_left", left_radius_m); // !!!! nem konzisztens, mashol r_left-et hasznalunk
                     OpS.modify_optical_object(element.split("-")[0], "r_right", right_radius_m); 
                     OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
-                } catch(RuntimeException ex){
+                } catch(OptiSimError ex){
                     System.out.println(ex.getMessage());
                 }
             }

@@ -12,14 +12,14 @@ class OpticalSystem(object):
             self.system.add(ls)
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
     def initialize(self, filename):
         try:
             self.system = op.OpticalSystem(str(filename))
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
     def add_thin_lens(self, name, x, f):
         try:
@@ -27,7 +27,7 @@ class OpticalSystem(object):
             self.system.add(lens, str(name))
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
     def add_thick_lens(self, name, x, n, d, r_left, r_right):
         try:
@@ -35,21 +35,21 @@ class OpticalSystem(object):
             self.system.add(lens, str(name))
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
     def modify_optical_object(self, name, param, val):
         try:
             self.system.modifyOpticalObject(str(name), str(param), val)
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))   
+            raise optisim_java.OptiSimError(str(e))   
 
     def modify_light_source(self, param, val):
         try:
             self.system.modifyLightSource(str(param), val)
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
     def calculate(self):
         try:
@@ -60,14 +60,14 @@ class OpticalSystem(object):
             img_map.put("real", img.getReal())
             self.system.toString()
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
         return img_map
 
     def save(self, filename):
         try:
             self.system.save(str(filename))
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
     def getSystemElements(self):
         try:
@@ -88,7 +88,7 @@ class OpticalSystem(object):
                     inner_map.put("r_right", oo.getR_right())
                 outer_map.put(name, inner_map)
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
         return outer_map
 
     def getLightSource(self):
@@ -98,7 +98,7 @@ class OpticalSystem(object):
             ls_map.put("x", ls.getX())
             ls_map.put("y", ls.getY())
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
         return ls_map
 
     def getRays(self):
@@ -117,19 +117,18 @@ class OpticalSystem(object):
                 inner_map.put("y", y_list)
                 outer_map.put(key, inner_map)
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
         return outer_map
 
     def remove(self, name):
         try:
             self.system.remove(str(name))
         except op.OptiSimError as e:
-            raise RuntimeException(str(e))
+            raise optisim_java.OptiSimError(str(e))
 
 jpype.startJVM(classpath = ['../Java/optisim_java.jar'])
 
 from java.util import HashMap, ArrayList
-from java.lang import RuntimeException
 
 import optisim_java
 
