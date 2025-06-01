@@ -74,6 +74,7 @@ public class ElementListPanel extends JPanel {
             }
             OpS.calculate();
             elementListModel.addElement("Image");
+            mainFrame.getDrawingPanel().setMode(true);
             mainFrame.getDrawingPanel().repaint();
         }catch(OptiSimError ex){
             JOptionPane.showMessageDialog(
@@ -110,6 +111,8 @@ public class ElementListPanel extends JPanel {
                 "Loaded: " + selectedFile.getName(),
                 "Optical Simulator Message", 
                 JOptionPane.INFORMATION_MESSAGE);
+                mainFrame.getDrawingPanel().setMode(false);
+                mainFrame.getDrawingPanel().repaint();
 
             } catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
@@ -279,6 +282,9 @@ public class ElementListPanel extends JPanel {
                 //close and clean up the dialog window
                 dialog.dispose();
 
+                mainFrame.getDrawingPanel().setMode(false);
+                mainFrame.getDrawingPanel().repaint();
+
             }catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
                     this,                         
@@ -410,6 +416,8 @@ public class ElementListPanel extends JPanel {
                 OpS.remove(element.split("-")[0]);
                 elementListModel.remove(index);
                 dialog.dispose();
+                mainFrame.getDrawingPanel().setMode(false);
+                mainFrame.getDrawingPanel().repaint();
             }catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
                     this,                         
@@ -451,6 +459,8 @@ public class ElementListPanel extends JPanel {
                     OpS.modify_optical_object(element.split("-")[0], "d", thickness_m);
                 }
                 dialog.dispose();
+                mainFrame.getDrawingPanel().setMode(false);
+                mainFrame.getDrawingPanel().repaint();
             }catch(OptiSimError ex){
                 JOptionPane.showMessageDialog(
                     this,                         

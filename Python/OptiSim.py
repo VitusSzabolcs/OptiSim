@@ -86,6 +86,7 @@ class OpticalSystem(object):
                     inner_map.put("d", oo.getD())
                     inner_map.put("r_left", oo.getR_left())
                     inner_map.put("r_right", oo.getR_right())
+                    inner_map.put("f", oo.getF())
                 outer_map.put(name, inner_map)
         except op.OptiSimError as e:
             raise optisim_java.OptiSimError(str(e))

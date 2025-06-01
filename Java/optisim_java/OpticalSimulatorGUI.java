@@ -12,7 +12,7 @@ public class OpticalSimulatorGUI extends JFrame {
         // Configure the main frame
         setTitle("Optical Simulator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 600); // Set initial window size
+        setSize(1400, 800); // Set initial window size
         setLocationRelativeTo(null); // Center the window on screen
         setLayout(new BorderLayout()); // Use BorderLayout for layout management
         /*
