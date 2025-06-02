@@ -349,8 +349,10 @@ public class ElementListPanel extends JPanel {
             if((double)list.get(list.size()-1) < (double)list.get(list.size()-2)){
                 image_type = "Virtual";
             }
+            
             list = (ArrayList) fields.get("y");
             size = (Double) list.get(list.size() - 1);
+            if(Double.isInfinite(size)) image_type = "-";
             
 
         } else if (element.split("-")[1].contains("Thin Lens")) {

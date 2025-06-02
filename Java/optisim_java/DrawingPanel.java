@@ -81,6 +81,13 @@ public class DrawingPanel extends JPanel {
             }
 
             if(Double.isInfinite(x_last)){
+
+                double x_ls = (double)LightSource.get("x");
+                OpS.modify_light_source("x", x_ls - 1e-2);
+                OpS.calculate();
+                Rays = OpS.getRays();
+
+
                 y_max = Math.abs((double)LightSource.get("y"));
 
                 for (String key : Rays.keySet()) {
@@ -99,6 +106,47 @@ public class DrawingPanel extends JPanel {
 
                 scale_x = 0.8 * width / (x_max - x_min);
                 scale_y = 0.6 * height / (y_max - y_min);
+
+                for (String key : Rays.keySet()) {
+                    ray = Rays.get(key);
+                    ArrayList list_x = (ArrayList) ray.get("x");
+                    ArrayList list_y = (ArrayList) ray.get("y");
+                    Color color = Color.BLUE;
+                    if(key.contains("ray_2")){
+                        color = Color.GREEN;
+                    }
+                    for(int i = list_x.size()-1; i > 0; i--){
+                        double y1 = (double)list_y.get(i-1);
+                        double x1 = (double)list_x.get(i-1);
+                        double y2 = (double)list_y.get(i);
+                        double x2 = (double)list_x.get(i);
+                    
+                        int x1_draw = (int)Math.round(getWidth() * 0.1 + (x1 - x_min) * scale_x);
+                        int x2_draw = (int)Math.round(getWidth() * 0.1 + (x2 - x_min) * scale_x);
+                        int y1_draw = (int)Math.round(getHeight() / 2 - y1 * scale_y);
+                        int y2_draw = (int)Math.round(getHeight() / 2 - y2 * scale_y);
+                        
+                        
+                        g2.setColor(color);
+                        g2.setStroke(new BasicStroke(2));
+                        if(x2 < x1){
+                            g2.drawLine(x1_draw, y1_draw, x1_draw + 1000 * (x1_draw - x2_draw), y1_draw + 1000 * (y1_draw - y2_draw));
+                            float[] dash = {10.0f, 5.0f};
+                            g2.setStroke(new BasicStroke(
+                                2.0f,                      // Line width
+                                BasicStroke.CAP_BUTT,     // End cap
+                                BasicStroke.JOIN_MITER,   // Line join
+                                10.0f,                     // Miter limit
+                                dash,                     // Dash pattern
+                                0.0f                      // Dash phase
+                            ));
+                        }
+                        g2.drawLine(x1_draw, y1_draw, x2_draw, y2_draw);
+                    }
+                }
+
+                OpS.modify_light_source("x", x_ls);
+                OpS.calculate();
             }
             else if(Double.isFinite(x_last)){
                 if(x_last > x_max) x_max = x_last;
