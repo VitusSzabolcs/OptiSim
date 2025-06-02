@@ -1,30 +1,31 @@
 import optisim as op
 
-ls = op.LightSource(-10, 2)
-
-lens1 = op.ThinLens(0, 10)
-lens2 = op.ThickLens(20, 1.5, 2.0, 15.0, -15.0)
-
-my_system = op.OpticalSystem()
-
-my_system.add(lens1, "L1")
-
-try:
-    my_system.add(lens2, "L1")
-except op.OptiSimError as e:
-    print("Caught:", e)
-
-my_system.add(lens2, "L2")    
-
-my_system.add(ls)
-
-my_system.modifyOpticalObject("L1", "x", 1)
-
-img = my_system.Calculate()
+my_system = op.OpticalSystem("json_files/input.json")
 
 my_system.toString()
 
-my_map = my_system.getRays() 
-print(my_map)
+my_system.Calculate()
+
+my_system.toString()
+
+rays = my_system.getRays()
+
+print("Ray 1:", rays["ray_1"].x)
+print("Ray 1:", rays["ray_1"].y)
+print("Ray 2:", rays["ray_2"].x)
+print("Ray 2:", rays["ray_2"].y)
+
+my_system.remove("Lense1")
+
+my_system.Calculate()
+
+my_system.toString()
+
+rays = my_system.getRays()
+
+print("Ray 1:", rays["ray_1"].x)
+print("Ray 1:", rays["ray_1"].y)
+print("Ray 2:", rays["ray_2"].x)
+print("Ray 2:", rays["ray_2"].y)
 
 

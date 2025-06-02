@@ -102,6 +102,7 @@ public class DrawingPanel extends JPanel {
             }
             else if(Double.isFinite(x_last)){
                 if(x_last > x_max) x_max = x_last;
+                if(x_last < x_min) x_min = x_last;
 
                 y_max = Math.abs((double)LightSource.get("y"));
 
@@ -129,7 +130,11 @@ public class DrawingPanel extends JPanel {
                     ray = Rays.get(key);
                     ArrayList list_x = (ArrayList) ray.get("x");
                     ArrayList list_y = (ArrayList) ray.get("y");
-                    for(int i = 1; i < list_x.size(); i++){
+                    Color color = Color.BLUE;
+                    if(key.contains("ray_2")){
+                        color = Color.GREEN;
+                    }
+                    for(int i = list_x.size()-1; i > 0; i--){
                         double y1 = (double)list_y.get(i-1);
                         double x1 = (double)list_x.get(i-1);
                         double y2 = (double)list_y.get(i);
@@ -140,9 +145,22 @@ public class DrawingPanel extends JPanel {
                         int y1_draw = (int)Math.round(getHeight() / 2 - y1 * scale_y);
                         int y2_draw = (int)Math.round(getHeight() / 2 - y2 * scale_y);
                         
-                        g2.setColor(Color.BLUE);
+                        
+                        g2.setColor(color);
+                        if(x2 < x1){
+                            g2.drawLine(x1_draw, y1_draw, x1_draw + 1000 * (x1_draw - x2_draw), y1_draw + 1000 * (y1_draw - y2_draw));
+                            float[] dash = {10.0f, 5.0f};
+                            g2.setStroke(new BasicStroke(
+                                2.0f,                      // Line width
+                                BasicStroke.CAP_BUTT,     // End cap
+                                BasicStroke.JOIN_MITER,   // Line join
+                                10.0f,                     // Miter limit
+                                dash,                     // Dash pattern
+                                0.0f                      // Dash phase
+                            ));
+                        }
                         g2.drawLine(x1_draw, y1_draw, x2_draw, y2_draw);
-            
+                        g2.setStroke(new BasicStroke(2));
                     }
                 }
             }

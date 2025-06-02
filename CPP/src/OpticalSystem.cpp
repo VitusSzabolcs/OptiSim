@@ -152,7 +152,9 @@ Image OpticalSystem::Calculate(){
 	if(order.size() == 0) throw OptiSimError("ERROR: \tYou have to add Optical Objects to the system first before calling the Calculate() method.");
 	
 	ray_coord["ray_1"].x = vector<double>();
+	ray_coord["ray_1"].y = vector<double>();
 	ray_coord["ray_2"].x = vector<double>();
+	ray_coord["ray_2"].y = vector<double>();
 
 	// calculate first image
 	imageSequence.clear();

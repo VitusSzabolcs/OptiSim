@@ -95,6 +95,9 @@ public class ElementListPanel extends JPanel {
             String path = selectedFile.getAbsolutePath();
             try {
                 OpS.initialize(path);
+
+                elementListModel.clear();
+                elementListModel.addElement("Light Source");
                 
                 Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
                 for (String key : SystemElements.keySet()) {
@@ -106,6 +109,7 @@ public class ElementListPanel extends JPanel {
                         elementListModel.addElement(key + "-Thick Lens");
                     }
                 }
+
                 JOptionPane.showMessageDialog(
                 this,
                 "Loaded: " + selectedFile.getName(),
@@ -329,6 +333,7 @@ public class ElementListPanel extends JPanel {
         double right_radius = 0;
         double thickness = 0;
         double size = 0;
+        String image_type = "Real";
 
         // Get element current values to display
         if (element.contains("Light Source")) {
@@ -341,8 +346,12 @@ public class ElementListPanel extends JPanel {
             Map<String, Object> fields = Rays.get("ray_1");
             ArrayList list = (ArrayList) fields.get("x");
             position = (Double) list.get(list.size() - 1);
+            if((double)list.get(list.size()-1) < (double)list.get(list.size()-2)){
+                image_type = "Virtual";
+            }
             list = (ArrayList) fields.get("y");
             size = (Double) list.get(list.size() - 1);
+            
 
         } else if (element.split("-")[1].contains("Thin Lens")) {
             Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
@@ -373,6 +382,9 @@ public class ElementListPanel extends JPanel {
         JTextField rightRadiusField = new JTextField(Double.toString(right_radius));
         JTextField thicknessField = new JTextField(Double.toString(thickness));
         JTextField sizeField = new JTextField(Double.toString(size));
+        JTextField imageType = new JTextField(image_type);
+
+        
 
         if (element.contains("Light Source")) {
             formPanel.add(new JLabel("Size:"));
@@ -382,6 +394,9 @@ public class ElementListPanel extends JPanel {
             positionField.setEditable(false);
             sizeField.setEditable(false);
             formPanel.add(sizeField);
+            formPanel.add(new JLabel("Image Type:"));
+            imageType.setEditable(false);
+            formPanel.add(imageType);
         } else if (element.split("-")[1].contains("Thin Lens")) {
             formPanel.add(new JLabel("Focal Length:"));
             formPanel.add(focalLengthField);
