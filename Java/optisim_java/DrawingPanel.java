@@ -172,7 +172,7 @@ public class DrawingPanel extends JPanel {
 
                 Map<String, Object> img = OpS.calculate();
         
-                drawImagingSubject(g2, img, x_min, y_min, y_max, Color.ORANGE);
+                drawImagingSubject(g2, img, x_min, y_min, y_max, Color.ORANGE, "Image");
 
                 for (String key : Rays.keySet()) {
                     ray = Rays.get(key);
@@ -219,17 +219,17 @@ public class DrawingPanel extends JPanel {
                 Map<String, Object> lens = SystemElements.get(key);
                 String type = (String) lens.get("type");
                 if(type.contains("ThinLens")){
-                    drawLens(g2, lens, x_min, 2);
+                    drawLens(g2, lens, x_min, 2, key);
                 }
                 else if(type.contains("ThickLens")){
-                    drawLens(g2, lens, x_min, 6);
+                    drawLens(g2, lens, x_min, 6, key);
                 }
             }
-            drawImagingSubject(g2, LightSource, x_min, y_min, y_max, Color.RED);
+            drawImagingSubject(g2, LightSource, x_min, y_min, y_max, Color.RED, "Light Source");
 
     }
 
-    private void drawLens(Graphics2D g2, Map<String, Object> Lens, double x_min, int thickness){
+    private void drawLens(Graphics2D g2, Map<String, Object> Lens, double x_min, int thickness, String name){
         double x = (double) Lens.get("x");
         double f = (double) Lens.get("f");
 
@@ -254,9 +254,14 @@ public class DrawingPanel extends JPanel {
             g2.drawLine(x_draw, y_draw2, x_draw - (int)Math.round(getWidth())/90, y_draw2 + (int)Math.round(getWidth())/70);
             g2.drawLine(x_draw, y_draw2, x_draw + (int)Math.round(getWidth())/90, y_draw2 + (int)Math.round(getWidth())/70);
         }
+
+        g2.setFont(new Font("Arial", Font.BOLD, 16));
+        FontMetrics fm = g2.getFontMetrics();
+        int textWidth = fm.stringWidth(name);
+        g2.drawString(name, x_draw - textWidth/2, (int)Math.round(getHeight() * 0.95));
     }
 
-    private void drawImagingSubject(Graphics2D g2, Map<String, Object> LS, double x_min, double y_min, double y_max, Color color){
+    private void drawImagingSubject(Graphics2D g2, Map<String, Object> LS, double x_min, double y_min, double y_max, Color color, String name){
         double x = (double) LS.get("x");
         double y = (double) LS.get("y");
 
@@ -264,15 +269,6 @@ public class DrawingPanel extends JPanel {
 
         int y_draw1 = (int)Math.round(getHeight() / 2 - y * scale_y);
         int y_draw2 = getHeight()/2;
-
-        // if(y > 0){
-        //     y_draw1 = (int)Math.round(getHeight() * 0.2 + (y_max - y) * scale_y);
-        //     y_draw2 = (int)Math.round(getHeight() * 0.2 + y_max * scale_y);
-        // }
-        // else if (y <= 0){
-        //     y_draw1 = (int)Math.round(getHeight() * 0.8 - (y_min - y) * scale_y);
-        //     y_draw2 = (int)Math.round(getHeight() * 0.8 + y_min * scale_y);
-        // }
 
         g2.setColor(color);
         g2.setStroke(new BasicStroke(2));
@@ -285,6 +281,10 @@ public class DrawingPanel extends JPanel {
             g2.drawLine(x_draw, y_draw1, x_draw - (int)Math.round(Math.abs(y_draw1 - y_draw2)/10), y_draw1 - (int)Math.round(Math.abs(y_draw1 - y_draw2)/8));
             g2.drawLine(x_draw, y_draw1, x_draw + (int)Math.round(Math.abs(y_draw1 - y_draw2)/10), y_draw1 - (int)Math.round(Math.abs(y_draw1 - y_draw2)/8));
         }
+        g2.setFont(new Font("Arial", Font.BOLD, 16));
+        FontMetrics fm = g2.getFontMetrics();
+        int textWidth = fm.stringWidth(name);
+        g2.drawString(name, x_draw - textWidth/2, (int)Math.round(Math.signum(y) * getHeight() * 0.03) + getHeight()/2);
     }
 
     public void setMode(boolean m){
