@@ -1,0 +1,50 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+*.ipynb_checkpoints
+
+# ---- Java ----
+*.class
+*.jar
+*.war
+*.log
+*.out
+*.tmp
+*.swp
+bin/
+build/
+target/
+
+# ---- C++ ----
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# ---- Doxygen ----
+docs/_build/
+
+# ---- General ----
+*.DS_Store
+*.bak
+*.tmp
+*.swp
+~*
+
+# ---- IDEs and Editors ----
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
