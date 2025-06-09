@@ -15,42 +15,7 @@ public class OpticalSimulatorGUI extends JFrame {
         setSize(1400, 800); // Set initial window size
         setLocationRelativeTo(null); // Center the window on screen
         setLayout(new BorderLayout()); // Use BorderLayout for layout management
-        /*
-        try{
-         OpS.add_thin_lens("Lens1", 10, 10);
-         OpS.add_thick_lens("Lens2", 20, 1.5, 3, 35, 30);
-         OpS.modify_light_source("x", 1);
-         OpS.modify_optical_object("Lens1", "x", 10);
-         Map<String, Object> Image = OpS.calculate();
-        }catch(RuntimeException e){
-         System.out.println(e.getMessage());
-        }
-
-        //System.out.println(Image.get("x"));
-        //System.out.println(Image.get("y"));
-        //System.out.println(Image.get("real"));
-
-        Map<String, Map<String, Object>> SystemElements = OpS.getSystemElements();
-        for (String key : SystemElements.keySet()) {
-            System.out.println("Element ID: " + key);
-            Map<String, Object> fields = SystemElements.get(key);
-            for (String field : fields.keySet()) {
-                System.out.println("  " + field +" "+field.getClass().getName()+ ": " + fields.get(field));
-            }
-        }
-        Map<String, Object> LightSource = OpS.getLightSource();
-        System.out.println(LightSource.get("x"));
-        System.out.println(LightSource.get("y"));
-
-        Map<String, Map<String, Object>> Rays = OpS.getRays();
-        for (String key : Rays.keySet()) {
-            System.out.println("Element ID: " + key);
-            Map<String, Object> fields = Rays.get(key);
-            for (String field : fields.keySet()) {
-                System.out.println("  " + field + ": " + fields.get(field));
-            }
-        }
-        */
+        
         // Initialize the left control panel and the center drawing panel
         elementListPanel = new ElementListPanel(this, OpS);
         drawingPanel = new DrawingPanel(OpS);
