@@ -26,6 +26,7 @@ cd build
 cmake ..
 cmake --build .
 cp optisim.cpython-312-x86_64-linux-gnu.so ..
+cp optisim.cpython-312-x86_64-linux-gnu.so ../../examples
 cd ../..
 
 # Java
@@ -50,7 +51,7 @@ Type=Application
 Name=OptiSim
 Exec=bash -c "cd $SCRIPT_DIR/Python && $PYTHON_PATH OptiSim.py"
 Icon=$SCRIPT_DIR/Run/icon.png
-Terminal=true
+Terminal=false
 EOF
 
 chmod +x "$DESKTOP_FILE"
