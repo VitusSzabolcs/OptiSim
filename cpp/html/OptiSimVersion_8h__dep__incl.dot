@@ -9,6 +9,8 @@ digraph "OptiSim/CPP/include/OptiSimVersion.h"
   Node2 [id="Node000002",label="OptiSim/CPP/include\l/OptiSim.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OptiSim_8h.html",tooltip="Main header file for the OptiSim optical simulation library."];
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="OptiSim/CPP/src/OptiSim.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OptiSim_8cpp.html",tooltip="This is the main executable for the OptiSim optical simulation tool."];
-  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="OptiSim/CPP/src/OptiSimVersion.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OptiSimVersion_8cpp.html",tooltip="Implements the function to retrieve the OptiSim library version string."];
+  Node2 -> Node4 [id="edge3_Node000002_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="OptiSim/examples/example.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$example_8cpp.html",tooltip=" "];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="OptiSim/CPP/src/OptiSimVersion.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OptiSimVersion_8cpp.html",tooltip="Implements the function to retrieve the OptiSim library version string."];
 }

@@ -6,7 +6,7 @@ PROJECT_BRIEF          = "Geometrical Optics Simulator"
 OUTPUT_DIRECTORY       = cpp
 
 # Input
-INPUT                  = ../CPP/include ../CPP/src
+INPUT                  = /home/vszabolcs/OOP/OptiSim
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.cpp
 

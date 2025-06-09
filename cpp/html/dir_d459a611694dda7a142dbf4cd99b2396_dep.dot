@@ -9,5 +9,9 @@ digraph "OptiSim"
     graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_d459a611694dda7a142dbf4cd99b2396.html",tooltip=""]
     dir_d459a611694dda7a142dbf4cd99b2396 [shape=plaintext, label="OptiSim"];
   dir_ebd350a6ab8457145effad1be399dc3a [label="CPP", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_ebd350a6ab8457145effad1be399dc3a.html",tooltip=""];
+  dir_5b81725f7e48b36a5fa62a060d59da35 [label="examples", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_5b81725f7e48b36a5fa62a060d59da35.html",tooltip=""];
+  dir_d748a46f6a2daa25613a8c2dbcad5dee [label="Python", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_d748a46f6a2daa25613a8c2dbcad5dee.html",tooltip=""];
   }
+  dir_5b81725f7e48b36a5fa62a060d59da35->dir_ebd350a6ab8457145effad1be399dc3a [headlabel="1", labeldistance=1.5 headhref="dir_000010_000009.html" href="dir_000010_000009.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_d748a46f6a2daa25613a8c2dbcad5dee->dir_ebd350a6ab8457145effad1be399dc3a [headlabel="15", labeldistance=1.5 headhref="dir_000013_000009.html" href="dir_000013_000009.html" color="steelblue1" fontcolor="steelblue1"];
 }
