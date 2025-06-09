@@ -1,11 +1,27 @@
-#include <iostream>
-#include <vector>
-#include <iomanip>
-#include "OptiSim.h"
+/**
+* @file OptiSim.cpp
+* @brief This is the main executable for the OptiSim optical simulation tool.
+* @author Bács Tamás <tamas.bacs@stud.ubbcluj.ro>
+* @author Vitus Szabolcs <szabolcs.vitus1@stud.ubbcluj.ro>
+* @date 2025-06-09
+*
+* It handles command-line arguments, sets up the optical system, performs calculations,
+* and manages output to console and files.
+*/
+
+#include <iostream>  // For standard input/output operations (cout, cerr)
+#include <vector>    // For using std::vector
+#include <iomanip>   // For formatting output (setw, setprecision)
+#include "OptiSim.h" // Main header for the OptiSim library components
 
 using namespace std;
 
-
+/**
+ * @brief Displays the help text for the OptiSim command-line tool.
+ *
+ * This function prints detailed information about the tool's description,
+ * usage, and available command-line options with their meanings.
+ */
 void help(){
 	cout << "-------------------------------------------------------------------------------"
          << "\n###\t\e[1mOptiSim\e[0m - tool for simulating geometrical optics\n"
@@ -47,11 +63,22 @@ void help(){
          << "Print version info." << endl;
 }
 
+/**
+ * @brief A structure to hold a command-line option and its associated file path (if any).
+ */
 struct command_path {
+    /** @brief The command-line option string (e.g., "-i", "--input"). */
     string command; 
+    /** @brief The associated file path, if the command uses the `=<file>` syntax. */
     string file;
 };
 
+/**
+ * @brief Splits a command-line argument string into a command and a file path if an '=' is present.
+ *
+ * @param S The input command-line argument string (e.g., "-i=input.json" or "--help").
+ * @return A `command_path` struct containing the extracted command and file.
+ */
 command_path split(string S) {
     size_t pos = S.find('=');
     command_path return_box;
@@ -65,6 +92,16 @@ command_path split(string S) {
     return return_box;
 }
 
+/**
+ * @brief The main entry point of the OptiSim application.
+ *
+ * This function parses command-line arguments to determine input/output files,
+ * display options, and then constructs and simulates an optical system.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv An array of C-style strings representing the command-line arguments.
+ * @return 0 if the program executes successfully, non-zero otherwise (e.g., on error).
+ */
 int main(int argc, char* argv[]){
     try{
         string input_file = "./input.json";
@@ -169,9 +206,9 @@ int main(int argc, char* argv[]){
             }
         }
     	
-    }catch(exception& e)
+    }catch(exception& e) // Catch any standard exception or custom OptiSimError
     {
         cout << e.what() << "\n";
     }
-    return 0;
+    return 0;  // Indicate successful execution
 }

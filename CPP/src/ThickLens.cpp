@@ -1,26 +1,35 @@
 /**
- * @file ThickLens.cpp
- * @brief Implementation of the ThickLens class for modeling thick lenses.
- */
+* @file ThickLens.cpp
+* @brief Implementation of the ThickLens class for modeling thick lenses.
+* @author Bács Tamás <tamas.bacs@stud.ubbcluj.ro>
+* @author Vitus Szabolcs <szabolcs.vitus1@stud.ubbcluj.ro>
+* @date 2025-06-09
+*/
 
 #include "ThickLens.h"
-#include <string>
-#include <iostream>
-#include <limits>
-#include <cmath>
-#include <OptiSimError.h>
+#include <string>           // For std::string
+#include <iostream>         // For standard input/output (e.g., debugging if needed)
+#include <limits>           // For std::numeric_limits
+#include <cmath>            // For std::abs, std::isinf
+#include <OptiSimError.h>   // Custom exception class
 
 using namespace std;
 
 /**
  * @brief Computes the focal length of a thick lens using the lensmaker's equation.
- * 
- * @param n Refractive index of the lens material
- * @param d Thickness of the lens
- * @param r_left Radius of curvature of the left lens surface
- * @param r_right Radius of curvature of the right lens surface
- * @return Computed focal length
- * @throws OptiSimError if r_left or r_right is zero
+ * @details This private helper method calculates the effective focal length (`f`) of the thick lens
+ * based on its refractive index, thickness, and the radii of curvature of its two surfaces.
+ * It handles cases where radii are infinite (flat surfaces) and checks for zero radii to prevent division by zero.
+ * The formula used is for a thick lens in air:
+ * $$ \frac{1}{f} = (n-1) \left( \frac{1}{R_1} - \frac{1}{R_2} + \frac{(n-1)d}{n R_1 R_2} \right) $$
+ * where $R_1$ is `r_left` and $R_2$ is `r_right`.
+ *
+ * @param n Refractive index of the lens material.
+ * @param d Thickness of the lens.
+ * @param r_left Radius of curvature of the left lens surface.
+ * @param r_right Radius of curvature of the right lens surface.
+ * @return The computed effective focal length. Returns `std::numeric_limits<double>::infinity()` if the lens acts as a plane.
+ * @throws OptiSimError if `r_left` or `r_right` is exactly zero, as this would lead to an invalid lens shape.
  */
 double ThickLens::computeF(double n, double d, double r_left, double r_right){
     if(r_left == 0.0 || r_right == 0.0) {
@@ -45,18 +54,18 @@ double ThickLens::computeF(double n, double d, double r_left, double r_right){
 }
 
 /**
- * @brief Computes the height of the left principal plane.
+ * @brief Computes the position of the left principal plane.
  * 
- * @return Height of the left principal plane relative to the lens center
+ * @return Position of the left principal plane. 
  */
 double ThickLens::computeHLeft(){
     return - f * (n - 1) * d / r_right / n + x - d/2;
 }
 
 /**
- * @brief Computes the height of the right principal plane.
+ * @brief Computes the position of the right principal plane.
  * 
- * @return Height of the right principal plane relative to the lens center
+ * @return Position of the right principal plane. 
  */
 double ThickLens::computeHRight(){
     return - f * (n - 1) * d / r_left / n + x + d/2;

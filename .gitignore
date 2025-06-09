@@ -33,6 +33,7 @@ Makefile
 
 # ---- Doxygen ----
 docs/_build/
+Doxyfile
 
 # ---- General ----
 *.DS_Store

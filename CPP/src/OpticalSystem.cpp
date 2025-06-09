@@ -1,10 +1,18 @@
+/**
+* @file OpticalSystem.cpp
+* @brief Implements the OpticalSystem class, managing optical elements and simulations.
+* @author Bács Tamás <tamas.bacs@stud.ubbcluj.ro>
+* @author Vitus Szabolcs <szabolcs.vitus1@stud.ubbcluj.ro>
+* @date 2025-06-09
+*/
+
 #include "OpticalSystem.h"
 #include <iostream>
 #include <fstream>
-#include <nlohmann/json.hpp>
-#include <typeinfo>
-#include <cmath>
-#include "OptiSimError.h"
+#include <nlohmann/json.hpp> // Assumes nlohmann/json library is installed
+#include <typeinfo>          // For dynamic_cast type checking
+#include <cmath>             // For abs()
+#include "OptiSimError.h"    // Custom exception class
 
 
 using namespace std;
@@ -12,10 +20,19 @@ using json = nlohmann::json;
 
 
 // Constructors ---------------------------------------------------------------
+/**
+ * @details This default constructor initializes the LightSource pointer to `nullptr`, indicating no light source is currently part of the system.
+ */
 OpticalSystem::OpticalSystem(){
 	LS = nullptr;
 };
 
+/**
+ * @details This constructor loads the optical system configuration from a specified JSON file.
+ * It reads the light source and various lens types (thin or thick) and adds them to the system.
+ * @param file_name The path to the JSON configuration file.
+ * @throws OptiSimError If the file cannot be opened, or if there's a JSON parsing error.
+ */
 OpticalSystem::OpticalSystem(string file_name){
 	// Read datafrom .json file
     ifstream file(file_name);
@@ -56,6 +73,15 @@ OpticalSystem::OpticalSystem(string file_name){
 };
 
 // Adding methods -------------------------------------------------------------
+
+/**
+ * @details This method adds an `OpticalObject` (like a `ThinLens` or `ThickLens`) to the system,
+ * managing its memory and ensuring it's added in the correct optical order based on its x-position.
+ * It also performs checks for duplicate names and minimum distances between objects.
+ * @param OO_object A reference to the `OpticalObject` to be added.
+ * @param OO_name A unique string identifier for the optical object.
+ * @throws OptiSimError If the chosen name is already taken, or if the object is too close to an existing light source or another optical object.
+ */
 void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	if(name_lens_map.find(OO_name) != name_lens_map.end()) throw OptiSimError("ERROR: \tThe key is taken, please chose another.");
 	if(LS != nullptr){
@@ -111,6 +137,12 @@ void OpticalSystem::add(OpticalObject& OO_object, string OO_name){
 	order.insert(order.begin() + index, OO_name);
 }
 
+/**
+ * @details This method adds a `LightSource` to the optical system. If a light source already exists, it is replaced.
+ * It checks for minimum distance constraints with existing optical objects.
+ * @param ls The `LightSource` object to be added.
+ * @throws OptiSimError If the `LightSource` is too close to an existing optical object.
+ */
 void OpticalSystem::add(LightSource ls){
 	int size = order.size();
 	if(size != 0){
@@ -124,6 +156,13 @@ void OpticalSystem::add(LightSource ls){
 
 
 // Modifying methods ----------------------------------------------------------
+/**
+ * @details This method modifies a specific property (e.g., x or y coordinate) of the light source.
+ * It includes validation to ensure the light source exists and adheres to distance constraints with optical objects.
+ * @param param The name of the property to modify (e.g., "x" for x-coordinate, "y" for y-coordinate).
+ * @param val The new double value for the specified property.
+ * @throws OptiSimError If no `LightSource` is present in the system, if `param` is an invalid property name, or if the new position is too close to an existing optical object.
+ */
 void OpticalSystem::modifyLightSource(string param, double val){
 	if(LS == nullptr) throw OptiSimError("ERROR: \tYou have to add a Light Source to the system before you can modify it");
 	if(param == "x"){
@@ -140,13 +179,56 @@ void OpticalSystem::modifyLightSource(string param, double val){
 	else throw OptiSimError("ERROR: \tInvalid parameter: " + param);
 }
 
+/**
+ * @details This method modifies a specific property of an existing optical object (e.g., position, focal length, refractive index).
+ * It dynamically casts the object to its specific type to call the correct setter method and handles re-insertion into the `order` vector if the position changes.
+ * @param name The string name of the optical object to modify.
+ * @param param The name of the property to modify (e.g., "x", "f", "n", "r_left", "r_right", "d").
+ * @param val The new double value for the specified property.
+ * @throws OptiSimError If the provided `name` does not correspond to an existing optical object, or if `param` is an invalid property name for that object type.
+ */
+void OpticalSystem::modifyOpticalObject(string name, string param, double val){
+	if(name_lens_map.find(name) == name_lens_map.end()) throw OptiSimError("ERROR: \tInvalid key: " + name);
+	ThinLens* ptr_thin = dynamic_cast<ThinLens*>(name_lens_map[name]);
+	ThickLens* ptr_thick = dynamic_cast<ThickLens*>(name_lens_map[name]);
+	if (ptr_thin) {
+		if(param == "f") ptr_thin->setF(val);
+		else if(param == "x"){
+			ThinLens l(val, ptr_thin->getF());
+			remove(name);
+			add(l, name);
+		}
+		else throw OptiSimError("ERROR: \tInvalid parameter: " + param);
+	}
+	else if (ptr_thick) {
+		if(param == "n") ptr_thick->setN(val);
+		else if(param == "r_left") ptr_thick->setR_Left(val);
+		else if(param == "r_right") ptr_thick->setR_Right(val);
+		else if(param == "d") ptr_thick->setD(val);
+		else if(param == "x"){
+			ThickLens L(val, ptr_thick->getN(), ptr_thick->getD(), ptr_thick->getR_Left(), ptr_thick->getR_Right());
+			remove(name);
+			add(L, name);
+		}
+		else throw OptiSimError("ERROR: \tInvalid parameter: " + param);
+	}
+}
 
 
 // Other methods --------------------------------------------------------------
+/**
+ * @details This method returns a copy of the sequence of images formed by the optical objects in the system.
+ */
 vector<Image> OpticalSystem::getImageSequence(){
 	return imageSequence;
 }
 
+/**
+ * @details This method simulates the path of light through the optical system, calculates the image formed by each optical object in sequence, and traces representative rays.
+ * It updates the `imageSequence` and `ray_coord` members.
+ * @return The final `Image` object formed by the entire optical system.
+ * @throws OptiSimError If no `LightSource` is present, if no `OpticalObjects` are in the system, or if the light source is positioned behind all optical objects.
+ */
 Image OpticalSystem::Calculate(){
 	if(LS == nullptr) throw OptiSimError("ERROR: \tYou have to add a Light Source to the system before calling the Calculate() method.");
 	if(order.size() == 0) throw OptiSimError("ERROR: \tYou have to add Optical Objects to the system first before calling the Calculate() method.");
@@ -201,7 +283,12 @@ Image OpticalSystem::Calculate(){
 	
 	return img;
 }
-	
+
+/**
+ * @details This method prints a formatted summary of the optical system, including details of the light source,
+ * all optical objects (thin and thick lenses), and the final calculated image (if available).
+ * @param os The output stream to which the summary will be written. Defaults to `std::cout`.
+ */
 void OpticalSystem::toString(ostream& os){
 
 	os << "\n-------------------------------------------------------------------------------\n";
@@ -237,6 +324,12 @@ void OpticalSystem::toString(ostream& os){
 	os << "\n-------------------------------------------------------------------------------\n";
 }
 
+/**
+ * @details This method saves the current configuration of the optical system to a JSON file.
+ * It includes details of the light source and all added lenses (thin or thick).
+ * @param file_name The path to the file where the system configuration will be saved.
+ * @throws OptiSimError If no LightSource is present in the system, or if the file cannot be opened for writing.
+ */
 void OpticalSystem::save(string file_name) {
     if (LS == nullptr) throw OptiSimError("ERROR: \tCannot save system: no light source present.");
 
@@ -283,6 +376,10 @@ void OpticalSystem::save(string file_name) {
 
 
 // Destructor -----------------------------------------------------------------
+/**
+ * @details This destructor is responsible for cleaning up dynamically allocated memory.
+ * It iterates through the `name_lens_map` to `delete` all `OpticalObject` pointers and also `delete`s the `LightSource` pointer.
+ */
 OpticalSystem::~OpticalSystem(){
 	for(int i = 0; i < order.size(); i++){
 		delete name_lens_map[order[i]];
@@ -291,6 +388,12 @@ OpticalSystem::~OpticalSystem(){
 	delete LS;
 }
 
+/**
+ * @details This method removes an optical object from the system by its unique name.
+ * It deallocates the memory associated with the object and removes its entry from the internal maps and order vector.
+ * @param name The string name of the optical object to be removed.
+ * @throws OptiSimError If the provided `name` does not correspond to an existing optical object in the system.
+ */
 void OpticalSystem::remove(string name){
 	if(name_lens_map.find(name) == name_lens_map.end()) throw OptiSimError("ERROR: \tInvalid key: " + name);
 	for(int i = 0; i < order.size(); i++){
@@ -303,34 +406,13 @@ void OpticalSystem::remove(string name){
 	name_lens_map.erase(name);
 }
 
-void OpticalSystem::modifyOpticalObject(string name, string param, double val){
-	if(name_lens_map.find(name) == name_lens_map.end()) throw OptiSimError("ERROR: \tInvalid key: " + name);
-	ThinLens* ptr_thin = dynamic_cast<ThinLens*>(name_lens_map[name]);
-	ThickLens* ptr_thick = dynamic_cast<ThickLens*>(name_lens_map[name]);
-	if (ptr_thin) {
-		if(param == "f") ptr_thin->setF(val);
-		else if(param == "x"){
-			ThinLens l(val, ptr_thin->getF());
-			remove(name);
-			add(l, name);
-		}
-		else throw OptiSimError("ERROR: \tInvalid parameter: " + param);
-	}
-	else if (ptr_thick) {
-		if(param == "n") ptr_thick->setN(val);
-		else if(param == "r_left") ptr_thick->setR_Left(val);
-		else if(param == "r_right") ptr_thick->setR_Right(val);
-		else if(param == "d") ptr_thick->setD(val);
-		else if(param == "x"){
-			ThickLens L(val, ptr_thick->getN(), ptr_thick->getD(), ptr_thick->getR_Left(), ptr_thick->getR_Right());
-			remove(name);
-			add(L, name);
-		}
-		else throw OptiSimError("ERROR: \tInvalid parameter: " + param);
-	}
-}
-
-// Helper method --------------------------------------------------------------
+/**
+ * @details This is a helper method used internally by `Calculate()` to determine the coordinates of a ray as it passes through an optical object.
+ * It calculates the point where the ray intersects the plane of the given `ActualLens` based on the previous image formed.
+ * @param ActualLens A pointer to the `OpticalObject` (lens) that the ray is currently interacting with.
+ * @param ActualImage The `Image` object formed by the *previous* optical element or the initial `LightSource`.
+ * @param which A string identifier for the ray being traced (e.g., "ray_1", "ray_2").
+ */
 void OpticalSystem::NextRayCoords(OpticalObject* ActualLens, Image ActualImage, string which){
 	double x_image = ActualImage.getX();
 	double y_image = ActualImage.getY();
@@ -347,10 +429,20 @@ void OpticalSystem::NextRayCoords(OpticalObject* ActualLens, Image ActualImage, 
 	ray_coord[which].y.push_back(y_ray_new);
 }
 
+/**
+ * @details This method returns a map containing the traced ray coordinates.
+ * The map keys are ray identifiers (e.g., "ray_1", "ray_2"), and the values are `ray` structs holding x and y coordinate sequences.
+ * @return A `std::map<std::string, ray>` containing the ray trace data.
+ */
 map<string, ray> OpticalSystem::getRays(){
 	return ray_coord;
 }
 
+/**
+ * @details This method provides a copy of the map containing all optical elements (lenses) in the system.
+ * It performs a deep copy to ensure memory safety for the returned pointers.
+ * @return A `std::map<std::string, OpticalObject*>` where keys are object names and values are pointers to copies of the `OpticalObject` instances.
+ */
 map<string, OpticalObject*> OpticalSystem::getSystemElements(){
     std::map<string, OpticalObject*> copyMap;
     for (const auto& [key, objPtr] : name_lens_map) {
@@ -370,6 +462,11 @@ map<string, OpticalObject*> OpticalSystem::getSystemElements(){
     return copyMap;
 }
 
+/**
+ * @details This method retrieves a copy of the `LightSource` currently in the system.
+ * @return A `LightSource` object representing the current light source.
+ * @throws OptiSimError If no `LightSource` has been added to the system yet.
+ */
 LightSource OpticalSystem::getLightSource(){
 	if (LS == nullptr) throw OptiSimError("ERROR: \tNo light source present.");
 	return LightSource(LS->getX(), LS->getY());
