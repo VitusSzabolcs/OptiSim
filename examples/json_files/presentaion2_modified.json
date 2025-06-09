@@ -1,0 +1,41 @@
+{
+  "lenses": [
+    {
+      "focal_length": -10.0,
+      "name": "Lens_3",
+      "position": 15.0,
+      "type": "thin"
+    },
+    {
+      "name": "Lens_4",
+      "position": 40.0,
+      "radius_left": 15.0,
+      "radius_right": -20.0,
+      "refractive_index": 1.52,
+      "thickness": 4.0,
+      "type": "thick"
+    },
+    {
+      "name": "Lens_5",
+      "position": 55.0,
+      "radius_left": 17.0,
+      "radius_right": -20.0,
+      "refractive_index": 1.72,
+      "thickness": 4.5,
+      "type": "thick"
+    },
+    {
+      "name": "Lens_2",
+      "position": 60.0,
+      "radius_left": 12.0,
+      "radius_right": -21.0,
+      "refractive_index": 1.52,
+      "thickness": 3.5,
+      "type": "thick"
+    }
+  ],
+  "object": {
+    "position": 0.0,
+    "size": 1.5
+  }
+}

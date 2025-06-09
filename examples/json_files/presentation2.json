@@ -2,18 +2,18 @@
   "lenses": [
     {
       "focal_length": 5.0,
-      "name": "Lense1",
+      "name": "Lens_1",
       "position": 10.0,
       "type": "thin"
     },
     {
       "focal_length": -10.0,
-      "name": "Lense3",
-      "position": 25.0,
+      "name": "Lens_3",
+      "position": 15.0,
       "type": "thin"
     },
     {
-      "name": "Lense4",
+      "name": "Lens_4",
       "position": 40.0,
       "radius_left": 15.0,
       "radius_right": -20.0,
@@ -22,17 +22,8 @@
       "type": "thick"
     },
     {
-      "name": "Lense2",
-      "position": 60.0,
-      "radius_left": 12.0,
-      "radius_right": -21.0,
-      "refractive_index": 1.52,
-      "thickness": 3.5,
-      "type": "thick"
-    },
-    {
-      "name": "Lense5",
-      "position": 65.0,
+      "name": "Lens_5",
+      "position": 55.0,
       "radius_left": 17.0,
       "radius_right": -20.0,
       "refractive_index": 1.72,
@@ -40,10 +31,13 @@
       "type": "thick"
     },
     {
-      "focal_length": 30.0,
-      "name": "new",
-      "position": 90.0,
-      "type": "thin"
+      "name": "Lens_2",
+      "position": 60.0,
+      "radius_left": 12.0,
+      "radius_right": -21.0,
+      "refractive_index": 1.52,
+      "thickness": 3.5,
+      "type": "thick"
     }
   ],
   "object": {

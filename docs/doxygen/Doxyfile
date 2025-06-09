@@ -1,0 +1,50 @@
+# Doxygen configuration file
+
+# Project info
+PROJECT_NAME           = "OptiSim"
+PROJECT_BRIEF          = "Geometrical Optics Simulator"
+OUTPUT_DIRECTORY       = docs
+
+# Input
+INPUT                  = include src
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.cpp
+
+# Output formats
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+# Source code browsing
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+
+# Extraction settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES
+
+# Class diagrams (optional)
+HAVE_DOT               = YES
+DOT_GRAPH_MAX_NODES    = 100
+CLASS_DIAGRAMS         = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+# Warnings
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+
+# Preprocessor options
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+PREDEFINED             = DOXYGEN_SHOULD_SKIP_THIS
+
+# Comment styles
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
+
+# Strip from path for easier source tree display
+STRIP_FROM_PATH        = ./src
