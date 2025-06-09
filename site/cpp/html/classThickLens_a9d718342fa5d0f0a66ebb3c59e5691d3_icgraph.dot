@@ -1,0 +1,24 @@
+digraph "ThickLens::getR_Right"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="ThickLens::getR_Right",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Retrieves the radius of curvature of the right lens surface."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="OpticalSystem::add",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#ae6db07d9e1f87f8e806754e82ade380e",tooltip="Adds an OpticalObject to the system."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="OpticalSystem::modifyOptical\lObject",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a2305f7a60f669b2a058f5e6ea8565186",tooltip="Modifies a property of an existing OpticalObject by its name."];
+  Node2 -> Node4 [id="edge3_Node000002_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="OpticalSystem::OpticalSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a69f88a3c7ef96026d36dba71768e5a89",tooltip="Constructs an OpticalSystem by loading its configuration from a json file."];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="OpticalSystem::getSystem\lElements",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#ae816a770d4ba9db4ac7da99f77465d35",tooltip="Retrieves a map of all optical elements in the system."];
+  Node1 -> Node3 [id="edge5_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node6 [id="edge6_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="OpticalSystem::save",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a0dd5b63cca2a07cd0de55802e210f343",tooltip="Saves the current configuration of the optical system to a file."];
+  Node1 -> Node7 [id="edge7_Node000001_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="OpticalSystem::toString",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a8a12e61ebbbb656507d8dd379f99f85e",tooltip="Prints a string representation of the optical system to an output stream."];
+  Node7 -> Node8 [id="edge8_Node000007_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="main",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OptiSim_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip="The main entry point of the OptiSim application."];
+}

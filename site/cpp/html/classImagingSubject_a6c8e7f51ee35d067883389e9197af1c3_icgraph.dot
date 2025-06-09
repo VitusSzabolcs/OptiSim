@@ -1,0 +1,35 @@
+digraph "ImagingSubject::getX"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="ImagingSubject::getX",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Retrieves the x-coordinate of the imaging subject."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="OpticalSystem::add",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a3f287f30315ff0c317832aa7de85b957",tooltip="Adds a LightSource to the system."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="OpticalSystem::add",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#ae6db07d9e1f87f8e806754e82ade380e",tooltip="Adds an OpticalObject to the system."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="OpticalSystem::modifyOptical\lObject",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a2305f7a60f669b2a058f5e6ea8565186",tooltip="Modifies a property of an existing OpticalObject by its name."];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="OpticalSystem::OpticalSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a69f88a3c7ef96026d36dba71768e5a89",tooltip="Constructs an OpticalSystem by loading its configuration from a json file."];
+  Node1 -> Node6 [id="edge5_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="OpticalSystem::Calculate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#abfa0b305c32eda9071c974bcf5413597",tooltip="Calculates the final image formed by the entire optical system."];
+  Node6 -> Node7 [id="edge6_Node000006_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="main",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OptiSim_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip="The main entry point of the OptiSim application."];
+  Node1 -> Node8 [id="edge7_Node000001_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="ThickLens::Calculate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classThickLens.html#ab9908633ff93699c3a6b14606c9d1d12",tooltip="Calculates the image formed by this thick lens."];
+  Node1 -> Node9 [id="edge8_Node000001_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="ThinLens::Calculate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classThinLens.html#a0067d898dec9b8188ba240bc5a832579",tooltip="Calculates the image formed by this thin lens."];
+  Node1 -> Node10 [id="edge9_Node000001_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="OpticalSystem::getLightSource",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#ac40a4866741c613a08867fd425e91e8a",tooltip="Retrieves the LightSource currently set in the system."];
+  Node1 -> Node11 [id="edge10_Node000001_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="OpticalSystem::NextRayCoords",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#ad2f214db0296fb9db5e828ea9b29231a",tooltip="Calculates and stores the next ray coordinates after interaction with an optical object."];
+  Node11 -> Node6 [id="edge11_Node000011_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node12 [id="edge12_Node000001_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="OpticalSystem::save",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a0dd5b63cca2a07cd0de55802e210f343",tooltip="Saves the current configuration of the optical system to a file."];
+  Node1 -> Node13 [id="edge13_Node000001_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="OpticalSystem::toString",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a8a12e61ebbbb656507d8dd379f99f85e",tooltip="Prints a string representation of the optical system to an output stream."];
+  Node13 -> Node7 [id="edge14_Node000013_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+}

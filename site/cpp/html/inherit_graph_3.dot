@@ -1,0 +1,15 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="OpticalObject",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalObject.html",tooltip="An abstract base class for any object positioned on the optical axis."];
+  Node0 -> Node1 [id="edge4_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="Lens",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLens.html",tooltip="Represents a basic lens with a focal length."];
+  Node1 -> Node2 [id="edge5_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="ThickLens",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classThickLens.html",tooltip="Represents a thick lens in an optical system."];
+  Node1 -> Node3 [id="edge6_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="ThinLens",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classThinLens.html",tooltip="Represents an idealized thin lens in an optical system."];
+}
