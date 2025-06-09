@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['r_5fleft_0',['r_left',['../classThickLens.html#afe5dbce60109c114a8689951acb13005',1,'ThickLens']]],
-  ['r_5fright_1',['r_right',['../classThickLens.html#aeb0217b15075f863c2f7c4452747d777',1,'ThickLens']]],
-  ['ray_2',['ray',['../structray.html',1,'']]],
-  ['ray_5fcoord_3',['ray_coord',['../classOpticalSystem.html#aa4f328a71ed2a58887b5bf6c654302a8',1,'OpticalSystem']]],
-  ['real_4',['real',['../classImage.html#a664dc2ff62f6ae23f4ceeeae5b63e156',1,'Image']]],
-  ['remove_5',['remove',['../classOpticalSystem.html#a91bbf09f3112a23f03655a6755a4d01d',1,'OpticalSystem']]]
+  ['main_0',['main',['../CPP_2build_2CMakeFiles_23_828_83_2CompilerIdCXX_2CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../OptiSim_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;OptiSim.cpp'],['../example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;example.cpp'],['../Python_2build_2CMakeFiles_23_828_83_2CompilerIdCXX_2CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp']]],
+  ['message_1',['message',['../classOptiSimError.html#ae3e59f3e91219524813f1b96f5ad03b0',1,'OptiSimError']]],
+  ['modifylightsource_2',['modifyLightSource',['../classOpticalSystem.html#a59a82e2d49467164f4b45301dd29912c',1,'OpticalSystem']]],
+  ['modifyopticalobject_3',['modifyOpticalObject',['../classOpticalSystem.html#a2305f7a60f669b2a058f5e6ea8565186',1,'OpticalSystem']]]
 ];

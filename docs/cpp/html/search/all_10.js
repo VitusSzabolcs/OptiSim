@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['x_0',['x',['../classImagingSubject.html#a40caa29975229d020f86e52983daa472',1,'ImagingSubject::x'],['../classOpticalObject.html#aea8d4aac32015f7660833056d537189b',1,'OpticalObject::x'],['../structray.html#a3428ec3474583bc8ea30d3dd9d550469',1,'ray::x']]]
+  ['r_5fleft_0',['r_left',['../classThickLens.html#afe5dbce60109c114a8689951acb13005',1,'ThickLens']]],
+  ['r_5fright_1',['r_right',['../classThickLens.html#aeb0217b15075f863c2f7c4452747d777',1,'ThickLens']]],
+  ['ray_2',['ray',['../structray.html',1,'']]],
+  ['ray_5fcoord_3',['ray_coord',['../classOpticalSystem.html#aa4f328a71ed2a58887b5bf6c654302a8',1,'OpticalSystem']]],
+  ['real_4',['real',['../classImage.html#a664dc2ff62f6ae23f4ceeeae5b63e156',1,'Image']]],
+  ['remove_5',['remove',['../classOpticalSystem.html#a91bbf09f3112a23f03655a6755a4d01d',1,'OpticalSystem']]]
 ];
