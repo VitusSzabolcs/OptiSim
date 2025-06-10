@@ -197,6 +197,7 @@ Here's an example of how you might use the command-line tool to load a system fr
 $ ./OptiSim --input=./json_files/presentation2.json --print --imagelist --rays --output=my_simulation_results.txt
 ```
 This command will:
+
 - Read the optical system definition from `./json_files/presentation2.json`.
 - Print a summary of the system's parameters directly to your terminal.
 - Calculate the image formation and include a detailed list of images and ray coordinates in the output.
