@@ -5,9 +5,9 @@ digraph "PYBIND11_MODULE"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node1 [id="Node000001",label="PYBIND11_MODULE",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [id="Node000001",label="PYBIND11_MODULE",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Main pybind11 module definition for the OptiSim library."];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="bind_imaging_subjects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__imaging__subjects_8cpp.html#a740e97b5d7ab4b2925c300f7fe0f9c16",tooltip=" "];
+  Node2 [id="Node000002",label="bind_imaging_subjects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__imaging__subjects_8cpp.html#a740e97b5d7ab4b2925c300f7fe0f9c16",tooltip="Binds the C++ ImagingSubject class and its derived classes to Python."];
   Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="Image::getReal",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classImage.html#a3e43568f1ee33a4e4759598710cfac1b",tooltip="Retrieves the real/virtual status of the image."];
   Node2 -> Node4 [id="edge3_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
@@ -21,7 +21,7 @@ digraph "PYBIND11_MODULE"
   Node2 -> Node8 [id="edge7_Node000002_Node000008",color="steelblue1",style="solid",tooltip=" "];
   Node8 [id="Node000008",label="ImagingSubject::setY",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classImagingSubject.html#a679146ac0f0c8b763c178b0fc9c81096",tooltip="Sets the y-coordinate of the imaging subject."];
   Node1 -> Node9 [id="edge8_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
-  Node9 [id="Node000009",label="bind_optical_objects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__objects_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9",tooltip=" "];
+  Node9 [id="Node000009",label="bind_optical_objects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__objects_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9",tooltip="Binds the C++ OpticalObject class and its derived classes to Python."];
   Node9 -> Node10 [id="edge9_Node000009_Node000010",color="steelblue1",style="solid",tooltip=" "];
   Node10 [id="Node000010",label="ThickLens::Calculate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classThickLens.html#ab9908633ff93699c3a6b14606c9d1d12",tooltip="Calculates the image formed by this thick lens."];
   Node10 -> Node11 [id="edge10_Node000010_Node000011",color="steelblue1",style="solid",tooltip=" "];
@@ -64,7 +64,7 @@ digraph "PYBIND11_MODULE"
   Node9 -> Node26 [id="edge32_Node000009_Node000026",color="steelblue1",style="solid",tooltip=" "];
   Node26 [id="Node000026",label="OpticalObject::setX",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalObject.html#ac35f62797792eb94afd785f1637f1f8c",tooltip="Sets the x-coordinate (position) of the optical object."];
   Node1 -> Node27 [id="edge33_Node000001_Node000027",color="steelblue1",style="solid",tooltip=" "];
-  Node27 [id="Node000027",label="bind_optical_system",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__system_8cpp.html#a4d9ce1c1e7f84524c60bc1fcaf35fb22",tooltip=" "];
+  Node27 [id="Node000027",label="bind_optical_system",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__system_8cpp.html#a4d9ce1c1e7f84524c60bc1fcaf35fb22",tooltip="Binds the C++ ray structure and OpticalSystem class to Python."];
   Node27 -> Node28 [id="edge34_Node000027_Node000028",color="steelblue1",style="solid",tooltip=" "];
   Node28 [id="Node000028",label="OpticalSystem::add",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#ae6db07d9e1f87f8e806754e82ade380e",tooltip="Adds an OpticalObject to the system."];
   Node28 -> Node14 [id="edge35_Node000028_Node000014",color="steelblue1",style="solid",tooltip=" "];

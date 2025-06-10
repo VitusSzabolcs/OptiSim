@@ -50,6 +50,5 @@ QT_AUTOBRIEF           = YES
 STRIP_FROM_PATH        = /home/vszabolcs/OOP/OptiSim/
 EXCLUDE                = \
 	 /home/vszabolcs/OOP/OptiSim/CPP/build \
-	 /home/vszabolcs/OOP/OptiSim/Python \
 	 /home/vszabolcs/OOP/OptiSim/Java
 

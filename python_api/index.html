@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../api/">
       
       
-        <link rel="next" href="../install/">
+        <link rel="next" href="../examples/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Requirements - OptiSim Documentation</title>
+        <title>Pythin Docs - OptiSim Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#python-api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -93,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Requirements
+              Pythin Docs
             
           </span>
         </div>
@@ -210,17 +215,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../requirement/" class="md-nav__link">
         
   
   
@@ -231,7 +229,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -328,8 +325,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -340,11 +339,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
@@ -360,7 +359,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             API Reference
@@ -394,10 +393,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../python_api/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -408,6 +416,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -481,6 +490,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -496,9 +507,22 @@
 
 
 
-  <h1>Requirements</h1>
-
-
+<h1 id="python-api-reference">Python API Reference</h1>
+<p>This page provides auto-generated documentation for the <code>optisim</code> Python module, which serves as the interface to the high-performance C++ OptiSim library.</p>
+<p>All classes and functions exposed from the C++ backend via <code>pybind11</code> are detailed below, including their methods, properties, and constructors.</p>
+<p>::: optisim
+    options:
+      members: true                # Show all public members (classes, functions, etc.)
+      show_root_heading: true      # Display a heading for the module itself
+      show_root_full_path: false   # Don't show the full path to the module (e.g., 'optisim' not 'your_project.optisim')
+      show_object_full_path: false # Don't show full path for individual objects
+      show_if_no_docstring: false  # Only show items that have docstrings
+      show_category_heading: true  # Group members under headings like 'Classes', 'Functions'
+      show_bases: true             # Show base classes for inherited classes
+      heading_level: 2             # Start the main API documentation headings at level 2 (##)
+      separate_signature: true     # Place function/method signatures on a separate line for readability
+      # Add filters here if you want to exclude certain members (e.g., private ones)
+      # filters: ["!^_"] # Exclude members starting with an underscore (private/internal)</p>
 
 
 
