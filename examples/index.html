@@ -830,11 +830,13 @@ Option             Long option           Meaning
 <p>Here's an example of how you might use the command-line tool to load a system from <code>presentation2.json</code>, print its parameters to the console, and save the detailed image list and ray coordinates to <code>my_simulation_results.txt</code>:</p>
 <pre><code class="language-bash">$ ./OptiSim --input=./json_files/presentation2.json --print --imagelist --rays --output=my_simulation_results.txt
 </code></pre>
-<p>This command will:
-- Read the optical system definition from <code>./json_files/presentation2.json</code>.
-- Print a summary of the system's parameters directly to your terminal.
-- Calculate the image formation and include a detailed list of images and ray coordinates in the output.
-- Save the complete results to <code>my_simulation_results.txt</code>.</p>
+<p>This command will:</p>
+<ul>
+<li>Read the optical system definition from <code>./json_files/presentation2.json</code>.</li>
+<li>Print a summary of the system's parameters directly to your terminal.</li>
+<li>Calculate the image formation and include a detailed list of images and ray coordinates in the output.</li>
+<li>Save the complete results to <code>my_simulation_results.txt</code>.</li>
+</ul>
 <h3 id="example-output">Example Output</h3>
 <p>When you run the command above, the <code>my_simulation_results.txt</code> file  will generate a detailed summary of the optical system, including image formation and ray coordinates. Here's what a typical output looks like:</p>
 <pre><code class="language-text">-------------------------------------------------------------------------------
