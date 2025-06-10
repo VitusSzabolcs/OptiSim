@@ -4,8 +4,8 @@ plugins:
       handlers:
         python:
           options:
-            docstring_style: "google" # Or "numpy", "sphinx" - choose based on your preference
-            show_root_heading: true
+            docstring_style: "numpy" # Or "google", "sphinx" - choose based on your preference
+            show_root_heading: false
             show_root_full_path: false
             show_object_full_path: false
             show_if_no_docstring: false
@@ -13,6 +13,10 @@ plugins:
             show_bases: true
             heading_level: 2
             separate_signature: true
+            show_source_link: false # This will hide the file path
+            filters: ["!^__"]
+            show_attributes: false
+
 
 site_name: OptiSim Documentation
 theme:
@@ -32,6 +36,6 @@ nav:
   - Architecture: architecture.md
   - API Reference:
       - C++ Docs: api.md
-      - Pythin Docs: python_api.md
+      - Python Docs: python_api.md
   - Examples: examples.md
   - Video Tutorial: video.md
