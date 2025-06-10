@@ -436,9 +436,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-future-considerations-optional" class="md-nav__link">
+  <a href="#6-future-considerations" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Future Considerations (Optional)
+      6. Future Considerations
     </span>
   </a>
   
@@ -697,9 +697,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-future-considerations-optional" class="md-nav__link">
+  <a href="#6-future-considerations" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Future Considerations (Optional)
+      6. Future Considerations
     </span>
   </a>
   
@@ -725,14 +725,15 @@
 <p>This document provides a high-level overview of the OptiSim project's architecture, detailing its primary components, their responsibilities, and how they interact. Understanding this structure is key for effective development and contribution.</p>
 <h2 id="1-high-level-system-design">1. High-Level System Design</h2>
 <p>OptiSim is designed as a multi-language system, leveraging the strengths of C++ for high-performance computation, Python for scripting and accessibility, and Java for specific enterprise or integration needs. The core logic resides in C++, with Python and Java serving as interfaces and application layers.</p>
+<p><em>(Optional: A simple block diagram could be very effective here if you can create one and embed it. E.g., <code>![System Architecture](assets/architecture_diagram.png)</code>)</em></p>
 <h2 id="2-core-components">2. Core Components</h2>
 <p>The OptiSim system is composed of several distinct, yet interconnected, components:</p>
 <h3 id="21-c-core-library">2.1. C++ Core Library</h3>
 <p>This is the foundational layer of OptiSim, responsible for:
 * Implementing high-performance computational algorithms.
 * Handling core data structures and complex logic.
-* Interacting with external, performance-critical C++ libraries (e.g., Eigen for linear algebra, OpenCV for image processing, Boost for extended functionalities).
-The C++ core is designed for efficiency and precision, forming the bedrock of OptiSim's capabilities.</p>
+* Interacting with external, performance-critical C++ libraries (e.g., Eigen for linear algebra, OpenCV for image processing, Boost for extended functionalities).</p>
+<p>The C++ core is designed for efficiency and precision, forming the bedrock of OptiSim's capabilities.</p>
 <h3 id="22-python-interface-via-pybind11">2.2. Python Interface (via Pybind11)</h3>
 <p>The Python layer provides a user-friendly and flexible interface to the powerful C++ core.
 * <strong>Role:</strong> Enables Python developers to easily integrate OptiSim's functionalities into their applications, scripts, and data analysis workflows without needing to write C++ code.
@@ -745,16 +746,15 @@ The C++ core is designed for efficiency and precision, forming the bedrock of Op
 <p>Data typically originates from an application layer (Python or Java), is passed to the C++ core for processing, and then results are returned.</p>
 <ul>
 <li><strong>Python to C++:</strong> Data is passed efficiently through <code>pybind11</code> bindings. Complex data structures are often mapped directly or converted to C++ equivalents.</li>
-<li><strong>Java to Python/C++:</strong> Java can initiate operations by interacting with the Python layer via <code>JPype</code>, which then channels requests to the C++ core. Alternatively, depending on the design, direct integration from Java to C++ might be considered for performance-critical paths if <code>JPype</code> overhead is a concern (though <code>JPype</code> is generally efficient).</li>
-<li><strong>C++ to Python/Java:</strong> Results from C++ computations are returned through the respective <code>pybind11</code> or <code>JPype</code> interfaces, converted into appropriate Python or Java data types.</li>
+<li><strong>Java to Python:</strong> Java can initiate operations by interacting with the Python layer via <code>JPype</code>, which then channels requests to the C++ core. Alternatively, depending on the design, direct integration from Java to C++ might be considered for performance-critical paths if <code>JPype</code> overhead is a concern (though <code>JPype</code> is generally efficient).</li>
 </ul>
 <h2 id="4-build-system-overview">4. Build System Overview</h2>
 <p>The entire project (C++, Python bindings, Java components) is built through a unified, automated shell script. This script orchestrates the build process, which typically involves:
 * CMake configuration for the C++ parts.
 * Compilation of C++ source code.
 * Generation of <code>pybind11</code> Python modules.
-* Compilation and packaging of Java components.
-This streamlined approach ensures consistency and simplifies the setup for developers.</p>
+* Compilation and packaging of Java components.</p>
+<p>This streamlined approach ensures consistency and simplifies the setup for developers.</p>
 <h2 id="5-key-design-principles">5. Key Design Principles</h2>
 <p>OptiSim's architecture is guided by the following principles:</p>
 <ul>
@@ -763,7 +763,7 @@ This streamlined approach ensures consistency and simplifies the setup for devel
 <li><strong>Language Agnosticism (Interface Layer):</strong> While core logic is in C++, robust interfaces in Python and Java ensure broad applicability and integration flexibility.</li>
 <li><strong>Extensibility:</strong> The design aims to allow for easy addition of new functionalities or interfaces in the future without major architectural overhauls.</li>
 </ul>
-<h2 id="6-future-considerations-optional">6. Future Considerations (Optional)</h2>
+<h2 id="6-future-considerations">6. Future Considerations</h2>
 <p>As OptiSim evolves, potential architectural considerations may include:
 * Distributed computing capabilities for large-scale simulations.
 * More direct Java-C++ interfaces if <code>JPype</code> becomes a bottleneck for specific high-frequency operations.
