@@ -1,3 +1,19 @@
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: "google" # Or "numpy", "sphinx" - choose based on your preference
+            show_root_heading: true
+            show_root_full_path: false
+            show_object_full_path: false
+            show_if_no_docstring: false
+            show_category_heading: true
+            show_bases: true
+            heading_level: 2
+            separate_signature: true
+
 site_name: OptiSim Documentation
 theme:
   name: material
