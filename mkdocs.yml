@@ -14,6 +14,7 @@ plugins:
             heading_level: 2
             separate_signature: true
             show_source_link: false # This will hide the file path
+            filters: ["!^__file__"]
             show_attributes: false
 
 
