@@ -57,3 +57,24 @@ EOF
 chmod +x "$DESKTOP_FILE"
 
 echo "Launcher created at $DESKTOP_FILE"
+
+# Add CLI directory to PATH
+
+
+# Construct the path to the desired build directory
+NEW_PATH="$SCRIPT_DIR/CPP/build"
+
+# Export line to add
+EXPORT_LINE="export PATH=\"$NEW_PATH:\$PATH\""
+
+# File to modify
+SHELL_RC="$HOME/.bashrc"
+
+# Check if already present
+if ! grep -Fxq "$EXPORT_LINE" "$SHELL_RC"; then
+    echo "$EXPORT_LINE" >> "$SHELL_RC"
+    echo "Added to PATH in $SHELL_RC"
+else
+    echo "PATH entry already exists in $SHELL_RC"
+fi
+
