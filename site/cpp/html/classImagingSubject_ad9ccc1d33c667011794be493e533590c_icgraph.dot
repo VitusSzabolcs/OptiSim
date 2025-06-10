@@ -7,12 +7,5 @@ digraph "ImagingSubject::setX"
   rankdir="RL";
   Node1 [id="Node000001",label="ImagingSubject::setX",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Sets the x-coordinate of the imaging subject."];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="bind_imaging_subjects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__imaging__subjects_8cpp.html#a740e97b5d7ab4b2925c300f7fe0f9c16",tooltip=" "];
-  Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="PYBIND11_MODULE",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$optisim__bindings_8cpp.html#a82d65b89848c085bfa58a60cdd31d6f6",tooltip=" "];
-  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="OpticalSystem::modifyLight\lSource",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a59a82e2d49467164f4b45301dd29912c",tooltip="Modifies a property of the existing LightSource."];
-  Node4 -> Node5 [id="edge4_Node000004_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node5 [id="Node000005",label="bind_optical_system",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__system_8cpp.html#a4d9ce1c1e7f84524c60bc1fcaf35fb22",tooltip=" "];
-  Node5 -> Node3 [id="edge5_Node000005_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="OpticalSystem::modifyLight\lSource",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classOpticalSystem.html#a59a82e2d49467164f4b45301dd29912c",tooltip="Modifies a property of the existing LightSource."];
 }

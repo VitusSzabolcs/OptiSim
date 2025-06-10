@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['what_0',['what',['../classOptiSimError.html#a2d1e1d7f3e8c0676f8da95a1e0663888',1,'OptiSimError']]]
+  ['y_0',['y',['../classImagingSubject.html#ab36e90ced6e0dfa8c56a5095d2d94bbe',1,'ImagingSubject::y'],['../structray.html#a5ed205e7ed679f3fc2b3c8a872658e29',1,'ray::y']]]
 ];
