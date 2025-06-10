@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['calculate_0',['calculate',['../classOpticalObject.html#ad09127dc6d54e1bc1551fc99c92a61a5',1,'OpticalObject::Calculate()'],['../classOpticalSystem.html#abfa0b305c32eda9071c974bcf5413597',1,'OpticalSystem::Calculate()'],['../classThickLens.html#ab9908633ff93699c3a6b14606c9d1d12',1,'ThickLens::Calculate()'],['../classThinLens.html#a0067d898dec9b8188ba240bc5a832579',1,'ThinLens::Calculate()']]],
-  ['computef_1',['computeF',['../classThickLens.html#a16b8550b9e42085bb024d779386f647a',1,'ThickLens']]],
-  ['computehleft_2',['computeHLeft',['../classThickLens.html#a32a63bbf19264cf1525bfb8434686cf9',1,'ThickLens']]],
-  ['computehright_3',['computeHRight',['../classThickLens.html#ab6ab352b383df41a95175bae74713734',1,'ThickLens']]]
+  ['bind_5fimaging_5fsubjects_0',['bind_imaging_subjects',['../bind__imaging__subjects_8cpp.html#a740e97b5d7ab4b2925c300f7fe0f9c16',1,'bind_imaging_subjects(py::module_ &amp;m):&#160;bind_imaging_subjects.cpp'],['../optisim__bindings_8cpp.html#a740e97b5d7ab4b2925c300f7fe0f9c16',1,'bind_imaging_subjects(py::module_ &amp;m):&#160;bind_imaging_subjects.cpp']]],
+  ['bind_5foptical_5fobjects_1',['bind_optical_objects',['../bind__optical__objects_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9',1,'bind_optical_objects(py::module_ &amp;m):&#160;bind_optical_objects.cpp'],['../optisim__bindings_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9',1,'bind_optical_objects(py::module_ &amp;m):&#160;bind_optical_objects.cpp']]],
+  ['bind_5foptical_5fsystem_2',['bind_optical_system',['../bind__optical__system_8cpp.html#a4d9ce1c1e7f84524c60bc1fcaf35fb22',1,'bind_optical_system(py::module_ &amp;m):&#160;bind_optical_system.cpp'],['../optisim__bindings_8cpp.html#a4d9ce1c1e7f84524c60bc1fcaf35fb22',1,'bind_optical_system(py::module_ &amp;m):&#160;bind_optical_system.cpp']]]
 ];

@@ -7,7 +7,7 @@ digraph "ThickLens::Calculate"
   rankdir="RL";
   Node1 [id="Node000001",label="ThickLens::Calculate",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Calculates the image formed by this thick lens."];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="bind_optical_objects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__objects_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9",tooltip=" "];
+  Node2 [id="Node000002",label="bind_optical_objects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__objects_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9",tooltip="Binds the C++ OpticalObject class and its derived classes to Python."];
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="PYBIND11_MODULE",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$optisim__bindings_8cpp.html#a82d65b89848c085bfa58a60cdd31d6f6",tooltip=" "];
+  Node3 [id="Node000003",label="PYBIND11_MODULE",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$optisim__bindings_8cpp.html#a82d65b89848c085bfa58a60cdd31d6f6",tooltip="Main pybind11 module definition for the OptiSim library."];
 }

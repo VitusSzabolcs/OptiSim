@@ -16,5 +16,6 @@ nav:
   - Architecture: architecture.md
   - API Reference:
       - C++ Docs: api.md
+      - Pythin Docs: python_api.md
   - Examples: examples.md
   - Video Tutorial: video.md

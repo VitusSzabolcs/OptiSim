@@ -79,6 +79,9 @@ $(function() {
   <div class="headertitle"><div class="title">bind_optical_objects.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Defines the bind_optical_objects function.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;pybind11/pybind11.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="OpticalObject_8h_source.html">OpticalObject.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Lens_8h_source.html">Lens.h</a>&quot;</code><br />
@@ -95,9 +98,18 @@ Include dependency graph for bind_optical_objects.cpp:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:abed024fc05ed7a9f896dd57e37f6faa9" id="r_abed024fc05ed7a9f896dd57e37f6faa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bind__optical__objects_8cpp.html#abed024fc05ed7a9f896dd57e37f6faa9">bind_optical_objects</a> (py::module_ &amp;m)</td></tr>
+<tr class="memdesc:abed024fc05ed7a9f896dd57e37f6faa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds the C++ <code><a class="el" href="classOpticalObject.html" title="An abstract base class for any object positioned on the optical axis.">OpticalObject</a></code> class and its derived classes to Python.  <br /></td></tr>
 <tr class="separator:abed024fc05ed7a9f896dd57e37f6faa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Defines the bind_optical_objects function. </p>
+<dl class="section author"><dt>Author</dt><dd>Bács Tamás <a href="#" onclick="location.href='mai'+'lto:'+'tam'+'as'+'.ba'+'cs'+'@st'+'ud'+'.ub'+'bc'+'luj'+'.r'+'o'; return false;">tamas<span class="obfuscator">.nosp@m.</span>.bac<span class="obfuscator">.nosp@m.</span>s@stu<span class="obfuscator">.nosp@m.</span>d.ub<span class="obfuscator">.nosp@m.</span>bcluj<span class="obfuscator">.nosp@m.</span>.ro</a> </dd>
+<dd>
+Vitus Szabolcs <a href="#" onclick="location.href='mai'+'lto:'+'sza'+'bo'+'lcs'+'.v'+'itu'+'s1'+'@st'+'ud'+'.ub'+'bc'+'luj'+'.r'+'o'; return false;">szabo<span class="obfuscator">.nosp@m.</span>lcs.<span class="obfuscator">.nosp@m.</span>vitus<span class="obfuscator">.nosp@m.</span>1@st<span class="obfuscator">.nosp@m.</span>ud.ub<span class="obfuscator">.nosp@m.</span>bclu<span class="obfuscator">.nosp@m.</span>j.ro</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-06-09 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="bind__optical__objects_8cpp_source.html">bind_optical_objects.cpp</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="abed024fc05ed7a9f896dd57e37f6faa9" name="abed024fc05ed7a9f896dd57e37f6faa9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abed024fc05ed7a9f896dd57e37f6faa9">&#9670;&#160;</a></span>bind_optical_objects()</h2>
 
@@ -114,33 +126,54 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bind__optical__objects_8cpp_source.html#l00010">10</a> of file <a class="el" href="bind__optical__objects_8cpp_source.html">bind_optical_objects.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   10</span>                                        {</div>
-<div class="line"><span class="lineno">   11</span>    py::class_&lt;OpticalObject&gt;(m, <span class="stringliteral">&quot;OpticalObject&quot;</span>)</div>
-<div class="line"><span class="lineno">   12</span>        .def(<span class="stringliteral">&quot;getX&quot;</span>, &amp;<a class="code hl_function" href="classOpticalObject.html#a7fad6a60fa013015007c19056cfd3767">OpticalObject::getX</a>)</div>
-<div class="line"><span class="lineno">   13</span>        .def(<span class="stringliteral">&quot;setX&quot;</span>, &amp;<a class="code hl_function" href="classOpticalObject.html#ac35f62797792eb94afd785f1637f1f8c">OpticalObject::setX</a>, py::arg(<span class="stringliteral">&quot;x&quot;</span>));</div>
-<div class="line"><span class="lineno">   14</span> </div>
-<div class="line"><span class="lineno">   15</span>    py::class_&lt;Lens, OpticalObject&gt;(m, <span class="stringliteral">&quot;Lens&quot;</span>)</div>
-<div class="line"><span class="lineno">   16</span>        .def(<span class="stringliteral">&quot;getF&quot;</span>, &amp;<a class="code hl_function" href="classLens.html#af3493e8cb2a4eb017b3bdfde9152b5ab">Lens::getF</a>);</div>
-<div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>    py::class_&lt;ThinLens, Lens&gt;(m, <span class="stringliteral">&quot;ThinLens&quot;</span>)</div>
-<div class="line"><span class="lineno">   19</span>        .def(py::init&lt;double, double&gt;(), py::arg(<span class="stringliteral">&quot;x&quot;</span>), py::arg(<span class="stringliteral">&quot;f&quot;</span>))</div>
-<div class="line"><span class="lineno">   20</span>        .def(<span class="stringliteral">&quot;Calculate&quot;</span>, &amp;<a class="code hl_function" href="classThinLens.html#a0067d898dec9b8188ba240bc5a832579">ThinLens::Calculate</a>, py::arg(<span class="stringliteral">&quot;imaging_subject&quot;</span>))</div>
-<div class="line"><span class="lineno">   21</span>        .def(<span class="stringliteral">&quot;setF&quot;</span>, &amp;<a class="code hl_function" href="classThinLens.html#a94d57d98f7e0d611629aeafe9d07bfea">ThinLens::setF</a>, py::arg(<span class="stringliteral">&quot;f&quot;</span>));</div>
-<div class="line"><span class="lineno">   22</span> </div>
-<div class="line"><span class="lineno">   23</span>    py::class_&lt;ThickLens, Lens&gt;(m, <span class="stringliteral">&quot;ThickLens&quot;</span>)</div>
-<div class="line"><span class="lineno">   24</span>        .def(py::init&lt;double, double, double, double, double&gt;(),</div>
-<div class="line"><span class="lineno">   25</span>             py::arg(<span class="stringliteral">&quot;x&quot;</span>), py::arg(<span class="stringliteral">&quot;n&quot;</span>), py::arg(<span class="stringliteral">&quot;d&quot;</span>), py::arg(<span class="stringliteral">&quot;r_left&quot;</span>), py::arg(<span class="stringliteral">&quot;r_right&quot;</span>))</div>
-<div class="line"><span class="lineno">   26</span>        .def(<span class="stringliteral">&quot;Calculate&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#ab9908633ff93699c3a6b14606c9d1d12">ThickLens::Calculate</a>, py::arg(<span class="stringliteral">&quot;imaging_subject&quot;</span>))</div>
-<div class="line"><span class="lineno">   27</span>        .def(<span class="stringliteral">&quot;getN&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#abcfe5c76d34e74a92181a9b88df6ee76">ThickLens::getN</a>)</div>
-<div class="line"><span class="lineno">   28</span>        .def(<span class="stringliteral">&quot;setN&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a8a2be3707c5505e7ff4afb3063a8c2e7">ThickLens::setN</a>, py::arg(<span class="stringliteral">&quot;n&quot;</span>))</div>
-<div class="line"><span class="lineno">   29</span>        .def(<span class="stringliteral">&quot;getD&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#abb55b079aff86835b9b9c3cea7664cd7">ThickLens::getD</a>)</div>
-<div class="line"><span class="lineno">   30</span>        .def(<span class="stringliteral">&quot;setD&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a5618eb214796b0b75c1edd8f0878aa44">ThickLens::setD</a>, py::arg(<span class="stringliteral">&quot;d&quot;</span>))</div>
-<div class="line"><span class="lineno">   31</span>        .def(<span class="stringliteral">&quot;getR_left&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#aacabdd54ef1dea0171e798de88ab911f">ThickLens::getR_Left</a>)</div>
-<div class="line"><span class="lineno">   32</span>        .def(<span class="stringliteral">&quot;setR_left&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a1ea8dc6de0b6dd715b184f75297ab93d">ThickLens::setR_Left</a>, py::arg(<span class="stringliteral">&quot;r_left&quot;</span>))</div>
-<div class="line"><span class="lineno">   33</span>        .def(<span class="stringliteral">&quot;getR_right&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a9d718342fa5d0f0a66ebb3c59e5691d3">ThickLens::getR_Right</a>)</div>
-<div class="line"><span class="lineno">   34</span>        .def(<span class="stringliteral">&quot;setR_right&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#accb3f38a9884bfd2eddca3da925c1eb9">ThickLens::setR_Right</a>, py::arg(<span class="stringliteral">&quot;r_right&quot;</span>));</div>
-<div class="line"><span class="lineno">   35</span>}</div>
+<p>Binds the C++ <code><a class="el" href="classOpticalObject.html" title="An abstract base class for any object positioned on the optical axis.">OpticalObject</a></code> class and its derived classes to Python. </p>
+<p>This function defines the Python interface for <code><a class="el" href="classOpticalObject.html" title="An abstract base class for any object positioned on the optical axis.">OpticalObject</a></code>, <code><a class="el" href="classLens.html" title="Represents a basic lens with a focal length.">Lens</a></code>, <code><a class="el" href="classThinLens.html" title="Represents an idealized thin lens in an optical system.">ThinLens</a></code>, and <code><a class="el" href="classThickLens.html" title="Represents a thick lens in an optical system.">ThickLens</a></code> classes, making their constructors and methods accessible from Python.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>A reference to the pybind11 module to which the classes will be bound. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Python binding for the <code><a class="el" href="classOpticalObject.html" title="An abstract base class for any object positioned on the optical axis.">OpticalObject</a></code> base class.</p>
+<p>Represents an abstract optical component with a position along the optical axis.</p>
+<p>Python binding for the <code><a class="el" href="classLens.html" title="Represents a basic lens with a focal length.">Lens</a></code> base class, derived from <code><a class="el" href="classOpticalObject.html" title="An abstract base class for any object positioned on the optical axis.">OpticalObject</a></code>.</p>
+<p>Represents an abstract lens with a focal length.</p>
+<p>Python binding for the <code><a class="el" href="classThinLens.html" title="Represents an idealized thin lens in an optical system.">ThinLens</a></code> class, derived from <code><a class="el" href="classLens.html" title="Represents a basic lens with a focal length.">Lens</a></code>.</p>
+<p>Represents an idealized thin lens with a single principal plane.</p>
+<p>Python binding for the <code><a class="el" href="classThickLens.html" title="Represents a thick lens in an optical system.">ThickLens</a></code> class, derived from <code><a class="el" href="classLens.html" title="Represents a basic lens with a focal length.">Lens</a></code>.</p>
+<p>Represents a real-world thick lens with non-negligible thickness and curved surfaces.</p>
+
+<p class="definition">Definition at line <a class="el" href="bind__optical__objects_8cpp_source.html#l00026">26</a> of file <a class="el" href="bind__optical__objects_8cpp_source.html">bind_optical_objects.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>                                        {</div>
+<div class="line"><span class="lineno">   32</span>    py::class_&lt;OpticalObject&gt;(m, <span class="stringliteral">&quot;OpticalObject&quot;</span>, <span class="stringliteral">&quot;Abstract base class for all optical components.&quot;</span>)</div>
+<div class="line"><span class="lineno">   33</span>        .def(<span class="stringliteral">&quot;getX&quot;</span>, &amp;<a class="code hl_function" href="classOpticalObject.html#a7fad6a60fa013015007c19056cfd3767">OpticalObject::getX</a>, <span class="stringliteral">&quot;Gets the X-coordinate (position along the optical axis) of the object.&quot;</span>)</div>
+<div class="line"><span class="lineno">   34</span>        .def(<span class="stringliteral">&quot;setX&quot;</span>, &amp;<a class="code hl_function" href="classOpticalObject.html#ac35f62797792eb94afd785f1637f1f8c">OpticalObject::setX</a>, py::arg(<span class="stringliteral">&quot;x&quot;</span>), <span class="stringliteral">&quot;Sets the X-coordinate (position along the optical axis) of the object.&quot;</span>);</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   41</span>    py::class_&lt;Lens, OpticalObject&gt;(m, <span class="stringliteral">&quot;Lens&quot;</span>, <span class="stringliteral">&quot;Abstract base class for all lens types.&quot;</span>)</div>
+<div class="line"><span class="lineno">   42</span>        .def(<span class="stringliteral">&quot;getF&quot;</span>, &amp;<a class="code hl_function" href="classLens.html#af3493e8cb2a4eb017b3bdfde9152b5ab">Lens::getF</a>, <span class="stringliteral">&quot;Gets the focal length of the lens.&quot;</span>);</div>
+<div class="line"><span class="lineno">   43</span> </div>
+<div class="line"><span class="lineno">   49</span>    py::class_&lt;ThinLens, Lens&gt;(m, <span class="stringliteral">&quot;ThinLens&quot;</span>, <span class="stringliteral">&quot;Represents an idealized thin lens.&quot;</span>)</div>
+<div class="line"><span class="lineno">   50</span>        .def(py::init&lt;double, double&gt;(), py::arg(<span class="stringliteral">&quot;x&quot;</span>), py::arg(<span class="stringliteral">&quot;f&quot;</span>),</div>
+<div class="line"><span class="lineno">   51</span>             <span class="stringliteral">&quot;Initializes a ThinLens with a specified X-coordinate and focal length.&quot;</span>)</div>
+<div class="line"><span class="lineno">   52</span>        .def(<span class="stringliteral">&quot;Calculate&quot;</span>, &amp;<a class="code hl_function" href="classThinLens.html#a0067d898dec9b8188ba240bc5a832579">ThinLens::Calculate</a>, py::arg(<span class="stringliteral">&quot;imaging_subject&quot;</span>),</div>
+<div class="line"><span class="lineno">   53</span>             <span class="stringliteral">&quot;Calculates the image formed by the thin lens for a given imaging subject.&quot;</span>)</div>
+<div class="line"><span class="lineno">   54</span>        .def(<span class="stringliteral">&quot;setF&quot;</span>, &amp;<a class="code hl_function" href="classThinLens.html#a94d57d98f7e0d611629aeafe9d07bfea">ThinLens::setF</a>, py::arg(<span class="stringliteral">&quot;f&quot;</span>), <span class="stringliteral">&quot;Sets the focal length of the thin lens.&quot;</span>);</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   61</span>    py::class_&lt;ThickLens, Lens&gt;(m, <span class="stringliteral">&quot;ThickLens&quot;</span>, <span class="stringliteral">&quot;Represents a thick lens with two curved surfaces and finite thickness.&quot;</span>)</div>
+<div class="line"><span class="lineno">   62</span>        .def(py::init&lt;double, double, double, double, double&gt;(),</div>
+<div class="line"><span class="lineno">   63</span>             py::arg(<span class="stringliteral">&quot;x&quot;</span>), py::arg(<span class="stringliteral">&quot;n&quot;</span>), py::arg(<span class="stringliteral">&quot;d&quot;</span>), py::arg(<span class="stringliteral">&quot;r_left&quot;</span>), py::arg(<span class="stringliteral">&quot;r_right&quot;</span>),</div>
+<div class="line"><span class="lineno">   64</span>             <span class="stringliteral">&quot;Initializes a ThickLens with X-coordinate, refractive index, thickness, and radii of curvature.&quot;</span>)</div>
+<div class="line"><span class="lineno">   65</span>        .def(<span class="stringliteral">&quot;Calculate&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#ab9908633ff93699c3a6b14606c9d1d12">ThickLens::Calculate</a>, py::arg(<span class="stringliteral">&quot;imaging_subject&quot;</span>),</div>
+<div class="line"><span class="lineno">   66</span>             <span class="stringliteral">&quot;Calculates the image formed by the thick lens for a given imaging subject.&quot;</span>)</div>
+<div class="line"><span class="lineno">   67</span>        .def(<span class="stringliteral">&quot;getN&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#abcfe5c76d34e74a92181a9b88df6ee76">ThickLens::getN</a>, <span class="stringliteral">&quot;Gets the refractive index of the lens material.&quot;</span>)</div>
+<div class="line"><span class="lineno">   68</span>        .def(<span class="stringliteral">&quot;setN&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a8a2be3707c5505e7ff4afb3063a8c2e7">ThickLens::setN</a>, py::arg(<span class="stringliteral">&quot;n&quot;</span>), <span class="stringliteral">&quot;Sets the refractive index of the lens material.&quot;</span>)</div>
+<div class="line"><span class="lineno">   69</span>        .def(<span class="stringliteral">&quot;getD&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#abb55b079aff86835b9b9c3cea7664cd7">ThickLens::getD</a>, <span class="stringliteral">&quot;Gets the thickness of the lens along the optical axis.&quot;</span>)</div>
+<div class="line"><span class="lineno">   70</span>        .def(<span class="stringliteral">&quot;setD&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a5618eb214796b0b75c1edd8f0878aa44">ThickLens::setD</a>, py::arg(<span class="stringliteral">&quot;d&quot;</span>), <span class="stringliteral">&quot;Sets the thickness of the lens along the optical axis.&quot;</span>)</div>
+<div class="line"><span class="lineno">   71</span>        .def(<span class="stringliteral">&quot;getR_left&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#aacabdd54ef1dea0171e798de88ab911f">ThickLens::getR_Left</a>, <span class="stringliteral">&quot;Gets the radius of curvature of the left surface.&quot;</span>)</div>
+<div class="line"><span class="lineno">   72</span>        .def(<span class="stringliteral">&quot;setR_left&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a1ea8dc6de0b6dd715b184f75297ab93d">ThickLens::setR_Left</a>, py::arg(<span class="stringliteral">&quot;r_left&quot;</span>), <span class="stringliteral">&quot;Sets the radius of curvature of the left surface.&quot;</span>)</div>
+<div class="line"><span class="lineno">   73</span>        .def(<span class="stringliteral">&quot;getR_right&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#a9d718342fa5d0f0a66ebb3c59e5691d3">ThickLens::getR_Right</a>, <span class="stringliteral">&quot;Gets the radius of curvature of the right surface.&quot;</span>)</div>
+<div class="line"><span class="lineno">   74</span>        .def(<span class="stringliteral">&quot;setR_right&quot;</span>, &amp;<a class="code hl_function" href="classThickLens.html#accb3f38a9884bfd2eddca3da925c1eb9">ThickLens::setR_Right</a>, py::arg(<span class="stringliteral">&quot;r_right&quot;</span>), <span class="stringliteral">&quot;Sets the radius of curvature of the right surface.&quot;</span>);</div>
+<div class="line"><span class="lineno">   75</span>}</div>
 <div class="ttc" id="aclassLens_html_af3493e8cb2a4eb017b3bdfde9152b5ab"><div class="ttname"><a href="classLens.html#af3493e8cb2a4eb017b3bdfde9152b5ab">Lens::getF</a></div><div class="ttdeci">double getF()</div><div class="ttdoc">Retrieves the focal length of the lens.</div><div class="ttdef"><b>Definition</b> <a href="Lens_8cpp_source.html#l00030">Lens.cpp:30</a></div></div>
 <div class="ttc" id="aclassOpticalObject_html_a7fad6a60fa013015007c19056cfd3767"><div class="ttname"><a href="classOpticalObject.html#a7fad6a60fa013015007c19056cfd3767">OpticalObject::getX</a></div><div class="ttdeci">double getX()</div><div class="ttdoc">Retrieves the x-coordinate (position) of the optical object.</div><div class="ttdef"><b>Definition</b> <a href="OpticalObject_8cpp_source.html#l00023">OpticalObject.cpp:23</a></div></div>
 <div class="ttc" id="aclassOpticalObject_html_ac35f62797792eb94afd785f1637f1f8c"><div class="ttname"><a href="classOpticalObject.html#ac35f62797792eb94afd785f1637f1f8c">OpticalObject::setX</a></div><div class="ttdeci">void setX(double)</div><div class="ttdoc">Sets the x-coordinate (position) of the optical object.</div><div class="ttdef"><b>Definition</b> <a href="OpticalObject_8cpp_source.html#l00031">OpticalObject.cpp:31</a></div></div>

@@ -34,6 +34,7 @@ Makefile
 # ---- Doxygen ----
 docs/cpp/
 Doxyfile
+site/
 
 # ---- General ----
 *.DS_Store
