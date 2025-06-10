@@ -33,6 +33,7 @@ Run the installation script:
 ./run.sh
 ```
 This script will:
+
 - Compile all necessary components (C++, Python, Java)
 
 - Add the CLI build directory to your PATH so you can run OptiSim from any terminal
@@ -69,7 +70,6 @@ To use OptiSim in Python:
 ```bash
 cp <full-path-to-OptiSim>/Python/optisim.cpython-312-x86_64-linux-gnu.so .
 ```
-
 2. Import it in Python:
 ```python
 import optisim
