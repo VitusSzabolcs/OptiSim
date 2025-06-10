@@ -725,7 +725,6 @@
 <p>This document provides a high-level overview of the OptiSim project's architecture, detailing its primary components, their responsibilities, and how they interact. Understanding this structure is key for effective development and contribution.</p>
 <h2 id="1-high-level-system-design">1. High-Level System Design</h2>
 <p>OptiSim is designed as a multi-language system, leveraging the strengths of C++ for high-performance computation, Python for scripting and accessibility, and Java for specific enterprise or integration needs. The core logic resides in C++, with Python and Java serving as interfaces and application layers.</p>
-<p><em>(Optional: A simple block diagram could be very effective here if you can create one and embed it. E.g., <code>![System Architecture](assets/architecture_diagram.png)</code>)</em></p>
 <h2 id="2-core-components">2. Core Components</h2>
 <p>The OptiSim system is composed of several distinct, yet interconnected, components:</p>
 <h3 id="21-c-core-library">2.1. C++ Core Library</h3>
@@ -735,13 +734,17 @@
 * Interacting with external, performance-critical C++ libraries (e.g., Eigen for linear algebra, OpenCV for image processing, Boost for extended functionalities).</p>
 <p>The C++ core is designed for efficiency and precision, forming the bedrock of OptiSim's capabilities.</p>
 <h3 id="22-python-interface-via-pybind11">2.2. Python Interface (via Pybind11)</h3>
-<p>The Python layer provides a user-friendly and flexible interface to the powerful C++ core.
-* <strong>Role:</strong> Enables Python developers to easily integrate OptiSim's functionalities into their applications, scripts, and data analysis workflows without needing to write C++ code.
-* <strong>Technology:</strong> <code>pybind11</code> is used to create robust and seamless bindings, exposing C++ classes, functions, and data types directly into Python. This ensures efficient data transfer and method calls between the two languages.</p>
+<p>The Python layer provides a user-friendly and flexible interface to the powerful C++ core.</p>
+<ul>
+<li><strong>Role:</strong> Enables Python developers to easily integrate OptiSim's functionalities into their applications, scripts, and data analysis workflows without needing to write C++ code.</li>
+<li><strong>Technology:</strong> <code>pybind11</code> is used to create robust and seamless bindings, exposing C++ classes, functions, and data types directly into Python. This ensures efficient data transfer and method calls between the two languages.</li>
+</ul>
 <h3 id="23-java-interface-via-jpype">2.3. Java Interface (via JPype)</h3>
-<p>The Java layer allows OptiSim's capabilities to be utilized within Java-based applications and ecosystems.
-* <strong>Role:</strong> Facilitates integration into existing Java enterprise systems or applications that require OptiSim's specific functionalities.
-* <strong>Technology:</strong> <code>JPype</code> acts as a bridge, allowing Python code to access Java classes and objects, and vice versa. This enables cross-language communication, where Python might orchestrate calls to Java components that then interact with the C++ core (or directly with other Java libraries).</p>
+<p>The Java layer allows OptiSim's capabilities to be utilized within Java-based applications and ecosystems.</p>
+<ul>
+<li><strong>Role:</strong> Facilitates integration into existing Java enterprise systems or applications that require OptiSim's specific functionalities.</li>
+<li><strong>Technology:</strong> <code>JPype</code> acts as a bridge, allowing Python code to access Java classes and objects, and vice versa. This enables cross-language communication, where Python might orchestrate calls to Java components that then interact with the C++ core (or directly with other Java libraries).</li>
+</ul>
 <h2 id="3-data-flow-and-interoperability">3. Data Flow and Interoperability</h2>
 <p>Data typically originates from an application layer (Python or Java), is passed to the C++ core for processing, and then results are returned.</p>
 <ul>
