@@ -7,7 +7,7 @@ Welcome to **OptiSim** – a modular optical simulator with C++, Python, and Jav
 Before you get started, make sure you have the following installed:
 
 - **CMake** and **g++**
-- **Python 3.12**
+- **Python 3.12 or later**
 - **Java Development Kit (JDK)**
 - A Linux-based OS (tested on Ubuntu)
 - **pybind11** and **jpype** 
