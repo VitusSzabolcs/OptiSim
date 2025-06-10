@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['f_0',['f',['../classLens.html#a9ce466f76805924039d3e2456387a9b1',1,'Lens']]],
-  ['features_1',['Features',['../index.html#features_sec',1,'']]],
-  ['file_2',['file',['../structcommand__path.html#a0a71571aa8157022dd0179a07fee12ee',1,'command_path']]]
+  ['help_0',['help',['../OptiSim_8cpp.html#a97ee70a8770dc30d06c744b24eb2fcfc',1,'OptiSim.cpp']]]
 ];
