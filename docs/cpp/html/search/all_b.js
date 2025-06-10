@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['lens_0',['lens',['../classLens.html',1,'Lens'],['../classLens.html#aff7873b43443c60b7b0d6c6f2c4e2b0c',1,'Lens::Lens()']]],
-  ['lens_2ecpp_1',['Lens.cpp',['../Lens_8cpp.html',1,'']]],
-  ['lens_2eh_2',['Lens.h',['../Lens_8h.html',1,'']]],
-  ['library_20documentation_3',['OptiSim Library Documentation',['../index.html',1,'']]],
-  ['lightsource_4',['lightsource',['../classLightSource.html',1,'LightSource'],['../classLightSource.html#abba572fb9b13583318dbdacdb0b09a7f',1,'LightSource::LightSource()']]],
-  ['lightsource_2ecpp_5',['LightSource.cpp',['../LightSource_8cpp.html',1,'']]],
-  ['lightsource_2eh_6',['LightSource.h',['../LightSource_8h.html',1,'']]],
-  ['ls_7',['LS',['../classOpticalSystem.html#aae97ecb01648ef4aa14b483682b34f6d',1,'OpticalSystem']]]
+  ['n_0',['n',['../classThickLens.html#a3068d6e74c5e137a9d149f7693378f00',1,'ThickLens']]],
+  ['name_5flens_5fmap_1',['name_lens_map',['../classOpticalSystem.html#a4a9ff2e98b17e8364009c9fc0e1172b6',1,'OpticalSystem']]],
+  ['nextraycoords_2',['NextRayCoords',['../classOpticalSystem.html#ad2f214db0296fb9db5e828ea9b29231a',1,'OpticalSystem']]]
 ];

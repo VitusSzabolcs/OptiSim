@@ -13,6 +13,4 @@ digraph "CPP/include/OpticalSystem.h"
   Node4 [id="Node000004",label="examples/example.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$example_8cpp.html",tooltip=" "];
   Node1 -> Node5 [id="edge4_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node5 [id="Node000005",label="CPP/src/OpticalSystem.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$OpticalSystem_8cpp.html",tooltip="Implements the OpticalSystem class, managing optical elements and simulations."];
-  Node1 -> Node6 [id="edge5_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node6 [id="Node000006",label="Python/bind/bind_optical\l_system.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$bind__optical__system_8cpp.html",tooltip=" "];
 }

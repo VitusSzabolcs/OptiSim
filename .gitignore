@@ -32,7 +32,7 @@ cmake_install.cmake
 Makefile
 
 # ---- Doxygen ----
-docs/_build/
+docs/cpp/
 Doxyfile
 
 # ---- General ----

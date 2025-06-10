@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['what_0',['what',['../classOptiSimError.html#a2d1e1d7f3e8c0676f8da95a1e0663888',1,'OptiSimError']]]
+  ['_7eopticalsystem_0',['~OpticalSystem',['../classOpticalSystem.html#a3c777ee9792b8705e8f9d9a926cd7f22',1,'OpticalSystem']]]
 ];
