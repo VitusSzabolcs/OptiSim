@@ -2,11 +2,21 @@
 
 Welcome to **OptiSim** – a modular optical simulator with C++, Python, and Java components. This guide will walk you through setting up the application and using it as a GUI program or as a library in your own projects.
 
+## Prerequisites
+
+Before you get started, make sure you have the following installed:
+
+- **CMake** and **g++**
+- **Python 3.12**
+- **Java Development Kit (JDK)**
+- A Linux-based OS (tested on Ubuntu)
+- **pybind11** and **jpype** 
+
 ## Step 1: Clone the Repository
 
 Clone the OptiSim repository from GitHub:
 ```bash
-Clone the OptiSim repository from GitHub:
+git clone https://github.com/VitusSzabolcs/OptiSim.git
 ```
 ## Step 2: Navigate to the Installer
 
@@ -76,4 +86,4 @@ Once the installation completes:
 
 ## Need Help?
 
-If you run into any issues during installation or usage, feel free to open an issue on the GitHub repository.
+If you run into any issues during installation or usage, feel free to open an issue on the [GitHub repository](https://github.com/VitusSzabolcs/OptiSim).
