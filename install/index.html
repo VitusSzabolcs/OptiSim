@@ -292,15 +292,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#step-1-clone-the-repository" class="md-nav__link">
     <span class="md-ellipsis">
       Step 1: Clone the Repository
@@ -628,15 +619,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#step-1-clone-the-repository" class="md-nav__link">
     <span class="md-ellipsis">
       Step 1: Clone the Repository
@@ -741,15 +723,7 @@
 
 <h1 id="optisim-installation-guide">OptiSim Installation Guide</h1>
 <p>Welcome to <strong>OptiSim</strong> – a modular optical simulator with C++, Python, and Java components. This guide will walk you through setting up the application and using it as a GUI program or as a library in your own projects.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Before you get started, make sure you have the following installed:</p>
-<ul>
-<li><strong>CMake</strong> and <strong>g++</strong></li>
-<li><strong>Python 3.12 or later</strong></li>
-<li><strong>Java Development Kit (JDK)</strong></li>
-<li>A Linux-based OS (tested on Ubuntu)</li>
-<li><strong>pybind11</strong> and <strong>jpype</strong> </li>
-</ul>
+<p>Before proceeding with installation, please make sure to review the system and software <a href="https://vitusszabolcs.github.io/OptiSim/requirement/">requirements.</a></p>
 <h2 id="step-1-clone-the-repository">Step 1: Clone the Repository</h2>
 <p>Clone the OptiSim repository from GitHub:</p>
 <pre><code class="language-bash">git clone https://github.com/VitusSzabolcs/OptiSim.git
@@ -762,9 +736,11 @@
 <p>Run the installation script:</p>
 <pre><code class="language-bash">./run.sh
 </code></pre>
-<p>This script will:
-- Compile all necessary components (C++, Python, Java)</p>
+<p>This script will:</p>
 <ul>
+<li>
+<p>Compile all necessary components (C++, Python, Java)</p>
+</li>
 <li>
 <p>Add the CLI build directory to your PATH so you can run OptiSim from any terminal</p>
 </li>
