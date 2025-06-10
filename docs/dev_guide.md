@@ -4,7 +4,7 @@ This guide is intended for anyone who wishes to contribute to the OptiSim projec
 
 ## 1. Getting Started
 
-Before diving into development, ensure you have met all the [Requirements](requirements.md) specified for developers. This section will guide you through setting up your local development environment.
+Before diving into development, ensure you have met all the [Requirements](requirement.md) specified for developers. This section will guide you through setting up your local development environment.
 
 ### 1.1. Cloning the Repository
 
