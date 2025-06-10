@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#requirements" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -221,6 +226,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Requirements
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -233,6 +253,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-operating-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Operating System
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-hardware-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Hardware Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-build-runtime-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Core Build &amp; Runtime Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-python-environment-and-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Python Environment and Libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-development-tools-for-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Development Tools (For Developers)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -483,6 +567,61 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-operating-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Operating System
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-hardware-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Hardware Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-build-runtime-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Core Build &amp; Runtime Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-python-environment-and-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Python Environment and Libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-development-tools-for-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Development Tools (For Developers)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -498,9 +637,35 @@
 
 
 
-  <h1>Requirements</h1>
-
-
+<h1 id="requirements">Requirements</h1>
+<p>This document outlines the essential software, tools, and hardware required to successfully build, run, and contribute to the project.</p>
+<h2 id="1-operating-system">1. Operating System</h2>
+<ul>
+<li><strong>Linux:</strong> Ubuntu 22.04 LTS (Jammy Jellyfish) or higher.</li>
+</ul>
+<h2 id="2-hardware-dependencies">2. Hardware Dependencies</h2>
+<ul>
+<li><strong>RAM:</strong> 8 GB or more recommended.</li>
+<li><strong>CPU:</strong> Multi-core processor recommended.</li>
+</ul>
+<h2 id="3-core-build-runtime-dependencies">3. Core Build &amp; Runtime Dependencies</h2>
+<ul>
+<li><strong>C++ Compiler:</strong> GCC/G++ 11.0 or higher.</li>
+<li><strong>Python:</strong> 3.12 or higher.</li>
+<li><strong>Java JDK:</strong> Version 17 (LTS) or higher.</li>
+<li><strong>CMake:</strong> 3.15 or higher.</li>
+<li><strong>Git:</strong> 2.25.0 or higher.</li>
+</ul>
+<h2 id="4-python-environment-and-libraries">4. Python Environment and Libraries</h2>
+<ul>
+<li><strong>JPype:</strong> 1.0.0 or higher.</li>
+<li><strong>Pybind11:</strong> 2.10.0 or higher.</li>
+</ul>
+<h2 id="5-development-tools-for-developers">5. Development Tools (For Developers)</h2>
+<ul>
+<li><strong>Doxygen:</strong> 1.9.1 or higher.</li>
+<li><strong>MkDocs:</strong> 1.5.0 or higher.</li>
+</ul>
 
 
 
