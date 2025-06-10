@@ -36,16 +36,20 @@ jar cf optisim_java.jar ./optisim_java/*.class
 cd ..
 
 # Create .desktop launcher
-
-echo "Creating desktop launcher..."
-
-DESKTOP_FILE=~/Desktop/OptiSim.desktop
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 PYTHON_PATH=$(which python3)
-echo "$SCRIPT_DIR"
-echo "$PYTHON_PATH"
+cd 
+if [ ! -d "Desktop" ]; then
+  echo "~/Desktop -> does not exist"
+else
+  echo "Creating desktop launcher..."
 
-cat > "$DESKTOP_FILE" <<EOF
+  DESKTOP_FILE=~/Desktop/OptiSim.desktop
+  
+  echo "$SCRIPT_DIR"
+  echo "$PYTHON_PATH"
+
+  cat > "$DESKTOP_FILE" <<EOF
 [Desktop Entry]
 Type=Application
 Name=OptiSim
@@ -54,27 +58,27 @@ Icon=$SCRIPT_DIR/Run/icon.png
 Terminal=false
 EOF
 
-chmod +x "$DESKTOP_FILE"
+  chmod +x "$DESKTOP_FILE"
 
-echo "Launcher created at $DESKTOP_FILE"
+  echo "Launcher created at $DESKTOP_FILE"
 
-# Add CLI directory to PATH
+  # Add CLI directory to PATH
 
 
-# Construct the path to the desired build directory
-NEW_PATH="$SCRIPT_DIR/CPP/build"
+  # Construct the path to the desired build directory
+  NEW_PATH="$SCRIPT_DIR/CPP/build"
 
-# Export line to add
-EXPORT_LINE="export PATH=\"$NEW_PATH:\$PATH\""
+  # Export line to add
+  EXPORT_LINE="export PATH=\"$NEW_PATH:\$PATH\""
 
-# File to modify
-SHELL_RC="$HOME/.bashrc"
+  # File to modify
+  SHELL_RC="$HOME/.bashrc"
 
-# Check if already present
-if ! grep -Fxq "$EXPORT_LINE" "$SHELL_RC"; then
-    echo "$EXPORT_LINE" >> "$SHELL_RC"
-    echo "Added to PATH in $SHELL_RC"
-else
-    echo "PATH entry already exists in $SHELL_RC"
+  # Check if already present
+  if ! grep -Fxq "$EXPORT_LINE" "$SHELL_RC"; then
+      echo "$EXPORT_LINE" >> "$SHELL_RC"
+      echo "Added to PATH in $SHELL_RC"
+  else
+      echo "PATH entry already exists in $SHELL_RC"
+  fi
 fi
-
