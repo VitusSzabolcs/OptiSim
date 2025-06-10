@@ -6,7 +6,7 @@ PROJECT_BRIEF          = "Geometrical Optics Simulator"
 OUTPUT_DIRECTORY       = cpp
 
 # Input
-INPUT                  = /home/vszabolcs/OOP/OptiSim
+INPUT                  = /home/vszabolcs/OOP/OptiSim/CPP
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.cpp
 
@@ -47,4 +47,4 @@ JAVADOC_AUTOBRIEF      = YES
 QT_AUTOBRIEF           = YES
 
 # Strip from path for easier source tree display
-STRIP_FROM_PATH        = /home/vszabolcs/OOP/OptiSim
+STRIP_FROM_PATH        = /home/vszabolcs/OOP/OptiSim/CPP
