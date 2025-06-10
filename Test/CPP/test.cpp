@@ -1,13 +1,3 @@
-/**
-* @file OptiSim.cpp
-* @brief This is the main executable for the OptiSim optical simulation tool.
-* @author Bács Tamás <tamas.bacs@stud.ubbcluj.ro>
-* @author Vitus Szabolcs <szabolcs.vitus1@stud.ubbcluj.ro>
-* @date 2025-06-09
-*
-* It handles command-line arguments, sets up the optical system, performs calculations,
-* and manages output to console and files.
-*/
 
 #include <iostream>  // For standard input/output operations (cout, cerr)
 #include <vector>    // For using std::vector
@@ -110,7 +100,7 @@ void test_OpticalSystem(){
     LightSource LS_get = OS.getLightSource();
     if (LS_get.getX() == LS.getX() && LS_get.getY() == LS.getY())
         cout << "\tOpticalSystem -> add(LightSource) & getLightSource() : works properly\n";
-    else cout << "\tThinLens -> add(LightSource) || getLightSource() : works faulty\n";
+    else cout << "\tOpticalSystem -> add(LightSource) || getLightSource() : works faulty\n";
 
 
     // Add Lenses to the OpticalSystem & get Lenses from OpticalSystem & check identity
@@ -125,7 +115,7 @@ void test_OpticalSystem(){
         ThickL_get->getD() == ThickL.getD() && ThickL_get->getR_Left() == ThickL.getR_Left() &&
         ThickL_get->getR_Right() == ThickL.getR_Right())
         cout << "\tOpticalSystem -> add(OpticalObject&, string) & getSystemElements() : works properly\n";
-    else cout << "\tThinLens -> add(OpticalObject&, string) || getSystemElements() : works faulty\n";
+    else cout << "\tOpticalSystem -> add(OpticalObject&, string) || getSystemElements() : works faulty\n";
 
     // Modify LightSource & get LightSource from OpticalSystem & check whether the modification was successful
     OS.modifyLightSource("x",-20);
@@ -133,7 +123,7 @@ void test_OpticalSystem(){
     LS_get = OS.getLightSource();
     if (LS_get.getX() == -20 && LS_get.getY() == 10)
         cout << "\tOpticalSystem -> modifyLightSource(string, double) : works properly\n";
-    else cout << "\tThinLens -> modifyLightSource(string, double) : works faulty\n";
+    else cout << "\tOpticalSystem -> modifyLightSource(string, double) : works faulty\n";
 
     // Modify Lenses & get Lenses from OpticalSystem & check whether the modification was successful
     OS.modifyOpticalObject("Lens1", "x", 0);
@@ -153,7 +143,7 @@ void test_OpticalSystem(){
         ThickL_get->getD() == 3 && ThickL_get->getR_Left() == 35 &&
         ThickL_get->getR_Right() == 40)
         cout << "\tOpticalSystem -> modifyOpticalObject(string, string, double) : works properly\n";
-    else cout << "\tThinLens -> modifyOpticalObject(string, string, double) : works faulty\n";
+    else cout << "\tOpticalSystem -> modifyOpticalObject(string, string, double) : works faulty\n";
 
     // Remove Lens & get Lenses from OpticalSystem & check whether the remove was successful
     OS.remove("Lens2");
@@ -163,7 +153,7 @@ void test_OpticalSystem(){
     if (ThinL_get->getX() == 0 && ThinL_get->getF() == 10 &&
         OOList.size() == 1) // check if we still have Lens1 & if we have only one lens
         cout << "\tOpticalSystem -> remove(string) : works properly\n";
-    else cout << "\tThinLens -> remove(string) : works faulty\n";
+    else cout << "\tOpticalSystem -> remove(string) : works faulty\n";
 
     // Calculate image formation & get image sequence & check for proper image formation
     OS.Calculate();
@@ -172,16 +162,16 @@ void test_OpticalSystem(){
 
     if (FinalI.getX() == 20 && FinalI.getY() == -10 && FinalI.getReal() == 1)
         cout << "\tOpticalSystem -> Calculate() &  getImageSequence(): works properly\n";
-    else cout << "\tThinLens -> Calculate() &  getImageSequence() : works faulty\n";
+    else cout << "\tOpticalSystem -> Calculate() &  getImageSequence() : works faulty\n";
 
-    //
+    // Get rays & check if they are correct
     map<string, ray> Rays =  OS.getRays();
     if (Rays["ray_1"].x[0] == -20 && Rays["ray_1"].x[1] == 0 && Rays["ray_1"].x[2] == 20 &&
         Rays["ray_1"].y[0] == 10 && Rays["ray_1"].y[1] == 10 && Rays["ray_1"].y[2] == -10 &&
         Rays["ray_2"].x[0] == -20 && Rays["ray_2"].x[1] == 0 && Rays["ray_2"].x[2] == 20 &&
         Rays["ray_2"].y[0] == 10 && Rays["ray_2"].y[1] == 0 && Rays["ray_2"].y[2] == -10 )
         cout << "\tOpticalSystem -> getRays(): works properly\n";
-    else cout << "\tThinLens -> getRays() : works faulty\n";
+    else cout << "\tOpticalSystem -> getRays() : works faulty\n";
 
     // Save the OpticalSystem into file & relaod it from file & check if we get the same OpticalSystem
     OS.save("saved_system.json");
@@ -194,7 +184,7 @@ void test_OpticalSystem(){
     if (LS_get.getX() == -20 && LS_get.getY() == 10 &&
         ThinL_get->getX() == 0 && ThinL_get->getF() == 10)
         cout << "\tOpticalSystem -> save(string) & OpticalSystem(string) : works properly\n";
-    else cout << "\tThinLens -> save(string) & OpticalSystem(string) : works faulty\n";
+    else cout << "\tOpticalSystem -> save(string) & OpticalSystem(string) : works faulty\n";
 }
 
 

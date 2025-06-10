@@ -27,6 +27,7 @@ cmake ..
 cmake --build .
 cp optisim.cpython-312-x86_64-linux-gnu.so ..
 cp optisim.cpython-312-x86_64-linux-gnu.so ../../examples
+cp optisim.cpython-312-x86_64-linux-gnu.so ../../Test/Python
 cd ../..
 
 # Java
