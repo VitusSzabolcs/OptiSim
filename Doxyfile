@@ -48,8 +48,8 @@ QT_AUTOBRIEF           = YES
 
 # Strip from path for easier source tree display
 STRIP_FROM_PATH        = /home/vszabolcs/OOP/OptiSim/
-EXCLUDE                = \
-	 /home/vszabolcs/OOP/OptiSim/CPP/build \
-	 /home/vszabolcs/OOP/OptiSim/Python \
-	 /home/vszabolcs/OOP/OptiSim/Java
+# EXCLUDE                = \
+# 	 /home/vszabolcs/OOP/OptiSim/CPP/build \
+# 	 /home/vszabolcs/OOP/OptiSim/Python \
+# 	 /home/vszabolcs/OOP/OptiSim/Java
 
